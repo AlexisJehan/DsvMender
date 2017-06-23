@@ -1,3 +1,4 @@
+/*
 MIT License
 
 Copyright (c) 2017 Alexis Jehan
@@ -19,3 +20,30 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
+*/
+package org.mender;
+
+/**
+ * <p>A {@code Mender} aims to fix invalids elements by learning from valid ones.</p>
+ *
+ * @param <E> Element's type
+ * @since 1.0
+ */
+public interface Mender<E> {
+
+	/**
+	 * <p>Learn from a valid element, for example that can be done using an {@link Evaluator}.</p>
+	 * 
+	 * @param element The valid element to learn from
+	 */
+	void fit(final E element);
+
+	/**
+	 * <p>Fix an invalid element using custom strategies and knowledges.</p>
+	 * 
+	 * @param element The invalid element to repair
+	 * @return Fixed version of the element
+	 * @throws MenderException In particular conditions the {@code Mender} might not be able to fix the given element
+	 */
+	E fix(final E element) throws MenderException;
+}

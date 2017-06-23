@@ -1,3 +1,4 @@
+/*
 MIT License
 
 Copyright (c) 2017 Alexis Jehan
@@ -19,3 +20,23 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
+*/
+package org.mender.criteria;
+
+/**
+ * <p>A {@code Criterion} can be used to calculate a score from a value.</p>
+ * 
+ * @param <V> Value's type
+ * @since 1.0
+ */
+@FunctionalInterface
+public interface Criterion<V> {
+
+	/**
+	 * <p>Calculate value's score.</p>
+	 * 
+	 * @param value The value to get the score from
+	 * @return The calculated score
+	 */
+	double calculate(final V value);
+}

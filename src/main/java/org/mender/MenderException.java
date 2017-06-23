@@ -1,3 +1,4 @@
+/*
 MIT License
 
 Copyright (c) 2017 Alexis Jehan
@@ -19,3 +20,27 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
+*/
+package org.mender;
+
+/**
+ * <p>An {@code Exception} that can be thrown by a {@link Mender} in specifics cases.</p>
+ *
+ * @since 1.0
+ */
+public class MenderException extends Exception {
+	
+	/**
+	 * <p>Generated serialization UID</p>
+	 */
+	private static final long serialVersionUID = -6841482368498568972L;
+
+	/**
+	 * <p>Constructor of a {@code MenderException} using a message.</p>
+	 * 
+	 * @param message The message of the {@code Exception}
+	 */
+	public MenderException(final String message) {
+		super(message);
+	}
+}

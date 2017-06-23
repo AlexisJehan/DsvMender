@@ -1,3 +1,4 @@
+/*
 MIT License
 
 Copyright (c) 2017 Alexis Jehan
@@ -19,3 +20,11 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
+*/
+/**
+ * <p>Components of the experimental {@link org.mender.Mender} pattern that have to be implemented by concrete
+ * classes.</p>
+ * 
+ * @since 1.0
+ */
+package org.mender;

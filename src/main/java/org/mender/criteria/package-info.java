@@ -1,3 +1,4 @@
+/*
 MIT License
 
 Copyright (c) 2017 Alexis Jehan
@@ -19,3 +20,10 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
+*/
+/**
+ * <p>Criteria components that can be used by an {@link org.mender.Evaluator} to compute a score.</p>
+ * 
+ * @since 1.0
+ */
+package org.mender.criteria;
