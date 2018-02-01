@@ -1,3 +1,26 @@
+/*
+MIT License
+
+Copyright (c) 2018 Alexis Jehan
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
+*/
 package org.mender.dsv;
 
 import java.util.regex.Pattern;
@@ -174,7 +197,7 @@ public class DsvBuilderTest {
 	}
 
 	@Test(expected = IllegalArgumentException.class)
-	public void testLengthConstraintInvalid() throws MenderException {
+	public void testLengthConstraintInvalid() {
 		DsvMender.builder(",", 3)
 				.withLengthConstraint(1, -1)
 				.build();
@@ -221,7 +244,7 @@ public class DsvBuilderTest {
 				.withMinLengthEstimations(0)
 				.build();
 	}
-	
+
 	@Test
 	public void testMinLengthEstimation() {
 		final DsvMender mender = DsvMender.builder(",", 3)
@@ -354,7 +377,7 @@ public class DsvBuilderTest {
 				.withMaxLengthConstraint(1, 0)
 				.build();
 	}
-	
+
 	@Test(expected = MenderException.class)
 	public void testMaxLengthConstraintNoSolution() throws MenderException {
 		final DsvMender mender = DsvMender.builder(",", 3)
@@ -363,7 +386,7 @@ public class DsvBuilderTest {
 				.build();
 		mender.fix(",a,b,cccccc"); // No solution
 	}
-	
+
 	@Test(expected = MenderException.class)
 	public void testMaxLengthConstraintConflict() throws MenderException {
 		final DsvMender mender = DsvMender.builder(",", 3)
@@ -465,7 +488,7 @@ public class DsvBuilderTest {
 				.withRangeLengthConstraint(1, 2, 1)
 				.build();
 	}
-	
+
 	@Test(expected = MenderException.class)
 	public void testRangeLengthConstraintNoSolution() throws MenderException {
 		final DsvMender mender = DsvMender.builder(",", 3)
@@ -474,7 +497,7 @@ public class DsvBuilderTest {
 				.build();
 		mender.fix(",a,b,ccc"); // No solution
 	}
-	
+
 	@Test(expected = MenderException.class)
 	public void testRangeLengthConstraintConflict() throws MenderException {
 		final DsvMender mender = DsvMender.builder(",", 3)
@@ -564,7 +587,7 @@ public class DsvBuilderTest {
 			Assert.fail(e.getMessage());
 		}
 	}
-	
+
 	@Test(expected = MenderException.class)
 	public void testPatternConstraintNoSolution() throws MenderException {
 		final DsvMender mender = DsvMender.builder(",", 3)
@@ -573,7 +596,7 @@ public class DsvBuilderTest {
 				.build();
 		mender.fix(",a,b,cc,"); // No solution
 	}
-	
+
 	@Test(expected = MenderException.class)
 	public void testPatternConstraintConflict() throws MenderException {
 		final DsvMender mender = DsvMender.builder(",", 3)
@@ -665,7 +688,7 @@ public class DsvBuilderTest {
 			Assert.fail(e.getMessage());
 		}
 	}
-	
+
 	@Test(expected = MenderException.class)
 	public void testContainsConstraintNoSolution() throws MenderException {
 		final DsvMender mender = DsvMender.builder(",", 3)
@@ -673,7 +696,7 @@ public class DsvBuilderTest {
 				.build();
 		mender.fix(",a,b,cc,"); // No solution
 	}
-	
+
 	@Test(expected = MenderException.class)
 	public void testContainsConstraintConflict() throws MenderException {
 		final DsvMender mender = DsvMender.builder(",", 3)
@@ -787,7 +810,7 @@ public class DsvBuilderTest {
 				.withStartsWithConstraint(1, null)
 				.build();
 	}
-	
+
 	@Test(expected = MenderException.class)
 	public void testStartsWithConstraintNoSolution() throws MenderException {
 		final DsvMender mender = DsvMender.builder(",", 3)
@@ -795,7 +818,7 @@ public class DsvBuilderTest {
 				.build();
 		mender.fix(",a,b,cc,"); // No solution
 	}
-	
+
 	@Test(expected = MenderException.class)
 	public void testStartsWithConstraintConflict() throws MenderException {
 		final DsvMender mender = DsvMender.builder(",", 3)
@@ -804,7 +827,7 @@ public class DsvBuilderTest {
 				.build();
 		mender.fix(",a,b,cc"); // Conflict
 	}
-	
+
 	@Test
 	public void testEndsWithEstimations() {
 		final DsvMender mender = DsvMender.builder(",", 3)
@@ -881,7 +904,7 @@ public class DsvBuilderTest {
 				.withEndsWithConstraint(1, null)
 				.build();
 	}
-	
+
 	@Test(expected = MenderException.class)
 	public void testEndsWithConstraintNoSolution() throws MenderException {
 		final DsvMender mender = DsvMender.builder(",", 3)
@@ -889,7 +912,7 @@ public class DsvBuilderTest {
 				.build();
 		mender.fix(",a,b,cc,"); // No solution
 	}
-	
+
 	@Test(expected = MenderException.class)
 	public void testEndsWithConstraintConflict() throws MenderException {
 		final DsvMender mender = DsvMender.builder(",", 3)

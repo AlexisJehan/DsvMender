@@ -1,7 +1,7 @@
 /*
 MIT License
 
-Copyright (c) 2017 Alexis Jehan
+Copyright (c) 2018 Alexis Jehan
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -34,8 +34,8 @@ import java.util.function.Function;
  * <p><b>Note</b>: Values are transformed using a function to be stored and collected
  * <i>(example: collect by features)</i>.</p>
  *
- * @param <V> Value's type
- * @param <S> Value's store type
+ * @param <V> value's type
+ * @param <S> value's store type
  * @since 1.0
  */
 public class Estimation<V, S> implements Criterion<V> {
@@ -44,22 +44,22 @@ public class Estimation<V, S> implements Criterion<V> {
 	 * <p>Internal used function.</p>
 	 */
 	private final Function<V, S> function;
-	
+
 	/**
 	 * <p>Bag of stored values.</p>
 	 */
 	private final Map<S, AtomicLong> bag = new HashMap<>();
-	
+
 	/**
 	 * <p>Total values in the bag <i>(different of the total of unique values)</i>.</p>
 	 */
 	private long total = 0;
-	
+
 	/**
 	 * <p>Constructor using a function that will be used to be applied to values.<p>
 	 * 
 	 * @param function The function
-	 * @throws NullPointerException If the function is null
+	 * @throws NullPointerException If the function is {@code null}
 	 */
 	public Estimation(final Function<V, S> function) {
 		if (null == function) {
@@ -92,12 +92,12 @@ public class Estimation<V, S> implements Criterion<V> {
 			return 0.0d;
 		}
 	}
-	
+
 	/**
-	 * <p>Sugar constructor for easiest uses with generic.</p>
+	 * <p>Vanilla constructor for easiest uses with generic.</p>
 	 * 
-	 * @param <V> Value's type
-	 * @param <S> Value's store type
+	 * @param <V> value's type
+	 * @param <S> value's store type
 	 * @param function The function
 	 * @return The instantiated {@code Estimation}
 	 */

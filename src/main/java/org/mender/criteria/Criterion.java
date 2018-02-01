@@ -1,7 +1,7 @@
 /*
 MIT License
 
-Copyright (c) 2017 Alexis Jehan
+Copyright (c) 2018 Alexis Jehan
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -26,7 +26,7 @@ package org.mender.criteria;
 /**
  * <p>A {@code Criterion} can be used to calculate a score from a value.</p>
  * 
- * @param <V> Value's type
+ * @param <V> value's type
  * @since 1.0
  */
 @FunctionalInterface

@@ -13,8 +13,7 @@ public class DsvEvaluatorTest {
 	@Test
 	public void testConstraint() {
 		final DsvEvaluator evaluator = new DsvEvaluator();
-		evaluator.addConstraint(1, Constraint.of(value -> "+".equals(value)));
-		
+		evaluator.addConstraint(1, Constraint.of("+"::equals));
 		Assert.assertEquals(0.0d, evaluator.evaluate(new String[] {"-", "-", "-"}), 0); // Second value is not "+"
 		Assert.assertEquals(1.0d, evaluator.evaluate(new String[] {"-", "+", "-"}), 0); // Ok
 	}
@@ -22,10 +21,9 @@ public class DsvEvaluatorTest {
 	@Test
 	public void testConstraints() {
 		final DsvEvaluator evaluator = new DsvEvaluator();
-		evaluator.addConstraint(0, Constraint.of(value ->   "-".equals(value)));
-		evaluator.addConstraint(1, Constraint.of(value ->   "+".equals(value)));
+		evaluator.addConstraint(0, Constraint.of("-"::equals));
+		evaluator.addConstraint(1, Constraint.of("+"::equals));
 		evaluator.addConstraint(2, Constraint.of(value -> 2 == value.length()));
-
 		Assert.assertEquals(0.0d, evaluator.evaluate(new String[] {"+", "-", "-" }), 0); // First value is not "-"
 		Assert.assertEquals(0.0d, evaluator.evaluate(new String[] {"-", "-", "-" }), 0); // Second value is not "+"
 		Assert.assertEquals(0.0d, evaluator.evaluate(new String[] {"-", "+", "-" }), 0); // Third value is not two chars length
@@ -35,20 +33,20 @@ public class DsvEvaluatorTest {
 	@Test
 	public void testEstimation() {
 		final DsvEvaluator evaluator = new DsvEvaluator();
-		evaluator.addEstimation(1, Estimation.of(value -> "+".equals(value)));
-		
+		evaluator.addEstimation(1, Estimation.of("+"::equals));
+
 		// Not adjusted yet
 		Assert.assertEquals(0.0d, evaluator.evaluate(new String[] {"-", "-", "-"}), 0);
 		Assert.assertEquals(0.0d, evaluator.evaluate(new String[] {"-", "+", "-"}), 0);
-		
+
 		evaluator.adjustEstimations(new String[] {"-", "+", "-"});
-		
+
 		// Adjusted with "+" once
 		Assert.assertEquals(0.0d, evaluator.evaluate(new String[] {"-", "-", "-"}), 0);
 		Assert.assertEquals(1.0d, evaluator.evaluate(new String[] {"-", "+", "-"}), 0);
-		
+
 		evaluator.adjustEstimations(new String[] {"-", "-", "-"});
-		
+
 		// Adjusted with "+" once and "-" once
 		Assert.assertEquals(0.5d, evaluator.evaluate(new String[] {"-", "-", "-"}), 0);
 		Assert.assertEquals(0.5d, evaluator.evaluate(new String[] {"-", "+", "-"}), 0);
@@ -57,20 +55,20 @@ public class DsvEvaluatorTest {
 	@Test
 	public void testEstimations() {
 		final DsvEvaluator evaluator = new DsvEvaluator();
-		evaluator.addEstimation(0, Estimation.of(value ->   "-".equals(value)));
-		evaluator.addEstimation(1, Estimation.of(value ->   "+".equals(value)));
+		evaluator.addEstimation(0, Estimation.of("-"::equals));
+		evaluator.addEstimation(1, Estimation.of("+"::equals));
 		evaluator.addEstimation(2, Estimation.of(value -> 2 == value.length()));
-		
+
 		// Not adjusted yet
 		Assert.assertEquals(0.0d, evaluator.evaluate(new String[] {"-", "+", "--"}), 0);
-		
+
 		evaluator.adjustEstimations(new String[] {"-", "+", "--"});
 
 		Assert.assertEquals(0.0d, evaluator.evaluate(new String[] {"+", "-", "-" }), 0); // First value is not "-", second value is not "+" and third value is not two chars length
 		Assert.assertEquals(1.0d, evaluator.evaluate(new String[] {"-", "-", "-" }), 0); // Second value is not "+" and third value is not two chars length
 		Assert.assertEquals(2.0d, evaluator.evaluate(new String[] {"-", "+", "-" }), 0); // Third value is not two chars length
 		Assert.assertEquals(3.0d, evaluator.evaluate(new String[] {"-", "+", "--"}), 0); // Ok
-		
+
 		evaluator.adjustEstimations(new String[] {"+", "-", "-"});
 
 		// Conflicts in adjustments
@@ -89,7 +87,7 @@ public class DsvEvaluatorTest {
 	@Test(expected = IndexOutOfBoundsException.class)
 	public void testConstraintNegativeIndex() {
 		final DsvEvaluator evaluator = new DsvEvaluator();
-		evaluator.addConstraint(-1, Constraint.of(value -> "-".equals(value)));
+		evaluator.addConstraint(-1, Constraint.of("-"::equals));
 	}
 
 	@Test(expected = NullPointerException.class)
@@ -101,7 +99,7 @@ public class DsvEvaluatorTest {
 	@Test(expected = IndexOutOfBoundsException.class)
 	public void testEstimationNegativeIndex() {
 		final DsvEvaluator evaluator = new DsvEvaluator();
-		evaluator.addEstimation(-1, Estimation.of(value -> "-".equals(value)));
+		evaluator.addEstimation(-1, Estimation.of("-"::equals));
 	}
 
 	@Test(expected = NullPointerException.class)

@@ -1,7 +1,7 @@
 /*
 MIT License
 
-Copyright (c) 2017 Alexis Jehan
+Copyright (c) 2018 Alexis Jehan
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -57,7 +57,7 @@ public final class DsvBuilder {
 	 * <p>Maximum depth of the nodes tree.</p>
 	 */
 	private final int maxDepth;
-	
+
 	/**
 	 * <p>Construct a new {@code DsvBuilder}.</p>
 	 * 
@@ -70,7 +70,7 @@ public final class DsvBuilder {
 		this.nbColumns = nbColumns;
 		this.maxDepth = maxDepth;
 	}
-	
+
 	// EMPTY
 	/**
 	 * <p>Add {@code String.isEmpty()} estimations to all columns of the DSV data.</p>
@@ -101,7 +101,7 @@ public final class DsvBuilder {
 	public DsvBuilder withEmptyConstraint(final int index) {
 		return withConstraint(index, String::isEmpty);
 	}
-	
+
 	// NON EMPTY
 	/**
 	 * <p>Add {@code String} non-empty constraints to all columns of the DSV data. In others words that means all
@@ -123,7 +123,7 @@ public final class DsvBuilder {
 	public DsvBuilder withNonEmptyConstraint(final int index) {
 		return withConstraint(index, value -> !value.isEmpty());
 	}
-	
+
 	// LENGTH
 	/**
 	 * <p>Add {@code String.length()} estimations to all columns of the DSV data.</p>
@@ -133,7 +133,7 @@ public final class DsvBuilder {
 	public DsvBuilder withLengthEstimations() {
 		return withEstimations(String::length);
 	}
-	
+
 	/**
 	 * <p>Add a {@code String.length()} estimation to the column at specified index of the DSV data.</p>
 	 * 
@@ -159,7 +159,7 @@ public final class DsvBuilder {
 		}
 		return withConstraint(index, value -> length == value.length());
 	}
-	
+
 	// MIN LENGTH
 	/**
 	 * <p>Add {@code String} minimum length estimations to all columns of the DSV data.</p>
@@ -174,7 +174,7 @@ public final class DsvBuilder {
 		}
 		return withEstimations(value -> minLength <= value.length());
 	}
-	
+
 	/**
 	 * <p>Add a {@code String} minimum length estimation to the column at specified index of the DSV data.</p>
 	 * 
@@ -189,7 +189,7 @@ public final class DsvBuilder {
 		}
 		return withEstimation(index, value -> minLength <= value.length());
 	}
-	
+
 	/**
 	 * <p>Add a {@code String} minimum length constraint to the column at specified index of the DSV data. In others
 	 * words that means each value of this column should always have that minimum length.</p>
@@ -205,7 +205,7 @@ public final class DsvBuilder {
 		}
 		return withConstraint(index, value -> minLength <= value.length());
 	}
-	
+
 	// MAX LENGTH
 	/**
 	 * <p>Add {@code String} maximum length estimations to all columns of the DSV data.</p>
@@ -220,7 +220,7 @@ public final class DsvBuilder {
 		}
 		return withEstimations(value -> maxLength >= value.length());
 	}
-	
+
 	/**
 	 * <p>Add a {@code String} maximum length estimation to the column at specified index of the DSV data.</p>
 	 * 
@@ -235,7 +235,7 @@ public final class DsvBuilder {
 		}
 		return withEstimation(index, value -> maxLength >= value.length());
 	}
-	
+
 	/**
 	 * <p>Add a {@code String} maximum length constraint to the column at specified index of the DSV data. In others
 	 * words that means each value of this column should always have that maximum length.</p>
@@ -251,7 +251,7 @@ public final class DsvBuilder {
 		}
 		return withConstraint(index, value -> maxLength >= value.length());
 	}
-	
+
 	// RANGE LENGTH
 	/**
 	 * <p>Add {@code String} range length estimations to all columns of the DSV data.</p>
@@ -271,7 +271,7 @@ public final class DsvBuilder {
 		}
 		return withEstimations(value -> minLength <= value.length() && maxLength >= value.length());
 	}
-	
+
 	/**
 	 * <p>Add a {@code String} range length estimation to the column at specified index of the DSV data.</p>
 	 * 
@@ -291,7 +291,7 @@ public final class DsvBuilder {
 		}
 		return withEstimation(index, value -> minLength <= value.length() && maxLength >= value.length());
 	}
-	
+
 	/**
 	 * <p>Add a {@code String} range length constraint to the column at specified index of the DSV data. In others
 	 * words that means each value of this column should always have that minimum and maximum lengths.</p>
@@ -312,7 +312,7 @@ public final class DsvBuilder {
 		}
 		return withConstraint(index, value -> minLength <= value.length() && maxLength >= value.length());
 	}
-	
+
 	// PATTERN
 	/**
 	 * <p>Add {@link Pattern} estimations to all columns of the DSV data.</p>
@@ -334,7 +334,7 @@ public final class DsvBuilder {
 	 * @param index Index of the column
 	 * @param pattern The estimated matched {@code Pattern} by specified column values
 	 * @return The {@code DsvBuilder} instance
-	 * @throws NullPointerException If the pattern is null
+	 * @throws NullPointerException If the pattern is {@code null}
 	 */
 	public DsvBuilder withPatternEstimation(final int index, final Pattern pattern) {
 		if (null == pattern) {
@@ -350,7 +350,7 @@ public final class DsvBuilder {
 	 * @param index Index of the column
 	 * @param pattern The required matched {@code Pattern} by specified column values
 	 * @return The {@code DsvBuilder} instance
-	 * @throws NullPointerException If the pattern is null
+	 * @throws NullPointerException If the pattern is {@code null}
 	 */
 	public DsvBuilder withPatternConstraint(final int index, final Pattern pattern) {
 		if (null == pattern) {
@@ -358,14 +358,14 @@ public final class DsvBuilder {
 		}
 		return withConstraint(index, value -> pattern.matcher(value).matches());
 	}
-	
+
 	// CONTAINS
 	/**
 	 * <p>Add {@code String.contains()} estimations to all columns of the DSV data.</p>
 	 * 
 	 * @param substring The estimated contained substring by all column values
 	 * @return The {@code DsvBuilder} instance
-	 * @throws NullPointerException If the substring is null
+	 * @throws NullPointerException If the substring is {@code null}
 	 */
 	public DsvBuilder withContainsEstimations(final String substring) {
 		if (null == substring) {
@@ -380,7 +380,7 @@ public final class DsvBuilder {
 	 * @param index Index of the column
 	 * @param substring The estimated contained substring by specified column values
 	 * @return The {@code DsvBuilder} instance
-	 * @throws NullPointerException If the substring is null
+	 * @throws NullPointerException If the substring is {@code null}
 	 */
 	public DsvBuilder withContainsEstimation(final int index, final String substring) {
 		if (null == substring) {
@@ -396,7 +396,7 @@ public final class DsvBuilder {
 	 * @param index Index of the column
 	 * @param substring The required contained substring by specified column values
 	 * @return The {@code DsvBuilder} instance
-	 * @throws NullPointerException If the substring is null
+	 * @throws NullPointerException If the substring is {@code null}
 	 */
 	public DsvBuilder withContainsConstraint(final int index, final String substring) {
 		if (null == substring) {
@@ -413,7 +413,7 @@ public final class DsvBuilder {
 	 * @param index Index of the column
 	 * @param substring The required not contained substring by specified column values
 	 * @return The {@code DsvBuilder} instance
-	 * @throws NullPointerException If the substring is null
+	 * @throws NullPointerException If the substring is {@code null}
 	 */
 	public DsvBuilder withContainsNoneConstraint(final int index, final String substring) {
 		if (null == substring) {
@@ -421,14 +421,14 @@ public final class DsvBuilder {
 		}
 		return withConstraint(index, value -> !value.contains(substring));
 	}
-	
+
 	// STARTS WITH
 	/**
 	 * <p>Add {@code String.startsWith()} estimations to all columns of the DSV data.</p>
 	 * 
 	 * @param prefix The estimated prefix of all column values
 	 * @return The {@code DsvBuilder} instance
-	 * @throws NullPointerException If the prefix is null
+	 * @throws NullPointerException If the prefix is {@code null}
 	 */
 	public DsvBuilder withStartsWithEstimations(final String prefix) {
 		if (null == prefix) {
@@ -443,7 +443,7 @@ public final class DsvBuilder {
 	 * @param index Index of the column
 	 * @param prefix The estimated prefix of specified column values
 	 * @return The {@code DsvBuilder} instance
-	 * @throws NullPointerException If the prefix is null
+	 * @throws NullPointerException If the prefix is {@code null}
 	 */
 	public DsvBuilder withStartsWithEstimation(final int index, final String prefix) {
 		if (null == prefix) {
@@ -459,7 +459,7 @@ public final class DsvBuilder {
 	 * @param index Index of the column
 	 * @param prefix The required prefix of specified column values
 	 * @return The {@code DsvBuilder} instance
-	 * @throws NullPointerException If the prefix is null
+	 * @throws NullPointerException If the prefix is {@code null}
 	 */
 	public DsvBuilder withStartsWithConstraint(final int index, final String prefix) {
 		if (null == prefix) {
@@ -467,14 +467,14 @@ public final class DsvBuilder {
 		}
 		return withConstraint(index, value -> value.startsWith(prefix));
 	}
-	
+
 	// ENDS WITH
 	/**
 	 * <p>Add {@code String.endsWith()} estimations to all columns of the DSV data.</p>
 	 * 
 	 * @param suffix The estimated suffix of all column values
 	 * @return The {@code DsvBuilder} instance
-	 * @throws NullPointerException If the suffix is null
+	 * @throws NullPointerException If the suffix is {@code null}
 	 */
 	public DsvBuilder withEndsWithEstimations(final String suffix) {
 		if (null == suffix) {
@@ -489,7 +489,7 @@ public final class DsvBuilder {
 	 * @param index Index of the column
 	 * @param suffix The estimated suffix of specified column values
 	 * @return The {@code DsvBuilder} instance
-	 * @throws NullPointerException If the suffix is null
+	 * @throws NullPointerException If the suffix is {@code null}
 	 */
 	public DsvBuilder withEndsWithEstimation(final int index, final String suffix) {
 		if (null == suffix) {
@@ -505,7 +505,7 @@ public final class DsvBuilder {
 	 * @param index Index of the column
 	 * @param suffix The required suffix of specified column values
 	 * @return The {@code DsvBuilder} instance
-	 * @throws NullPointerException If the suffix is null
+	 * @throws NullPointerException If the suffix is {@code null}
 	 */
 	public DsvBuilder withEndsWithConstraint(final int index, final String suffix) {
 		if (null == suffix) {
@@ -513,7 +513,7 @@ public final class DsvBuilder {
 		}
 		return withConstraint(index, value -> value.endsWith(suffix));
 	}
-	
+
 	// CUSTOM
 	/**
 	 * <p>Add custom estimation function to all columns of the DSV data.</p>
@@ -552,7 +552,7 @@ public final class DsvBuilder {
 		evaluator.addEstimation(index, estimation);
 		return this;
 	}
-	
+
 	/**
 	 * <p>Add a custom constraint predicate to all columns of the DSV data.</p>
 	 * 
@@ -590,7 +590,7 @@ public final class DsvBuilder {
 		evaluator.addConstraint(index, constraint);
 		return this;
 	}
-	
+
 	/**
 	 * <p>Build and return a {@code DsvMender} instance using configured attributes.</p>
 	 * 

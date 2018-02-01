@@ -1,7 +1,7 @@
 /*
 MIT License
 
-Copyright (c) 2017 Alexis Jehan
+Copyright (c) 2018 Alexis Jehan
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -38,7 +38,7 @@ final class DsvUtils {
 	private DsvUtils() {
 		throw new AssertionError();
 	}
-	
+
 	/**
 	 * <p>This function aims to considerably improve performances of the {@code DsvMender.fix()} method for specials
 	 * cases, especially when the delimiter occurs several times consecutively and lead to nodes explosion.</p>
@@ -52,7 +52,6 @@ final class DsvUtils {
 	static String[] optimize(final String[] values, final String delimiter, final int nbColumns, final int nbSafeColumns) {
 		String[] result = Arrays.copyOf(values, values.length);
 		while (nbColumns < result.length) {
-			
 			// Interval of longest consecutive empty values
 			int dmin = 0;
 			int dmax = 0;
@@ -74,9 +73,7 @@ final class DsvUtils {
 				dmin = s;
 				dmax = result.length;
 			}
-			
 			if (dmax - dmin > 2 * nbSafeColumns + 1) {
-				
 				// Merging consecutive empty values while keeping a safe amount on each side
 				for (int i = dmin + nbSafeColumns + 1; i < dmax - nbSafeColumns; ++i) {
 					result = remove(result, dmin + nbSafeColumns + 1);
@@ -88,7 +85,7 @@ final class DsvUtils {
 		}
 		return result;
 	}
-	
+
 	/**
 	 * <p>Remove an element from an array at a specific index.</p>
 	 * 

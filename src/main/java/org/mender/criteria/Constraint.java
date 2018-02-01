@@ -1,7 +1,7 @@
 /*
 MIT License
 
-Copyright (c) 2017 Alexis Jehan
+Copyright (c) 2018 Alexis Jehan
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -28,7 +28,7 @@ import java.util.function.Predicate;
 /**
  * <p>A {@link Criterion} that returns a binary <i>(0 or 1)</i> score using a predicate on values.</p>
  * 
- * @param <V> Value's type
+ * @param <V> value's type
  * @since 1.0
  */
 public class Constraint<V> implements Criterion<V> {
@@ -37,12 +37,12 @@ public class Constraint<V> implements Criterion<V> {
 	 * <p>Internal used predicate.</p>
 	 */
 	private final Predicate<V> predicate;
-	
+
 	/**
 	 * <p>Constructor using a predicate that will be used to test the value.<p>
 	 * 
 	 * @param predicate The predicate function
-	 * @throws NullPointerException If the predicate is null
+	 * @throws NullPointerException If the predicate is {@code null}
 	 */
 	public Constraint(final Predicate<V> predicate) {
 		if (null == predicate) {
@@ -50,7 +50,7 @@ public class Constraint<V> implements Criterion<V> {
 		}
 		this.predicate = predicate;
 	}
-	
+
 	/**
 	 * <p>Check if the value passes the predicate.</p>
 	 * 
@@ -60,16 +60,16 @@ public class Constraint<V> implements Criterion<V> {
 	public boolean check(final V value) {
 		return predicate.test(value);
 	}
-	
+
 	@Override
 	public double calculate(final V value) {
 		return predicate.test(value) ? 1.0d : 0.0d;
 	}
 
 	/**
-	 * <p>Sugar constructor for easiest uses with generic.</p>
+	 * <p>Vanilla constructor for easiest uses with generic.</p>
 	 * 
-	 * @param <V> Value's type
+	 * @param <V> value's type
 	 * @param predicate The predicate function
 	 * @return The instantiated {@code Constraint}
 	 */

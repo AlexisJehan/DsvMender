@@ -1,7 +1,7 @@
 /*
 MIT License
 
-Copyright (c) 2017 Alexis Jehan
+Copyright (c) 2018 Alexis Jehan
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -35,27 +35,27 @@ import org.mender.criteria.Estimation;
  *
  * <p><b>Score computation</b>: (1 * c[1] * c2] * c[3]...) * (e[1] + e[2] + e[3]...)<br>
  * <i>(with c[n] the n-th constraint score and e[n] the n-th estimation score)</i></p>
- * 
+ *
  * @since 1.0
  */
 class DsvEvaluator implements Evaluator<String[]> {
-	
+
 	/**
 	 * <p>Map of constraints associated to column indexes.</p>
 	 */
 	private final Map<Constraint<String>, Integer> constraints = new HashMap<>();
-	
+
 	/**
 	 * <p>Map of estimations associated to column indexes.</p>
 	 */
 	private final Map<Estimation<String, ?>, Integer> estimations = new HashMap<>();
-	
+
 	/**
 	 * <p>Add a new {@code Constraint} at the specified index.</p>
-	 * 
+	 *
 	 * @param index The related column index
 	 * @param constraint The constraint to register
-	 * @throws NullPointerException If the constraint is null
+	 * @throws NullPointerException If the constraint is {@code null}
 	 * @throws IndexOutOfBoundsException If the index is negative
 	 */
 	public void addConstraint(final int index, final Constraint<String> constraint) {
@@ -67,13 +67,13 @@ class DsvEvaluator implements Evaluator<String[]> {
 		}
 		constraints.put(constraint, index);
 	}
-	
+
 	/**
 	 * <p>Add a new {@code Estimation} at the specified index.</p>
-	 * 
+	 *
 	 * @param index The related column index
 	 * @param estimation The estimation to register
-	 * @throws NullPointerException If the estimation is null
+	 * @throws NullPointerException If the estimation is {@code null}
 	 * @throws IndexOutOfBoundsException If the index is negative
 	 */
 	public void addEstimation(final int index, final Estimation<String, ?> estimation) {
@@ -88,10 +88,10 @@ class DsvEvaluator implements Evaluator<String[]> {
 
 	/**
 	 * <p>Check constraints using given values.</p>
-	 * 
+	 *
 	 * @param values Values to use to check
 	 * @return {@code true} if values pass all constraints
-	 * @throws NullPointerException If values are null
+	 * @throws NullPointerException If values are {@code null}
 	 */
 	@Override
 	public boolean checkConstraints(final String[] values) {
@@ -108,9 +108,9 @@ class DsvEvaluator implements Evaluator<String[]> {
 
 	/**
 	 * <p>Adjust estimations using given values.</p>
-	 * 
+	 *
 	 * @param values Values to use to adjust
-	 * @throws NullPointerException If values are null
+	 * @throws NullPointerException If values are {@code null}
 	 */
 	@Override
 	public void adjustEstimations(final String[] values) {
@@ -124,9 +124,9 @@ class DsvEvaluator implements Evaluator<String[]> {
 
 	/**
 	 * <p>Evaluate given values to get a computed score.</p>
-	 * 
+	 *
 	 * @param values Values to evaluate
-	 * @throws NullPointerException If values are null
+	 * @throws NullPointerException If values are {@code null}
 	 */
 	@Override
 	public double evaluate(final String[] values) {
@@ -137,7 +137,7 @@ class DsvEvaluator implements Evaluator<String[]> {
 				constraints.entrySet()
 						.stream()
 						.mapToDouble(constraint -> constraint.getKey().calculate(values[constraint.getValue()]))
-						.reduce(1, (a, b) -> a * b) * 
+						.reduce(1, (a, b) -> a * b) *
 				(
 						estimations.isEmpty() ? 1.0d : estimations.entrySet()
 						.stream()

@@ -1,7 +1,7 @@
 /*
 MIT License
 
-Copyright (c) 2017 Alexis Jehan
+Copyright (c) 2018 Alexis Jehan
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -44,22 +44,22 @@ import org.mender.MenderException;
  * @since 1.0
  */
 public class DsvReader implements Closeable {
-	
+
 	/**
 	 * <p>Configured {@code DsvMender} to use.</p>
 	 */
 	private final DsvMender mender;
-	
+
 	/**
 	 * <p>Delegated {@code BufferedReader} to read lines from the input.</p>
 	 */
 	private final BufferedReader bufferedReader;
-	
+
 	/**
 	 * <p>Boolean that indicate if a line has already been read.</p>
 	 */
 	private boolean hasStarted = false;
-	
+
 	/**
 	 * <p>Constructor using a file {@code Path}.</p>
 	 * 
@@ -70,7 +70,7 @@ public class DsvReader implements Closeable {
 	public DsvReader(final DsvMender mender, final Path file) throws IOException {
 		this(mender, Files.newBufferedReader(file));
 	}
-	
+
 	/**
 	 * <p>Constructor using a file {@code Path} and a custom {@code Charset}.</p>
 	 * 
@@ -82,7 +82,7 @@ public class DsvReader implements Closeable {
 	public DsvReader(final DsvMender mender, final Path file, final Charset charset) throws IOException {
 		this(mender, Files.newBufferedReader(file, charset));
 	}
-	
+
 	/**
 	 * <p>Constructor using a {@code String}</p>
 	 * 
@@ -92,7 +92,7 @@ public class DsvReader implements Closeable {
 	public DsvReader(final DsvMender mender, final String string) {
 		this(mender, new StringReader(string));
 	}
-	
+
 	/**
 	 * <p>Constructor using a {@code Reader}</p>
 	 * 
@@ -108,7 +108,7 @@ public class DsvReader implements Closeable {
 	 * 
 	 * @param mender The {@code DSVMender} to use
 	 * @param bufferedReader The {@code BufferedReader} to use
-	 * @throws NullPointerException If the {@code DsvMender} or the {@code BufferedReader} are null
+	 * @throws NullPointerException If the {@code DsvMender} or the {@code BufferedReader} are {@code null}
 	 */
 	public DsvReader(final DsvMender mender, final BufferedReader bufferedReader) {
 		if (null == mender) {
@@ -120,7 +120,7 @@ public class DsvReader implements Closeable {
 		this.mender = mender;
 		this.bufferedReader = bufferedReader;
 	}
-	
+
 	/**
 	 * <p>Read the DSV header, it must be the first read line. Note that no fit operation will be performed.</p>
 	 * 
@@ -138,7 +138,7 @@ public class DsvReader implements Closeable {
 		}
 		return mender.fixIfNotValid(line);
 	}
-	
+
 	/**
 	 * <p>Read a DSV row, performing a fit operation if it is valid, or a fix operation else.</p>
 	 * 

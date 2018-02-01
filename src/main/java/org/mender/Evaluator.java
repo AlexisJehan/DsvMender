@@ -1,7 +1,7 @@
 /*
 MIT License
 
-Copyright (c) 2017 Alexis Jehan
+Copyright (c) 2018 Alexis Jehan
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -32,7 +32,7 @@ package org.mender;
  * @since 1.0
  */
 public interface Evaluator<E> {
-	
+
 	/**
 	 * <p>Check if the element passes all configured {@code Constraint} objects.</p>
 	 * 
@@ -48,7 +48,7 @@ public interface Evaluator<E> {
 	 * @param element The element to adjust
 	 */
 	void adjustEstimations(final E element);
-	
+
 	/**
 	 * <p>Evaluate the given element by returning a score <i>(the score should be computed with {@code Constraint} or
 	 * {@code Estimation} objects)</i>.</p>

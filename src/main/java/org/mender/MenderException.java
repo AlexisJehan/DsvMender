@@ -1,7 +1,7 @@
 /*
 MIT License
 
-Copyright (c) 2017 Alexis Jehan
+Copyright (c) 2018 Alexis Jehan
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -29,7 +29,7 @@ package org.mender;
  * @since 1.0
  */
 public class MenderException extends Exception {
-	
+
 	/**
 	 * <p>Generated serialization UID</p>
 	 */

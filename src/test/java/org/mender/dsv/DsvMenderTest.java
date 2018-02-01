@@ -1,3 +1,26 @@
+/*
+MIT License
+
+Copyright (c) 2018 Alexis Jehan
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
+*/
 package org.mender.dsv;
 
 import java.lang.reflect.InvocationTargetException;
@@ -124,13 +147,13 @@ public class DsvMenderTest {
 			Assert.fail(e.getMessage());
 		}
 	}
-	
+
 	@Test
 	public void testHashCode() {
-		final Function<String[], Integer> standard = array -> Arrays.hashCode(array);
+		final Function<String[], Integer> standard = Arrays::hashCode;
 		final Function<String[], Integer> custom  = array -> {
 			try {
-				final Method method = DsvMender.class.getDeclaredClasses()[0].getDeclaredMethod("customHashCode", new Class[] {String[].class});
+				final Method method = DsvMender.class.getDeclaredClasses()[0].getDeclaredMethod("customHashCode", String[].class);
 				method.setAccessible(true);
 				return (int) method.invoke(null, new Object[] {array});
 			} catch (final NoSuchMethodException | SecurityException | IllegalAccessException | IllegalArgumentException | InvocationTargetException e) {
@@ -138,10 +161,8 @@ public class DsvMenderTest {
 			}
 			return null;
 		};
-		
 		Assert.assertEquals(standard.apply(new String[] {"00", "00"}), standard.apply(new String[] {"00", "00"}));
 		Assert.assertEquals(  custom.apply(new String[] {"00", "00"})  , custom.apply(new String[] {"00", "00"}));
-
 		Assert.assertEquals(   standard.apply(new String[] {"0", "000"}), standard.apply(new String[] {"00", "00"})); // Collision
 		Assert.assertNotEquals(  custom.apply(new String[] {"0", "000"}),   custom.apply(new String[] {"00", "00"}));
 	}
