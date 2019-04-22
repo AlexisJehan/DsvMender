@@ -4,7 +4,7 @@
 
 	<groupId>com.github.alexisjehan</groupId>
 	<artifactId>dsv-mender</artifactId>
-	<version>1.0.0-SNAPSHOT</version>
+	<version>1.0.1-SNAPSHOT</version>
 	<packaging>jar</packaging>
 
 	<name>DSV Mender</name>
