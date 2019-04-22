@@ -1,123 +1,150 @@
+![DSV Mender](logo.png)
 # DSV Mender
+[![Maven Central](https://img.shields.io/maven-central/v/com.github.alexisjehan/dsv-mender.svg)](https://mvnrepository.com/artifact/com.github.alexisjehan/dsv-mender/latest)
+[![Javadoc](http://www.javadoc.io/badge/com.github.alexisjehan/dsv-mender.svg)](http://www.javadoc.io/doc/com.github.alexisjehan/dsv-mender)
+[![Travis](https://img.shields.io/travis/alexisjehan/dsv-mender.svg)](https://travis-ci.org/alexisjehan/dsv-mender)
+[![Codecov](https://img.shields.io/codecov/c/github/alexisjehan/dsv-mender.svg)](https://codecov.io/gh/alexisjehan/dsv-mender)
+[![License](https://img.shields.io/github/license/alexisjehan/dsv-mender.svg)](https://github.com/alexisjehan/dsv-mender/blob/master/LICENSE.txt)
 
-A Java 8 library to fix malformed Delimiter-separated values (DSV) data automatically.
+A Java 11+ library to fix malformed DSV (Delimiter-Separated Values) data automatically.
 
 ## Introduction
-
 As many developers you may already had to treat some input data with formats such as _CSV_ or _JSON_. Sometimes that
-task could become tricky to achieve because some values are not formatted how they are supposed to be. DSV Mender is a
-library that aims to help you in such cases efficiently. Basically it collects some features from each valid column of
-the data independently to find the best solution while handling invalid or missing values.
+task could become tricky to achieve because some values are not always formatted how they are supposed to be.
+**DSV Mender** is a library that aims to help you in such cases efficiently. Basically it collects some features from
+each valid column of the data independently to find the best solution while handling invalid or missing values.
 
-### Estimations and Constraints
+### Constraints and estimations
+DSV Mender is working with a concept of constraints and estimations that are associated to specific columns of the data:
 
-DSV Mender is working with concepts of estimations and constraints that are assigned to desired columns:
+* **Constraints** eliminate some candidate possibilities of a malformed row if they do not respect a rule, without
+taking into account previous valid values at all.
+For example if the third column has to be exactly 5 characters long, then all candidates with a value that does not
+will be discarded.
 
 * **Estimations** could be used to collect some features from valid values. When an invalid value need to be fixed then
 the closest generated possibility is chosen.
 For example if you collect the length of valid values and get 5 characters 95% of the time then a possible fixed-value
-that got a length of 5 got more chances to be selected than a possibility of 3 characters.
+that got a length of 5 got more chances to be selected than a candidate of 3 characters.
 
-* **Constraints** unlike estimations, eliminate some possibilities if they do not respect a precise rule, without taking
-into account valid values at all.
-For example if the third column has to be exactly 5 characters long, then all possibilities with a value that does not
-will be discarded.
+## Getting started
+To include and use DSV Mender, you need to add the following dependency into your _Maven_ _pom.xml_ file:
+```xml
+<dependency>
+	<groupId>com.github.alexisjehan</groupId>
+	<artifactId>dsv-mender</artifactId>
+	<version>1.0.0</version>
+</dependency>
+```
 
-## Example
+Or if you are using _Gradle_:
+```xml
+dependencies {
+	compile "com.github.alexisjehan:dsv-mender:1.0.0"
+}
+```
 
+Also the Javadoc can be accessed [here](http://www.javadoc.io/doc/com.github.alexisjehan/dsv-mender).
+
+## Examples
 Let's illustrate how it works step-by-step, consider the following CSV data:
 
 ```csv
-ID,NAME,DESCRIPTION,BIRTHDAY,COUNTRY
-1,John,Hey everyone I'm the first user,1984-05-16,United Kingdom
-2,Pierre,Bonjour à tous vous allez bien ?,1992-11-26,France
-3,Pedro,Holà qué tal ?,1962-01-05,Spain
-4,Arnold,My country name contains a , in it,1974-05-30,Macedonia, Rep. of
-5,Peter,I, like, to, use, commas, between, words,1994-12-04,United States
+Release,Release date,Highlights
+Java SE 9,2017-09-21,Initial release
+Java SE 9.0.1,2017-10-17,October 2017 security fixes and critical bug fixes
+Java SE 9.0.4,2018-01-16,Final release for JDK 9; January 2018 security fixes and critical bug fixes
+Java SE 10,2018-03-20,Initial release
+Java SE 10.0.1,2018-04-17,Security fixes, 5 bug fixes
+Java SE 11,2018-09-25,Initial release
+Java SE 11.0.1,2018-10-16,Security & bug fixes
+Java SE 11.0.2,2019-01-15,Security & bug fixes
+Java SE 12,Initial release
 ```
 
-As you can see, it looks like CSV data but values are not quoted. Have a look especially to the two last lines, yeah...
-some values appear to contain some comma characters, which is used also as the delimiter. How to fix it ? Let's see how
-DSV Mender works...
+As you may see, some lines are not well-formatted. The "Java SE 10.0.1" "Highlights" column contains the delimiter
+character, and the "Java SE 12" "Release date" column is missing. Let's see how to use DSV Mender to fix it.
 
 ### Building the mender
+First you need to create a _Mender_ object based on the input data. That requires to specify the delimiter string as
+well as the expected number of columns.
 
-The first thing is to configure a _Mender_ object based on the input data. You need to specify the delimiter string as
-well as the valid number of columns.
-
-#### Automatic configuration
-
-If you don't know so much about the data or you want to see how the Mender acts automatically you can use that:
+#### Basic configuration
+The lazy way, for a first attempt is to build a basic _Mender_, that can be able to mend most of input data:
 
 ```java
-final DsvMender mender = DsvMender.auto(",", 5); // delimiter and number of columns
+final var delimiter = ',';
+final var length = 3;
+final var mender = DsvMender.basic(delimiter, length);
 ```
 
 #### Advanced configuration
-
-If you know approximately how some columns need to be formatted and to get more accurate results, you would better use a
-more advanced configuration. Concerning our example the Mender could be created like this:
+For more accurate results, you can also build a _Mender_ with custom _Constraints_ and _Estimations_. For our example above
+we will use the following ones:
 
 ```java
-final DsvMender mender = DsvMender.builder(",", 5)
-		.withLengthEstimations() // Estimating the length of the value for every columns
-		.withContainsEstimations(" ") // Estimating if the value contains a space character for every columns
-		.withPatternConstraint(0, Pattern.compile("[0-9]+")) // The ID column is always numerical, not empty
-		.withLengthConstraint(3, 10) // The birthday column always contains 10 characters
+final var mender = DsvMender.builder()
+		.withDelimiter(',')
+		.withLength(3)
+		.withConstraint(value -> value.startsWith("Java SE"), 0) // values[0] must start with "Java SE"
+		.withConstraint(value -> value.isEmpty() || 10 == value.length(), 1)// values[1] must be empty or have a length of 10
 		.build();
 ```
 
 ### Processing the data
-
-Before to fix, and because we configured estimations, then we first need to fit the DSV Mender with valid rows.
-
-```java
-mender.fit("1,John,Hey everyone I'm the first user,1984-05-16,United Kingdom");
-mender.fit("2,Pierre,Bonjour à tous vous allez bien ?,1992-11-26,France");
-mender.fit("3,Pedro,Holà, qué tal ?,1962-01-05,Spain");
-```
-
-Finally we can now fix invalid rows and display the result:
+Once you got your _Mender_ component built, you are able to process your data line by line. Note that you do not have to
+worry of the passed line being valid or not, if it is then the _Mender_ will still fit its _Estimations_ before to
+return it.
 
 ```java
-try {
-	Arrays.asList(mender.fix("4,Arnold,My country name contains a , in it,1974-05-30,Macedonia, Rep. of")).forEach(System.out::println);
-	System.out.println();
-	Arrays.asList(mender.fix("5,Peter,I, like, to, use, commas, between, words,1994-12-04,United States")).forEach(System.out::println);
-} catch (final MenderException e) {
-	System.err.println("ERROR: No solution has been found, try others estimations and constraints");
+String row;
+while (null != (row = reader.readLine())) {
+	printValues(mender.mend(row));
 }
 ```
 
-If you had properly configured the DSV Mender as described earlier, then the data should be fixed.
-
-#### Notes:
-* If you don't know which row is valid or not, you should use _fitIfValid_ and _fixIfNotValid_ instead of _fit_ and
-_fix_.
-* Even better, you can use the _DSVReader_ wrapper class that automatically fit and fix while reading from a source.
-
-More examples can be found in the _examples_ package.
-
-## Maven commands
-
-### Compiling
+Finally here is the result we got for our example:
 
 ```
-mvn compile
+"Release", "Release date", "Highlights"
+"Java SE 9", "2017-09-21", "Initial release"
+"Java SE 9.0.1", "2017-10-17", "October 2017 security fixes and critical bug fixes"
+"Java SE 9.0.4", "2018-01-16", "Final release for JDK 9; January 2018 security fixes and critical bug fixes"
+"Java SE 10", "2018-03-20", "Initial release"
+"Java SE 10.0.1", "2018-04-17", "Security fixes, 5 bug fixes"
+"Java SE 11", "2018-09-25", "Initial release"
+"Java SE 11.0.1", "2018-10-16", "Security & bug fixes"
+"Java SE 11.0.2", "2019-01-15", "Security & bug fixes"
+"Java SE 12", "", "Initial release"
 ```
 
-### Running unit tests
+(You can find the code of that example among others in the "examples" package)
 
+## Maven phases and goals
+Compile, test and install the JAR in the local Maven repository:
+```
+mvn install
+```
+
+Run JUnit 5 tests:
 ```
 mvn test
 ```
 
-### Generating the Javadoc
-
+Generate the Javadoc API documentation:
 ```
 mvn javadoc:javadoc
 ```
 
-## License
+Update sources license:
+```
+mvn license:format
+```
 
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details
+Generate the Jacoco test coverage report:
+```
+mvn jacoco:report
+```
+
+## License
+This project is licensed under the MIT License - see the [LICENSE](LICENSE.txt) file for details
