@@ -9,6 +9,12 @@ install: mvn install -DskipTests -Dmaven.javadoc.skip=true -Dgpg.skip
 jdk:
   - openjdk11
   - openjdk12
+  - openjdk13
+  - openjdk-ea
+  - oraclejdk11
+  - oraclejdk12
+  - oraclejdk13
+  - oraclejdk-ea
 
 after_success:
   - mvn jacoco:report && bash <(curl -s https://codecov.io/bash)
