@@ -60,8 +60,9 @@
 		<maven.compiler.source>11</maven.compiler.source>
 		<maven.compiler.target>11</maven.compiler.target>
 		<maven.compiler.release>11</maven.compiler.release>
-		<maven.compiler.showDeprecation>true</maven.compiler.showDeprecation>
 		<maven.compiler.showWarnings>true</maven.compiler.showWarnings>
+		<maven.compiler.showDeprecation>true</maven.compiler.showDeprecation>
+		<maven.test.skip>false</maven.test.skip>
 		<maven.javadoc.skip>false</maven.javadoc.skip>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
@@ -104,18 +105,12 @@
 				<version>3.8.1</version>
 				<configuration>
 					<compilerArgs>
-						<arg>-Xlint:unchecked</arg>
+						<arg>-Xlint:all</arg>
 					</compilerArgs>
 					<excludes>
-						<exclude>**/benchmarks/**</exclude>
 						<exclude>**/examples/**</exclude>
 					</excludes>
 				</configuration>
-			</plugin>
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-surefire-plugin</artifactId>
-				<version>2.22.2</version>
 			</plugin>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
@@ -123,9 +118,10 @@
 				<version>3.1.0</version>
 				<executions>
 					<execution>
-						<id>sources-jar</id>
+						<id>source-jar</id>
 						<goals>
 							<goal>jar-no-fork</goal>
+							<goal>test-jar-no-fork</goal>
 						</goals>
 					</execution>
 				</executions>
@@ -135,9 +131,8 @@
 				<artifactId>maven-javadoc-plugin</artifactId>
 				<version>3.1.1</version>
 				<configuration>
-					<excludePackageNames>benchmarks</excludePackageNames>
-					<excludePackageNames>examples</excludePackageNames>
 					<additionalOptions>-html5</additionalOptions>
+					<excludePackageNames>examples</excludePackageNames>
 				</configuration>
 				<executions>
 					<execution>
@@ -154,10 +149,40 @@
 				<version>1.6</version>
 				<executions>
 					<execution>
-						<id>sign-artifacts</id>
+						<id>gpg-sign</id>
 						<phase>verify</phase>
 						<goals>
 							<goal>sign</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-surefire-plugin</artifactId>
+				<version>2.22.2</version>
+			</plugin>
+			<plugin>
+				<groupId>org.jacoco</groupId>
+				<artifactId>jacoco-maven-plugin</artifactId>
+				<version>0.8.4</version>
+				<configuration>
+					<excludes>
+						<exclude>**/examples/**</exclude>
+					</excludes>
+				</configuration>
+				<executions>
+					<execution>
+						<id>jacoco-prepare-agent</id>
+						<goals>
+							<goal>prepare-agent</goal>
+						</goals>
+					</execution>
+					<execution>
+						<id>jacoco-report</id>
+						<phase>test</phase>
+						<goals>
+							<goal>report</goal>
 						</goals>
 					</execution>
 				</executions>
@@ -177,28 +202,9 @@
 				</configuration>
 				<executions>
 					<execution>
-						<id>default-check</id>
+						<id>license-check</id>
 						<goals>
 							<goal>check</goal>
-						</goals>
-					</execution>
-				</executions>
-			</plugin>
-			<plugin>
-				<groupId>org.jacoco</groupId>
-				<artifactId>jacoco-maven-plugin</artifactId>
-				<version>0.8.4</version>
-				<configuration>
-					<excludes>
-						<exclude>**/benchmarks/**</exclude>
-						<exclude>**/examples/**</exclude>
-					</excludes>
-				</configuration>
-				<executions>
-					<execution>
-						<id>default-prepare-agent</id>
-						<goals>
-							<goal>prepare-agent</goal>
 						</goals>
 					</execution>
 				</executions>
