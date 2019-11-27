@@ -57,23 +57,23 @@ final class DsvMenderTest {
 	@Test
 	void testOptimize() {
 		final var dsvMender = new DsvMender(",", 3, 5, Set.of(new ConstraintEvaluator<>(values -> "foo".equals(values[0]))), Set.of(new EstimationEvaluator<>(values -> values[2])));
-		assertThat(dsvMender.optimize(0, "foo,")).containsExactly("foo", "");
-		assertThat(dsvMender.optimize(0, "foo", "")).containsExactly("foo", "");
-		assertThat(dsvMender.optimize(0, "foo", "bar", "", "")).containsExactly("foo", "bar", ",");
-		assertThat(dsvMender.optimize(0, "", "foo")).containsExactly("", "foo");
-		assertThat(dsvMender.optimize(0, "", "", "bar", "foo")).containsExactly(",", "bar", "foo");
-		assertThat(dsvMender.optimize(0, "foo", "", "", "bar", "")).containsExactly("foo", ",", "bar", "");
+		assertThat(dsvMender.optimize(0, "foo,")).containsExactly("foo", Strings.EMPTY);
+		assertThat(dsvMender.optimize(0, "foo", Strings.EMPTY)).containsExactly("foo", Strings.EMPTY);
+		assertThat(dsvMender.optimize(0, "foo", "bar", Strings.EMPTY, Strings.EMPTY)).containsExactly("foo", "bar", ",");
+		assertThat(dsvMender.optimize(0, Strings.EMPTY, "foo")).containsExactly(Strings.EMPTY, "foo");
+		assertThat(dsvMender.optimize(0, Strings.EMPTY, Strings.EMPTY, "bar", "foo")).containsExactly(",", "bar", "foo");
+		assertThat(dsvMender.optimize(0, "foo", Strings.EMPTY, Strings.EMPTY, "bar", Strings.EMPTY)).containsExactly("foo", ",", "bar", Strings.EMPTY);
 		assertThat(dsvMender.optimize(0, "foo", "bar")).containsExactly("foo", "bar");
-		assertThat(dsvMender.optimize(0, "foo", "", "bar")).containsExactly("foo", "", "bar");
-		assertThat(dsvMender.optimize(0, "foo", "", "", "", "", "bar")).containsExactly("foo", ",,,", "bar");
-		assertThat(dsvMender.optimize(1, "foo", "", "", "", "", "bar")).containsExactly("foo", "", ",", "", "bar");
-		assertThat(dsvMender.optimize(2, "foo", "", "", "", "", "bar")).containsExactly("foo", "", "", "", "", "bar");
+		assertThat(dsvMender.optimize(0, "foo", Strings.EMPTY, "bar")).containsExactly("foo", Strings.EMPTY, "bar");
+		assertThat(dsvMender.optimize(0, "foo", Strings.EMPTY, Strings.EMPTY, Strings.EMPTY, Strings.EMPTY, "bar")).containsExactly("foo", ",,,", "bar");
+		assertThat(dsvMender.optimize(1, "foo", Strings.EMPTY, Strings.EMPTY, Strings.EMPTY, Strings.EMPTY, "bar")).containsExactly("foo", Strings.EMPTY, ",", Strings.EMPTY, "bar");
+		assertThat(dsvMender.optimize(2, "foo", Strings.EMPTY, Strings.EMPTY, Strings.EMPTY, Strings.EMPTY, "bar")).containsExactly("foo", Strings.EMPTY, Strings.EMPTY, Strings.EMPTY, Strings.EMPTY, "bar");
 	}
 
 	@Test
 	void testOptimizeInvalid() {
 		final var dsvMender = new DsvMender(",", 3, 5, Set.of(new ConstraintEvaluator<>(values -> "foo".equals(values[0]))), Set.of(new EstimationEvaluator<>(values -> values[2])));
-		assertThatIllegalArgumentException().isThrownBy(() -> dsvMender.optimize(-1, "foo", "", "", "", "bar"));
+		assertThatIllegalArgumentException().isThrownBy(() -> dsvMender.optimize(-1, "foo", Strings.EMPTY, Strings.EMPTY, Strings.EMPTY, "bar"));
 		assertThatNullPointerException().isThrownBy(() -> dsvMender.optimize(0, (String) null));
 		assertThatNullPointerException().isThrownBy(() -> dsvMender.optimize(0, (String[]) null));
 	}
@@ -82,11 +82,11 @@ final class DsvMenderTest {
 	void testMend() {
 		{
 			final var dsvMender = new DsvMender(",", 3, 5, Set.of(new ConstraintEvaluator<>(values -> "foo".equals(values[0]))), Set.of(new EstimationEvaluator<>(values -> values[2])));
-			assertThat(dsvMender.mend("foo,,bar")).containsExactly("foo", "", "bar");
-			assertThat(dsvMender.mend("foo", "", "bar")).containsExactly("foo", "", "bar");
-			assertThat(dsvMender.mend("foo")).containsExactly("foo", "", "");
-			assertThat(dsvMender.mend("foo", "", "", "", "bar")).containsExactly("foo", ",,", "bar");
-			assertThatExceptionOfType(MendException.class).isThrownBy(() -> dsvMender.mend("bar", "", "foo"));
+			assertThat(dsvMender.mend("foo,,bar")).containsExactly("foo", Strings.EMPTY, "bar");
+			assertThat(dsvMender.mend("foo", Strings.EMPTY, "bar")).containsExactly("foo", Strings.EMPTY, "bar");
+			assertThat(dsvMender.mend("foo")).containsExactly("foo", Strings.EMPTY, Strings.EMPTY);
+			assertThat(dsvMender.mend("foo", Strings.EMPTY, Strings.EMPTY, Strings.EMPTY, "bar")).containsExactly("foo", ",,", "bar");
+			assertThatExceptionOfType(MendException.class).isThrownBy(() -> dsvMender.mend("bar", Strings.EMPTY, "foo"));
 		}
 		{
 			final var dsvMender = new DsvMender(",", 3, 5, Set.of(), Set.of());
@@ -94,8 +94,8 @@ final class DsvMenderTest {
 		}
 		{
 			final var dsvMender = new DsvMender(",", 3, 5, Set.of(), Set.of(new EstimationEvaluator<>(values -> values[0].length()), new EstimationEvaluator<>(values -> values[1].length()), new EstimationEvaluator<>(values -> values[2].length())));
-			assertThat(dsvMender.mend("foo", "", "bar")).containsExactly("foo", "", "bar");
-			assertThat(dsvMender.mend("f", "o", "", "b", "r")).containsExactly("f,o", "", "b,r");
+			assertThat(dsvMender.mend("foo", Strings.EMPTY, "bar")).containsExactly("foo", Strings.EMPTY, "bar");
+			assertThat(dsvMender.mend("f", "o", Strings.EMPTY, "b", "r")).containsExactly("f,o", Strings.EMPTY, "b,r");
 		}
 	}
 
@@ -110,19 +110,19 @@ final class DsvMenderTest {
 	void testGetLastResult() {
 		final var dsvMender = new DsvMender(",", 3, 5, Set.of(new ConstraintEvaluator<>(values -> "foo".equals(values[0]))), Set.of(new EstimationEvaluator<>(values -> values[2])));
 		assertThat(dsvMender.getLastResult()).isEmpty();
-		assertThat(dsvMender.mend("foo", "", "bar")).containsExactly("foo", "", "bar");
+		assertThat(dsvMender.mend("foo", Strings.EMPTY, "bar")).containsExactly("foo", Strings.EMPTY, "bar");
 		assertThat(dsvMender.getLastResult()).isEmpty();
-		assertThat(dsvMender.mend("foo", "bar")).containsExactly("foo", "", "bar");
+		assertThat(dsvMender.mend("foo", "bar")).containsExactly("foo", Strings.EMPTY, "bar");
 		final var optionalLastResult = dsvMender.getLastResult();
 		assertThat(optionalLastResult).isPresent();
 		final var lastResult = optionalLastResult.orElseThrow();
 		assertThat(lastResult.getValue()).containsExactly("foo", "bar");
 		assertThat(lastResult.getCandidates()).containsExactlyInAnyOrder(
-				new DsvMendCandidate(ObjectArrays.of("", "foo", "bar"), Double.NaN),
-				new DsvMendCandidate(ObjectArrays.of("foo", "", "bar"), 1.0d),
-				new DsvMendCandidate(ObjectArrays.of("foo", "bar", ""), 0.5d)
+				new DsvMendCandidate(ObjectArrays.of(Strings.EMPTY, "foo", "bar"), Double.NaN),
+				new DsvMendCandidate(ObjectArrays.of("foo", Strings.EMPTY, "bar"), 1.0d),
+				new DsvMendCandidate(ObjectArrays.of("foo", "bar", Strings.EMPTY), 0.5d)
 		);
-		assertThat(lastResult.getBestCandidate()).isEqualTo(new DsvMendCandidate(ObjectArrays.of("foo", "", "bar"), 1.0d));
+		assertThat(lastResult.getBestCandidate()).isEqualTo(new DsvMendCandidate(ObjectArrays.of("foo", Strings.EMPTY, "bar"), 1.0d));
 	}
 
 	@Test

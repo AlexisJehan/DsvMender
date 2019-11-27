@@ -23,6 +23,7 @@
  */
 package com.github.alexisjehan.mender.dsv;
 
+import com.github.alexisjehan.javanilla.lang.Strings;
 import com.github.alexisjehan.javanilla.lang.array.IntArrays;
 import com.github.alexisjehan.javanilla.lang.array.ObjectArrays;
 import org.junit.jupiter.api.Test;
@@ -207,10 +208,10 @@ final class DsvMenderBuilderTest {
 		assertThat(estimationEvaluators).hasSize(2 * dsvMender.getLength());
 		for (final var estimationEvaluator : estimationEvaluators) {
 			assertThat(estimationEvaluator.evaluate(ObjectArrays.of("foo", "foo"))).isNaN();
-			assertThat(estimationEvaluator.evaluate(ObjectArrays.of("", ""))).isNaN();
+			assertThat(estimationEvaluator.evaluate(ObjectArrays.of(Strings.EMPTY, Strings.EMPTY))).isNaN();
 			estimationEvaluator.fit(ObjectArrays.of("foo", "foo"));
 			assertThat(estimationEvaluator.evaluate(ObjectArrays.of("foo", "foo"))).isEqualTo(1.0d);
-			assertThat(estimationEvaluator.evaluate(ObjectArrays.of("", ""))).isEqualTo(0.0d);
+			assertThat(estimationEvaluator.evaluate(ObjectArrays.of(Strings.EMPTY, Strings.EMPTY))).isEqualTo(0.0d);
 		}
 	}
 }
