@@ -23,12 +23,12 @@
  */
 package com.github.alexisjehan.mender.dsv;
 
-import com.github.alexisjehan.mender.api.MendCandidate;
 import com.github.alexisjehan.javanilla.misc.quality.Ensure;
 import com.github.alexisjehan.javanilla.misc.quality.Equals;
 import com.github.alexisjehan.javanilla.misc.quality.HashCode;
 import com.github.alexisjehan.javanilla.misc.quality.ToString;
 import com.github.alexisjehan.javanilla.misc.tuples.Pair;
+import com.github.alexisjehan.mender.api.MendCandidate;
 
 /**
  * <p>An immutable {@link MendCandidate} implementation to work with {@link DsvMender}.</p>

@@ -23,8 +23,8 @@
  */
 package examples;
 
-import com.github.alexisjehan.mender.dsv.DsvMender;
 import com.github.alexisjehan.javanilla.lang.Strings;
+import com.github.alexisjehan.mender.dsv.DsvMender;
 
 import java.util.Arrays;
 import java.util.stream.Collectors;

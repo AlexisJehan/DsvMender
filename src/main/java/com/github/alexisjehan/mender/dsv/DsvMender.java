@@ -23,14 +23,14 @@
  */
 package com.github.alexisjehan.mender.dsv;
 
-import com.github.alexisjehan.mender.api.MendException;
-import com.github.alexisjehan.mender.api.Mender;
-import com.github.alexisjehan.mender.api.evaluators.ConstraintEvaluator;
-import com.github.alexisjehan.mender.api.evaluators.EstimationEvaluator;
 import com.github.alexisjehan.javanilla.lang.Strings;
 import com.github.alexisjehan.javanilla.lang.array.ObjectArrays;
 import com.github.alexisjehan.javanilla.misc.quality.Ensure;
 import com.github.alexisjehan.javanilla.misc.quality.ToString;
+import com.github.alexisjehan.mender.api.MendException;
+import com.github.alexisjehan.mender.api.Mender;
+import com.github.alexisjehan.mender.api.evaluators.ConstraintEvaluator;
+import com.github.alexisjehan.mender.api.evaluators.EstimationEvaluator;
 
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -312,10 +312,10 @@ public final class DsvMender implements Mender<String[], DsvMendResult> {
 	 * @param constraintEvaluators the {@link Set} of {@link ConstraintEvaluator}s
 	 * @param estimationEvaluators the {@link Set} of {@link EstimationEvaluator}s
 	 * @throws NullPointerException if the delimiter, the {@link Set} of {@link ConstraintEvaluator}s or any of them or
-	 * the {@link Set} of {@link EstimationEvaluator}s or any of them if {@code null}
+	 *         the {@link Set} of {@link EstimationEvaluator}s or any of them if {@code null}
 	 * @throws IllegalArgumentException if delimiter is empty, the length is lower than 2, the maximum depth if lower
-	 * than 1 or if the {@link Set} of {@link ConstraintEvaluator}s or the {@link Set} of {@link EstimationEvaluator}s
-	 * is empty
+	 *         than 1 or if the {@link Set} of {@link ConstraintEvaluator}s or the {@link Set} of
+	 *         {@link EstimationEvaluator}s is empty
 	 * @since 1.0.0
 	 */
 	public DsvMender(final String delimiter, final int length, final int maxDepth, final Set<ConstraintEvaluator<String[]>> constraintEvaluators, final Set<EstimationEvaluator<String[]>> estimationEvaluators) {

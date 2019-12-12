@@ -41,15 +41,15 @@ public final class ConcreteExample {
 	private static final String DATA = String.join(
 			System.lineSeparator(),
 			String.join(DELIMITER, "Release", "Release date", "Highlights"),
-			String.join(DELIMITER, "Java SE 9",      "2017-09-21", "Initial release"),
-			String.join(DELIMITER, "Java SE 9.0.1",  "2017-10-17", "October 2017 security fixes and critical bug fixes"),
-			String.join(DELIMITER, "Java SE 9.0.4",  "2018-01-16", "Final release for JDK 9; January 2018 security fixes and critical bug fixes"),
-			String.join(DELIMITER, "Java SE 10",     "2018-03-20", "Initial release"),
+			String.join(DELIMITER, "Java SE 9", "2017-09-21", "Initial release"),
+			String.join(DELIMITER, "Java SE 9.0.1", "2017-10-17", "October 2017 security fixes and critical bug fixes"),
+			String.join(DELIMITER, "Java SE 9.0.4", "2018-01-16", "Final release for JDK 9; January 2018 security fixes and critical bug fixes"),
+			String.join(DELIMITER, "Java SE 10", "2018-03-20", "Initial release"),
 			String.join(DELIMITER, "Java SE 10.0.1", "2018-04-17", "Security fixes, 5 bug fixes"), // One value contains the delimiter
-			String.join(DELIMITER, "Java SE 11",     "2018-09-25", "Initial release"),
+			String.join(DELIMITER, "Java SE 11", "2018-09-25", "Initial release"),
 			String.join(DELIMITER, "Java SE 11.0.1", "2018-10-16", "Security & bug fixes"),
 			String.join(DELIMITER, "Java SE 11.0.2", "2019-01-15", "Security & bug fixes"),
-			String.join(DELIMITER, "Java SE 12",                   "Initial release") // Missing the release date value
+			String.join(DELIMITER, "Java SE 12", "Initial release") // Missing the release date value
 	);
 
 	private ConcreteExample() {

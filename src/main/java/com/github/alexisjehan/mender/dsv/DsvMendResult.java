@@ -23,12 +23,12 @@
  */
 package com.github.alexisjehan.mender.dsv;
 
-import com.github.alexisjehan.mender.api.MendResult;
 import com.github.alexisjehan.javanilla.misc.quality.Ensure;
 import com.github.alexisjehan.javanilla.misc.quality.Equals;
 import com.github.alexisjehan.javanilla.misc.quality.HashCode;
 import com.github.alexisjehan.javanilla.misc.quality.ToString;
 import com.github.alexisjehan.javanilla.misc.tuples.Pair;
+import com.github.alexisjehan.mender.api.MendResult;
 
 import java.util.Set;
 
@@ -64,7 +64,7 @@ public final class DsvMendResult implements MendResult<String[], DsvMendCandidat
 	 * @param candidates the {@link Set} of all candidates
 	 * @param bestCandidate the best candidate
 	 * @throws NullPointerException if the initial value, the {@link Set} of all candidates or any of them or the best
-	 * candidate is {@code null}
+	 *         candidate is {@code null}
 	 * @throws IllegalArgumentException if the initial value or the {@link Set} of candidates is empty
 	 * @since 1.0.0
 	 */

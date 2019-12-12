@@ -23,8 +23,8 @@
  */
 package examples;
 
-import com.github.alexisjehan.mender.dsv.DsvMender;
 import com.github.alexisjehan.javanilla.lang.Strings;
+import com.github.alexisjehan.mender.dsv.DsvMender;
 
 import java.util.Arrays;
 import java.util.stream.Collectors;
@@ -52,7 +52,7 @@ public final class SimpleExample {
 		mender.mend("111", "222", "333");
 
 		// Invalid
-		mender.mend( "11", "2", "2", "33");
+		mender.mend("11", "2", "2", "33");
 
 		// ["11", "2", "2\t33"] -> 0.9 (Because the frequency of values[2] containing "2" is 0.0)
 		// ["11\t2", "2", "33"] -> 0.9 (Because the frequency of values[0] containing "2" is 0.0)
