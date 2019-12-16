@@ -21,6 +21,7 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
+
 /**
  * <p>{@link com.github.alexisjehan.mender.api.evaluators.Evaluator} implementations.</p>
  * @since 1.0.0

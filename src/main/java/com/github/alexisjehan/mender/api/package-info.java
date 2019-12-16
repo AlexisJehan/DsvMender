@@ -21,6 +21,7 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
+
 /**
  * <p>{@link com.github.alexisjehan.mender.api.Mender} interfaces and components.</p>
  * @since 1.0.0

@@ -21,6 +21,7 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
+
 /**
  * <p>{@link com.github.alexisjehan.mender.dsv.DsvMender} implementation of
  * {@link com.github.alexisjehan.mender.api.Mender} and its components.</p>
