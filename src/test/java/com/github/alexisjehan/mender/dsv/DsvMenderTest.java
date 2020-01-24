@@ -31,6 +31,7 @@ import com.github.alexisjehan.mender.api.evaluators.EstimationEvaluator;
 import org.junit.jupiter.api.Test;
 
 import java.util.Set;
+import java.util.function.Supplier;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
@@ -42,37 +43,43 @@ import static org.assertj.core.api.Assertions.assertThatNullPointerException;
  */
 final class DsvMenderTest {
 
+	private static final String DELIMITER = ",";
+	private static final int LENGTH = 3;
+	private static final int MAX_DEPTH = 5;
+	private static final Supplier<Set<ConstraintEvaluator<String[]>>> CONSTRAINT_EVALUATORS_GENERATOR = () -> Set.of(new ConstraintEvaluator<>(values -> "foo".equals(values[0])));
+	private static final Supplier<Set<EstimationEvaluator<String[]>>> ESTIMATION_EVALUATORS_GENERATOR = () -> Set.of(new EstimationEvaluator<>(values -> values[2]));
+
 	@Test
 	void testConstructorInvalid() {
-		assertThatNullPointerException().isThrownBy(() -> new DsvMender(null, 3, 5, Set.of(new ConstraintEvaluator<>(values -> "foo".equals(values[0]))), Set.of(new EstimationEvaluator<>(values -> values[2]))));
-		assertThatIllegalArgumentException().isThrownBy(() -> new DsvMender(Strings.EMPTY, 3, 5, Set.of(new ConstraintEvaluator<>(values -> "foo".equals(values[0]))), Set.of(new EstimationEvaluator<>(values -> values[2]))));
-		assertThatIllegalArgumentException().isThrownBy(() -> new DsvMender(",", 1, 5, Set.of(new ConstraintEvaluator<>(values -> "foo".equals(values[0]))), Set.of(new EstimationEvaluator<>(values -> values[2]))));
-		assertThatIllegalArgumentException().isThrownBy(() -> new DsvMender(",", 3, 0, Set.of(new ConstraintEvaluator<>(values -> "foo".equals(values[0]))), Set.of(new EstimationEvaluator<>(values -> values[2]))));
-		assertThatNullPointerException().isThrownBy(() -> new DsvMender(",", 3, 5, null, Set.of(new EstimationEvaluator<>(values -> values[2]))));
-		assertThatNullPointerException().isThrownBy(() -> new DsvMender(",", 3, 5, Set.of((ConstraintEvaluator<String[]>) null), Set.of(new EstimationEvaluator<>(values -> values[2]))));
-		assertThatNullPointerException().isThrownBy(() -> new DsvMender(",", 3, 5, Set.of(new ConstraintEvaluator<>(values -> "foo".equals(values[0]))), null));
-		assertThatNullPointerException().isThrownBy(() -> new DsvMender(",", 3, 5, Set.of(new ConstraintEvaluator<>(values -> "foo".equals(values[0]))), Set.of((EstimationEvaluator<String[]>) null)));
+		assertThatNullPointerException().isThrownBy(() -> new DsvMender(null, LENGTH, MAX_DEPTH, CONSTRAINT_EVALUATORS_GENERATOR.get(), ESTIMATION_EVALUATORS_GENERATOR.get()));
+		assertThatIllegalArgumentException().isThrownBy(() -> new DsvMender(Strings.EMPTY, LENGTH, MAX_DEPTH, CONSTRAINT_EVALUATORS_GENERATOR.get(), ESTIMATION_EVALUATORS_GENERATOR.get()));
+		assertThatIllegalArgumentException().isThrownBy(() -> new DsvMender(DELIMITER, 1, MAX_DEPTH, CONSTRAINT_EVALUATORS_GENERATOR.get(), ESTIMATION_EVALUATORS_GENERATOR.get()));
+		assertThatIllegalArgumentException().isThrownBy(() -> new DsvMender(DELIMITER, LENGTH, 0, CONSTRAINT_EVALUATORS_GENERATOR.get(), ESTIMATION_EVALUATORS_GENERATOR.get()));
+		assertThatNullPointerException().isThrownBy(() -> new DsvMender(DELIMITER, LENGTH, MAX_DEPTH, null, ESTIMATION_EVALUATORS_GENERATOR.get()));
+		assertThatNullPointerException().isThrownBy(() -> new DsvMender(DELIMITER, LENGTH, MAX_DEPTH, Set.of((ConstraintEvaluator<String[]>) null), ESTIMATION_EVALUATORS_GENERATOR.get()));
+		assertThatNullPointerException().isThrownBy(() -> new DsvMender(DELIMITER, LENGTH, MAX_DEPTH, CONSTRAINT_EVALUATORS_GENERATOR.get(), null));
+		assertThatNullPointerException().isThrownBy(() -> new DsvMender(DELIMITER, LENGTH, MAX_DEPTH, CONSTRAINT_EVALUATORS_GENERATOR.get(), Set.of((EstimationEvaluator<String[]>) null)));
 	}
 
 	@Test
 	void testOptimize() {
-		final var dsvMender = new DsvMender(",", 3, 5, Set.of(new ConstraintEvaluator<>(values -> "foo".equals(values[0]))), Set.of(new EstimationEvaluator<>(values -> values[2])));
-		assertThat(dsvMender.optimize(0, "foo,")).containsExactly("foo", Strings.EMPTY);
+		final var dsvMender = new DsvMender(DELIMITER, LENGTH, MAX_DEPTH, CONSTRAINT_EVALUATORS_GENERATOR.get(), ESTIMATION_EVALUATORS_GENERATOR.get());
+		assertThat(dsvMender.optimize(0, "foo" + DELIMITER)).containsExactly("foo", Strings.EMPTY);
 		assertThat(dsvMender.optimize(0, "foo", Strings.EMPTY)).containsExactly("foo", Strings.EMPTY);
-		assertThat(dsvMender.optimize(0, "foo", "bar", Strings.EMPTY, Strings.EMPTY)).containsExactly("foo", "bar", ",");
+		assertThat(dsvMender.optimize(0, "foo", "bar", Strings.EMPTY, Strings.EMPTY)).containsExactly("foo", "bar", DELIMITER);
 		assertThat(dsvMender.optimize(0, Strings.EMPTY, "foo")).containsExactly(Strings.EMPTY, "foo");
-		assertThat(dsvMender.optimize(0, Strings.EMPTY, Strings.EMPTY, "bar", "foo")).containsExactly(",", "bar", "foo");
-		assertThat(dsvMender.optimize(0, "foo", Strings.EMPTY, Strings.EMPTY, "bar", Strings.EMPTY)).containsExactly("foo", ",", "bar", Strings.EMPTY);
+		assertThat(dsvMender.optimize(0, Strings.EMPTY, Strings.EMPTY, "bar", "foo")).containsExactly(DELIMITER, "bar", "foo");
+		assertThat(dsvMender.optimize(0, "foo", Strings.EMPTY, Strings.EMPTY, "bar", Strings.EMPTY)).containsExactly("foo", DELIMITER, "bar", Strings.EMPTY);
 		assertThat(dsvMender.optimize(0, "foo", "bar")).containsExactly("foo", "bar");
 		assertThat(dsvMender.optimize(0, "foo", Strings.EMPTY, "bar")).containsExactly("foo", Strings.EMPTY, "bar");
-		assertThat(dsvMender.optimize(0, "foo", Strings.EMPTY, Strings.EMPTY, Strings.EMPTY, Strings.EMPTY, "bar")).containsExactly("foo", ",,,", "bar");
-		assertThat(dsvMender.optimize(1, "foo", Strings.EMPTY, Strings.EMPTY, Strings.EMPTY, Strings.EMPTY, "bar")).containsExactly("foo", Strings.EMPTY, ",", Strings.EMPTY, "bar");
+		assertThat(dsvMender.optimize(0, "foo", Strings.EMPTY, Strings.EMPTY, Strings.EMPTY, Strings.EMPTY, "bar")).containsExactly("foo", DELIMITER.repeat(3), "bar");
+		assertThat(dsvMender.optimize(1, "foo", Strings.EMPTY, Strings.EMPTY, Strings.EMPTY, Strings.EMPTY, "bar")).containsExactly("foo", Strings.EMPTY, DELIMITER, Strings.EMPTY, "bar");
 		assertThat(dsvMender.optimize(2, "foo", Strings.EMPTY, Strings.EMPTY, Strings.EMPTY, Strings.EMPTY, "bar")).containsExactly("foo", Strings.EMPTY, Strings.EMPTY, Strings.EMPTY, Strings.EMPTY, "bar");
 	}
 
 	@Test
 	void testOptimizeInvalid() {
-		final var dsvMender = new DsvMender(",", 3, 5, Set.of(new ConstraintEvaluator<>(values -> "foo".equals(values[0]))), Set.of(new EstimationEvaluator<>(values -> values[2])));
+		final var dsvMender = new DsvMender(DELIMITER, LENGTH, MAX_DEPTH, CONSTRAINT_EVALUATORS_GENERATOR.get(), ESTIMATION_EVALUATORS_GENERATOR.get());
 		assertThatIllegalArgumentException().isThrownBy(() -> dsvMender.optimize(-1, "foo", Strings.EMPTY, Strings.EMPTY, Strings.EMPTY, "bar"));
 		assertThatNullPointerException().isThrownBy(() -> dsvMender.optimize(0, (String) null));
 		assertThatNullPointerException().isThrownBy(() -> dsvMender.optimize(0, (String[]) null));
@@ -80,35 +87,44 @@ final class DsvMenderTest {
 
 	@Test
 	void testMend() {
-		{
-			final var dsvMender = new DsvMender(",", 3, 5, Set.of(new ConstraintEvaluator<>(values -> "foo".equals(values[0]))), Set.of(new EstimationEvaluator<>(values -> values[2])));
-			assertThat(dsvMender.mend("foo,,bar")).containsExactly("foo", Strings.EMPTY, "bar");
+		assertThat(new DsvMender(DELIMITER, LENGTH, MAX_DEPTH, CONSTRAINT_EVALUATORS_GENERATOR.get(), ESTIMATION_EVALUATORS_GENERATOR.get())).satisfies(dsvMender -> {
+			assertThat(dsvMender.mend("foo" + DELIMITER.repeat(2) + "bar")).containsExactly("foo", Strings.EMPTY, "bar");
 			assertThat(dsvMender.mend("foo", Strings.EMPTY, "bar")).containsExactly("foo", Strings.EMPTY, "bar");
 			assertThat(dsvMender.mend("foo")).containsExactly("foo", Strings.EMPTY, Strings.EMPTY);
-			assertThat(dsvMender.mend("foo", Strings.EMPTY, Strings.EMPTY, Strings.EMPTY, "bar")).containsExactly("foo", ",,", "bar");
+			assertThat(dsvMender.mend("foo", Strings.EMPTY, Strings.EMPTY, Strings.EMPTY, "bar")).containsExactly("foo", DELIMITER.repeat(2), "bar");
 			assertThatExceptionOfType(MendException.class).isThrownBy(() -> dsvMender.mend("bar", Strings.EMPTY, "foo"));
-		}
-		{
-			final var dsvMender = new DsvMender(",", 3, 5, Set.of(), Set.of());
-			assertThatExceptionOfType(MendException.class).isThrownBy(() -> dsvMender.mend("foo", "bar"));
-		}
-		{
-			final var dsvMender = new DsvMender(",", 3, 5, Set.of(), Set.of(new EstimationEvaluator<>(values -> values[0].length()), new EstimationEvaluator<>(values -> values[1].length()), new EstimationEvaluator<>(values -> values[2].length())));
+		});
+		assertThat(new DsvMender(DELIMITER, LENGTH, MAX_DEPTH, Set.of(), Set.of())).satisfies(
+				dsvMender -> assertThatExceptionOfType(MendException.class).isThrownBy(() -> dsvMender.mend("foo", "bar"))
+		);
+		assertThat(
+				new DsvMender(
+						DELIMITER,
+						LENGTH,
+						MAX_DEPTH,
+						Set.of(),
+						Set.of(
+								new EstimationEvaluator<>(values -> values[0].length()),
+								new EstimationEvaluator<>(values -> values[1].length()),
+								new EstimationEvaluator<>(values -> values[2].length())
+						)
+				)
+		).satisfies(dsvMender -> {
 			assertThat(dsvMender.mend("foo", Strings.EMPTY, "bar")).containsExactly("foo", Strings.EMPTY, "bar");
-			assertThat(dsvMender.mend("f", "o", Strings.EMPTY, "b", "r")).containsExactly("f,o", Strings.EMPTY, "b,r");
-		}
+			assertThat(dsvMender.mend("f", "o", Strings.EMPTY, "b", "r")).containsExactly("f" + DELIMITER + "o", Strings.EMPTY, "b" + DELIMITER + "r");
+		});
 	}
 
 	@Test
 	void testMendInvalid() {
-		final var dsvMender = new DsvMender(",", 3, 5, Set.of(new ConstraintEvaluator<>(values -> "foo".equals(values[0]))), Set.of(new EstimationEvaluator<>(values -> values[2])));
+		final var dsvMender = new DsvMender(DELIMITER, LENGTH, MAX_DEPTH, CONSTRAINT_EVALUATORS_GENERATOR.get(), ESTIMATION_EVALUATORS_GENERATOR.get());
 		assertThatNullPointerException().isThrownBy(() -> dsvMender.mend((String) null));
 		assertThatNullPointerException().isThrownBy(() -> dsvMender.mend((String[]) null));
 	}
 
 	@Test
 	void testGetLastResult() {
-		final var dsvMender = new DsvMender(",", 3, 5, Set.of(new ConstraintEvaluator<>(values -> "foo".equals(values[0]))), Set.of(new EstimationEvaluator<>(values -> values[2])));
+		final var dsvMender = new DsvMender(DELIMITER, LENGTH, MAX_DEPTH, CONSTRAINT_EVALUATORS_GENERATOR.get(), ESTIMATION_EVALUATORS_GENERATOR.get());
 		assertThat(dsvMender.getLastResult()).isEmpty();
 		assertThat(dsvMender.mend("foo", Strings.EMPTY, "bar")).containsExactly("foo", Strings.EMPTY, "bar");
 		assertThat(dsvMender.getLastResult()).isEmpty();
@@ -127,18 +143,18 @@ final class DsvMenderTest {
 
 	@Test
 	void testGetters() {
-		final var dsvMender = new DsvMender(",", 3, 5, Set.of(new ConstraintEvaluator<>(values -> "foo".equals(values[0]))), Set.of(new EstimationEvaluator<>(values -> values[2])));
-		assertThat(dsvMender.getDelimiter()).isEqualTo(",");
-		assertThat(dsvMender.getLength()).isEqualTo(3);
-		assertThat(dsvMender.getMaxDepth()).isEqualTo(5);
+		final var dsvMender = new DsvMender(DELIMITER, LENGTH, MAX_DEPTH, CONSTRAINT_EVALUATORS_GENERATOR.get(), ESTIMATION_EVALUATORS_GENERATOR.get());
+		assertThat(dsvMender.getDelimiter()).isEqualTo(DELIMITER);
+		assertThat(dsvMender.getLength()).isEqualTo(LENGTH);
+		assertThat(dsvMender.getMaxDepth()).isEqualTo(MAX_DEPTH);
 		final var constraintEvaluators = dsvMender.getConstraintEvaluators();
-		assertThat(constraintEvaluators).hasSize(1);
+		assertThat(constraintEvaluators).hasSize(CONSTRAINT_EVALUATORS_GENERATOR.get().size());
 		for (final var constraintEvaluator : constraintEvaluators) {
 			assertThat(constraintEvaluator.evaluate(ObjectArrays.of("foo", "foo", "foo"))).isEqualTo(1.0d);
 			assertThat(constraintEvaluator.evaluate(ObjectArrays.of("bar", "foo", "foo"))).isNaN();
 		}
 		final var estimationEvaluators = dsvMender.getEstimationEvaluators();
-		assertThat(estimationEvaluators).hasSize(1);
+		assertThat(estimationEvaluators).hasSize(ESTIMATION_EVALUATORS_GENERATOR.get().size());
 		for (final var estimationEvaluator : estimationEvaluators) {
 			assertThat(estimationEvaluator.evaluate(ObjectArrays.of("foo", "foo", "foo"))).isNaN();
 			assertThat(estimationEvaluator.evaluate(ObjectArrays.of("foo", "foo", "foo"))).isNaN();

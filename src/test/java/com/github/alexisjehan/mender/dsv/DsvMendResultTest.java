@@ -26,7 +26,7 @@ package com.github.alexisjehan.mender.dsv;
 import com.github.alexisjehan.javanilla.lang.array.ObjectArrays;
 import org.junit.jupiter.api.Test;
 
-import java.util.HashSet;
+import java.util.Collections;
 import java.util.Set;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -38,69 +38,78 @@ import static org.assertj.core.api.Assertions.assertThatNullPointerException;
  */
 final class DsvMendResultTest {
 
+	private static final String[] VALUE = ObjectArrays.singleton("foo");
+	private static final Set<DsvMendCandidate> CANDIDATES;
+	private static final DsvMendCandidate BEST_CANDIDATE;
+
+	static {
+		final var candidate = new DsvMendCandidate(ObjectArrays.singleton("foo"), 1.0d);
+		CANDIDATES = Set.of(candidate);
+		BEST_CANDIDATE = candidate;
+	}
+
+	private final DsvMendResult mendResult = new DsvMendResult(VALUE, CANDIDATES, BEST_CANDIDATE);
+
 	@Test
 	void testConstructorImmutable() {
-		final var values = ObjectArrays.singleton("foo");
-		final var mendResult = new DsvMendResult(values, Set.of(new DsvMendCandidate(ObjectArrays.singleton("bar"), 0.5d)), new DsvMendCandidate(ObjectArrays.singleton("bar"), 0.5d));
-		assertThat(mendResult.getValue()).containsExactly("foo");
-		values[0] = "bar";
-		assertThat(mendResult.getValue()).containsExactly("foo");
+		final var value = VALUE.clone();
+		final var mendResult = new DsvMendResult(value, CANDIDATES, BEST_CANDIDATE);
+		assertThat(mendResult.getValue()).containsExactly(VALUE);
+		value[0] = "bar";
+		assertThat(mendResult.getValue()).containsExactly(VALUE);
 	}
 
 	@Test
 	void testConstructorInvalid() {
-		assertThatNullPointerException().isThrownBy(() -> new DsvMendResult(null, Set.of(new DsvMendCandidate(ObjectArrays.singleton("bar"), 0.5d)), new DsvMendCandidate(ObjectArrays.singleton("bar"), 0.5d)));
-		assertThatIllegalArgumentException().isThrownBy(() -> new DsvMendResult(ObjectArrays.empty(String.class), Set.of(new DsvMendCandidate(ObjectArrays.singleton("bar"), 0.5d)), new DsvMendCandidate(ObjectArrays.singleton("bar"), 0.5d)));
-		assertThatNullPointerException().isThrownBy(() -> new DsvMendResult(ObjectArrays.singleton("foo"), null, new DsvMendCandidate(ObjectArrays.singleton("bar"), 0.5d)));
-		assertThatNullPointerException().isThrownBy(() -> new DsvMendResult(ObjectArrays.singleton("foo"), new HashSet<>(null), new DsvMendCandidate(ObjectArrays.singleton("bar"), 0.5d)));
-		assertThatIllegalArgumentException().isThrownBy(() -> new DsvMendResult(ObjectArrays.singleton("foo"), Set.of(), new DsvMendCandidate(ObjectArrays.singleton("bar"), 0.5d)));
-		assertThatNullPointerException().isThrownBy(() -> new DsvMendResult(ObjectArrays.singleton("foo"), Set.of(new DsvMendCandidate(ObjectArrays.singleton("bar"), 0.5d)), null));
+		assertThatNullPointerException().isThrownBy(() -> new DsvMendResult(null, CANDIDATES, BEST_CANDIDATE));
+		assertThatIllegalArgumentException().isThrownBy(() -> new DsvMendResult(ObjectArrays.empty(String.class), CANDIDATES, BEST_CANDIDATE));
+		assertThatNullPointerException().isThrownBy(() -> new DsvMendResult(VALUE, null, BEST_CANDIDATE));
+		assertThatNullPointerException().isThrownBy(() -> new DsvMendResult(VALUE, Collections.singleton(null), BEST_CANDIDATE));
+		assertThatIllegalArgumentException().isThrownBy(() -> new DsvMendResult(VALUE, Set.of(), BEST_CANDIDATE));
+		assertThatNullPointerException().isThrownBy(() -> new DsvMendResult(VALUE, CANDIDATES, null));
 	}
 
 	@Test
 	void testEqualsHashCodeToString() {
-		final var mendResult = new DsvMendResult(ObjectArrays.singleton("foo"), Set.of(new DsvMendCandidate(ObjectArrays.singleton("bar"), 0.5d)), new DsvMendCandidate(ObjectArrays.singleton("bar"), 0.5d));
 		assertThat(mendResult).isEqualTo(mendResult);
 		assertThat(mendResult).isNotEqualTo(1);
-		{
-			final var otherMendResult = new DsvMendResult(mendResult.getValue(), mendResult.getCandidates(), mendResult.getBestCandidate());
+		assertThat(new DsvMendResult(VALUE, CANDIDATES, BEST_CANDIDATE)).satisfies(otherMendResult -> {
+			assertThat(mendResult).isNotSameAs(otherMendResult);
 			assertThat(mendResult).isEqualTo(otherMendResult);
 			assertThat(mendResult).hasSameHashCodeAs(otherMendResult);
 			assertThat(mendResult).hasToString(otherMendResult.toString());
-		}
-		{
-			final var otherMendResult = new DsvMendResult(ObjectArrays.singleton("bar"), mendResult.getCandidates(), mendResult.getBestCandidate());
+		});
+		assertThat(new DsvMendResult(ObjectArrays.singleton("bar"), CANDIDATES, BEST_CANDIDATE)).satisfies(otherMendResult -> {
+			assertThat(mendResult).isNotSameAs(otherMendResult);
 			assertThat(mendResult).isNotEqualTo(otherMendResult);
 			assertThat(mendResult.hashCode()).isNotEqualTo(otherMendResult.hashCode());
 			assertThat(mendResult.toString()).isNotEqualTo(otherMendResult.toString());
-		}
-		{
-			final var otherMendResult = new DsvMendResult(mendResult.getValue(), Set.of(new DsvMendCandidate(ObjectArrays.singleton("bar"), 0.5d), new DsvMendCandidate(ObjectArrays.singleton("bar"), 1.0d)), mendResult.getBestCandidate());
+		});
+		assertThat(new DsvMendResult(VALUE, Set.of(new DsvMendCandidate(ObjectArrays.singleton("foo"), 1.0d), new DsvMendCandidate(ObjectArrays.singleton("bar"), 2.0d)), BEST_CANDIDATE)).satisfies(otherMendResult -> {
+			assertThat(mendResult).isNotSameAs(otherMendResult);
 			assertThat(mendResult).isNotEqualTo(otherMendResult);
 			assertThat(mendResult.hashCode()).isNotEqualTo(otherMendResult.hashCode());
 			assertThat(mendResult.toString()).isNotEqualTo(otherMendResult.toString());
-		}
-		{
-			final var otherMendResult = new DsvMendResult(mendResult.getValue(), mendResult.getCandidates(), new DsvMendCandidate(ObjectArrays.singleton("bar"), 1.0d));
+		});
+		assertThat(new DsvMendResult(VALUE, CANDIDATES, new DsvMendCandidate(ObjectArrays.singleton("bar"), 2.0d))).satisfies(otherMendResult -> {
+			assertThat(mendResult).isNotSameAs(otherMendResult);
 			assertThat(mendResult).isNotEqualTo(otherMendResult);
 			assertThat(mendResult.hashCode()).isNotEqualTo(otherMendResult.hashCode());
 			assertThat(mendResult.toString()).isNotEqualTo(otherMendResult.toString());
-		}
+		});
 	}
 
 	@Test
 	void testGetters() {
-		final var mendResult = new DsvMendResult(ObjectArrays.singleton("foo"), Set.of(new DsvMendCandidate(ObjectArrays.singleton("bar"), 0.5d)), new DsvMendCandidate(ObjectArrays.singleton("bar"), 0.5d));
-		assertThat(mendResult.getValue()).containsExactly("foo");
-		assertThat(mendResult.getCandidates()).containsExactly(new DsvMendCandidate(ObjectArrays.singleton("bar"), 0.5d));
-		assertThat(mendResult.getBestCandidate()).isEqualTo(new DsvMendCandidate(ObjectArrays.singleton("bar"), 0.5d));
+		assertThat(mendResult.getValue()).containsExactly(VALUE);
+		assertThat(mendResult.getCandidates()).isEqualTo(CANDIDATES);
+		assertThat(mendResult.getBestCandidate()).isEqualTo(BEST_CANDIDATE);
 	}
 
 	@Test
 	void testGettersImmutable() {
-		final var mendResult = new DsvMendResult(ObjectArrays.singleton("foo"), Set.of(new DsvMendCandidate(ObjectArrays.singleton("bar"), 0.5d)), new DsvMendCandidate(ObjectArrays.singleton("bar"), 0.5d));
-		assertThat(mendResult.getValue()).containsExactly("foo");
+		assertThat(mendResult.getValue()).containsExactly(VALUE);
 		mendResult.getValue()[0] = "bar";
-		assertThat(mendResult.getValue()).containsExactly("foo");
+		assertThat(mendResult.getValue()).containsExactly(VALUE);
 	}
 }

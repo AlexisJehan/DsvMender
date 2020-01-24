@@ -34,15 +34,24 @@ import static org.assertj.core.api.Assertions.assertThatNullPointerException;
  */
 final class MendExceptionTest {
 
+	private static final String MESSAGE = "foo";
+
+	private final MendException mendException = new MendException(MESSAGE);
+
 	@Test
 	void testConstructorInvalid() {
-		assertThatNullPointerException().isThrownBy(() -> new MendException(null));
+		assertThatNullPointerException().isThrownBy(() -> {
+			throw new MendException(null);
+		});
+	}
+
+	@Test
+	void testGetMessage() {
+		assertThat(mendException.getMessage()).isEqualTo(MESSAGE);
 	}
 
 	@Test
 	void testSerializable() {
-		final var mendException = new MendException("foo");
-		final var deserializedMendException = Serializables.<MendException>deserialize(Serializables.serialize(mendException));
-		assertThat(deserializedMendException.getMessage()).isEqualTo(mendException.getMessage());
+		assertThat(Serializables.<MendException>deserialize(Serializables.serialize(mendException))).hasSameClassAs(mendException);
 	}
 }

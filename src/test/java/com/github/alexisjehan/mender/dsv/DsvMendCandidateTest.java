@@ -35,59 +35,61 @@ import static org.assertj.core.api.Assertions.assertThatNullPointerException;
  */
 final class DsvMendCandidateTest {
 
+	private static final String[] VALUE = ObjectArrays.singleton("foo");
+	private static final double SCORE = 1.0d;
+
+	private final DsvMendCandidate mendCandidate = new DsvMendCandidate(VALUE, SCORE);
+
 	@Test
 	void testConstructorImmutable() {
-		final var values = ObjectArrays.singleton("foo");
-		final var mendCandidate = new DsvMendCandidate(values, 1.0d);
-		assertThat(mendCandidate.getValue()).containsExactly("foo");
-		values[0] = "bar";
-		assertThat(mendCandidate.getValue()).containsExactly("foo");
+		final var value = VALUE.clone();
+		final var mendCandidate = new DsvMendCandidate(value, SCORE);
+		assertThat(mendCandidate.getValue()).containsExactly(VALUE);
+		value[0] = "bar";
+		assertThat(mendCandidate.getValue()).containsExactly(VALUE);
 	}
 
 	@Test
 	void testConstructorInvalid() {
-		assertThatNullPointerException().isThrownBy(() -> new DsvMendCandidate(null, 1.0d));
-		assertThatIllegalArgumentException().isThrownBy(() -> new DsvMendCandidate(ObjectArrays.empty(String.class), 1.0d));
-		assertThatIllegalArgumentException().isThrownBy(() -> new DsvMendCandidate(ObjectArrays.singleton("foo"), -1.0d));
+		assertThatNullPointerException().isThrownBy(() -> new DsvMendCandidate(null, SCORE));
+		assertThatIllegalArgumentException().isThrownBy(() -> new DsvMendCandidate(ObjectArrays.empty(String.class), SCORE));
+		assertThatIllegalArgumentException().isThrownBy(() -> new DsvMendCandidate(VALUE, -1.0d));
 	}
 
 	@Test
 	void testEqualsHashCodeToString() {
-		final var mendCandidate = new DsvMendCandidate(ObjectArrays.singleton("foo"), 1.0d);
 		assertThat(mendCandidate).isEqualTo(mendCandidate);
 		assertThat(mendCandidate).isNotEqualTo(1);
-		{
-			final var otherMendCandidate = new DsvMendCandidate(mendCandidate.getValue(), mendCandidate.getScore());
+		assertThat(new DsvMendCandidate(VALUE, SCORE)).satisfies(otherMendCandidate -> {
+			assertThat(mendCandidate).isNotSameAs(otherMendCandidate);
 			assertThat(mendCandidate).isEqualTo(otherMendCandidate);
 			assertThat(mendCandidate).hasSameHashCodeAs(otherMendCandidate);
 			assertThat(mendCandidate).hasToString(otherMendCandidate.toString());
-		}
-		{
-			final var otherMendCandidate = new DsvMendCandidate(ObjectArrays.singleton("bar"), mendCandidate.getScore());
+		});
+		assertThat(new DsvMendCandidate(ObjectArrays.singleton("bar"), SCORE)).satisfies(otherMendCandidate -> {
+			assertThat(mendCandidate).isNotSameAs(otherMendCandidate);
 			assertThat(mendCandidate).isNotEqualTo(otherMendCandidate);
 			assertThat(mendCandidate.hashCode()).isNotEqualTo(otherMendCandidate.hashCode());
 			assertThat(mendCandidate.toString()).isNotEqualTo(otherMendCandidate.toString());
-		}
-		{
-			final var otherMendCandidate = new DsvMendCandidate(mendCandidate.getValue(), 0.5d);
+		});
+		assertThat(new DsvMendCandidate(VALUE, 2.0d)).satisfies(otherMendCandidate -> {
+			assertThat(mendCandidate).isNotSameAs(otherMendCandidate);
 			assertThat(mendCandidate).isNotEqualTo(otherMendCandidate);
 			assertThat(mendCandidate.hashCode()).isNotEqualTo(otherMendCandidate.hashCode());
 			assertThat(mendCandidate.toString()).isNotEqualTo(otherMendCandidate.toString());
-		}
+		});
 	}
 
 	@Test
 	void testGetters() {
-		final var mendCandidate = new DsvMendCandidate(ObjectArrays.singleton("foo"), 1.0d);
-		assertThat(mendCandidate.getValue()).containsExactly("foo");
-		assertThat(mendCandidate.getScore()).isEqualTo(1.0d);
+		assertThat(mendCandidate.getValue()).containsExactly(VALUE);
+		assertThat(mendCandidate.getScore()).isEqualTo(SCORE);
 	}
 
 	@Test
 	void testGettersImmutable() {
-		final var mendCandidate = new DsvMendCandidate(ObjectArrays.singleton("foo"), 1.0d);
-		assertThat(mendCandidate.getValue()).containsExactly("foo");
+		assertThat(mendCandidate.getValue()).containsExactly(VALUE);
 		mendCandidate.getValue()[0] = "bar";
-		assertThat(mendCandidate.getValue()).containsExactly("foo");
+		assertThat(mendCandidate.getValue()).containsExactly(VALUE);
 	}
 }

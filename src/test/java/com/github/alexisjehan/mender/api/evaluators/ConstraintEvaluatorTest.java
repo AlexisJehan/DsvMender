@@ -25,6 +25,8 @@ package com.github.alexisjehan.mender.api.evaluators;
 
 import org.junit.jupiter.api.Test;
 
+import java.util.function.Predicate;
+
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatNullPointerException;
 
@@ -33,6 +35,10 @@ import static org.assertj.core.api.Assertions.assertThatNullPointerException;
  */
 final class ConstraintEvaluatorTest {
 
+	private static final Predicate<String> VALIDATOR = "foo"::equals;
+
+	private final ConstraintEvaluator<String> constraintEvaluator = new ConstraintEvaluator<>(VALIDATOR);
+
 	@Test
 	void testConstructorInvalid() {
 		assertThatNullPointerException().isThrownBy(() -> new ConstraintEvaluator<>(null));
@@ -40,15 +46,13 @@ final class ConstraintEvaluatorTest {
 
 	@Test
 	void testIsValid() {
-		final var evaluator = new ConstraintEvaluator<>("foo"::equals);
-		assertThat(evaluator.isValid("foo")).isTrue();
-		assertThat(evaluator.isValid("bar")).isFalse();
+		assertThat(constraintEvaluator.isValid("foo")).isTrue();
+		assertThat(constraintEvaluator.isValid("bar")).isFalse();
 	}
 
 	@Test
 	void testEvaluate() {
-		final var evaluator = new ConstraintEvaluator<>("foo"::equals);
-		assertThat(evaluator.evaluate("foo")).isEqualTo(1.0d);
-		assertThat(evaluator.evaluate("bar")).isNaN();
+		assertThat(constraintEvaluator.evaluate("foo")).isEqualTo(1.0d);
+		assertThat(constraintEvaluator.evaluate("bar")).isNaN();
 	}
 }
