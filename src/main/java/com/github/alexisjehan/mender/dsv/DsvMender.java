@@ -46,6 +46,7 @@ import java.util.stream.IntStream;
  * <p>{@link Mender} able to mend invalid DSV (Delimiter-Separated Values) rows based on valid ones.</p>
  * @since 1.0.0
  */
+@SuppressWarnings("overrides")
 public final class DsvMender implements Mender<String[], DsvMendResult> {
 
 	/**
@@ -173,13 +174,13 @@ public final class DsvMender implements Mender<String[], DsvMendResult> {
 	 * <p>Step builder to build {@link DsvMender} instances.</p>
 	 * @since 1.0.0
 	 */
-	private static class Builder implements DelimiterStep, LengthStep, OptionalMaxDepthStep {
+	static class Builder implements DelimiterStep, LengthStep, OptionalMaxDepthStep {
 
 		/**
 		 * <p>Default maximum depth.</p>
 		 * @since 1.0.0
 		 */
-		private static final int DEFAULT_MAX_DEPTH = 20;
+		static final int DEFAULT_MAX_DEPTH = 20;
 
 		/**
 		 * <p>{@link DsvMender}'s delimiter.</p>

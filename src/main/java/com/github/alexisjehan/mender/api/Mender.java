@@ -23,13 +23,11 @@
  */
 package com.github.alexisjehan.mender.api;
 
-import com.github.alexisjehan.mender.api.evaluators.Evaluator;
-
 import java.util.Optional;
 
 /**
  * <p>Interface for objects that can mend a value. Fixed values are generated and then scored by some
- * {@link Evaluator}s and the best one is returned.</p>
+ * {@link com.github.alexisjehan.mender.api.evaluators.Evaluator}s and the best one is returned.</p>
  * @param <V> the value's type
  * @param <R> the last result's type
  * @since 1.0.0
