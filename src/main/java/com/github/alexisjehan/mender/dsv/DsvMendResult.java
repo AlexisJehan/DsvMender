@@ -78,6 +78,9 @@ public final class DsvMendResult implements MendResult<String[], DsvMendCandidat
 		this.bestCandidate = bestCandidate;
 	}
 
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public boolean equals(final Object object) {
 		if (this == object) {
@@ -92,6 +95,9 @@ public final class DsvMendResult implements MendResult<String[], DsvMendCandidat
 				&& Equals.equals(bestCandidate, other.bestCandidate);
 	}
 
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public int hashCode() {
 		return HashCode.of(
@@ -101,6 +107,9 @@ public final class DsvMendResult implements MendResult<String[], DsvMendCandidat
 		);
 	}
 
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public String toString() {
 		return ToString.of(
@@ -111,16 +120,25 @@ public final class DsvMendResult implements MendResult<String[], DsvMendCandidat
 		);
 	}
 
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public String[] getValue() {
 		return value.clone();
 	}
 
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public Set<DsvMendCandidate> getCandidates() {
 		return candidates;
 	}
 
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public DsvMendCandidate getBestCandidate() {
 		return bestCandidate;

@@ -65,6 +65,9 @@ public final class DsvMendCandidate implements MendCandidate<String[]> {
 		this.score = score;
 	}
 
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public boolean equals(final Object object) {
 		if (this == object) {
@@ -78,6 +81,9 @@ public final class DsvMendCandidate implements MendCandidate<String[]> {
 				&& Equals.equals(score, other.score);
 	}
 
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public int hashCode() {
 		return HashCode.of(
@@ -86,6 +92,9 @@ public final class DsvMendCandidate implements MendCandidate<String[]> {
 		);
 	}
 
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public String toString() {
 		return ToString.of(
@@ -95,11 +104,17 @@ public final class DsvMendCandidate implements MendCandidate<String[]> {
 		);
 	}
 
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public String[] getValue() {
 		return value.clone();
 	}
 
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public double getScore() {
 		return score;

@@ -212,29 +212,44 @@ public final class DsvMender implements Mender<String[], DsvMendResult> {
 		 */
 		private final Set<EstimationEvaluator<String[]>> estimationEvaluators = new HashSet<>();
 
+		/**
+		 * {@inheritDoc}
+		 */
 		@Override
 		public LengthStep withDelimiter(final String delimiter) {
 			this.delimiter = delimiter;
 			return this;
 		}
 
+		/**
+		 * {@inheritDoc}
+		 */
 		@Override
 		public OptionalMaxDepthStep withLength(final int length) {
 			this.length = length;
 			return this;
 		}
 
+		/**
+		 * {@inheritDoc}
+		 */
 		@Override
 		public OptionalEvaluatorStep withMaxDepth(final int maxDepth) {
 			this.maxDepth = maxDepth;
 			return this;
 		}
 
+		/**
+		 * {@inheritDoc}
+		 */
 		@Override
 		public OptionalEvaluatorStep withConstraint(final Predicate<String> validator) {
 			return withConstraint(validator, IntStream.range(0, length).toArray());
 		}
 
+		/**
+		 * {@inheritDoc}
+		 */
 		@Override
 		public OptionalEvaluatorStep withConstraint(final Predicate<String> validator, final int... indexes) {
 			Ensure.notNull("validator", validator);
@@ -246,11 +261,17 @@ public final class DsvMender implements Mender<String[], DsvMendResult> {
 			return this;
 		}
 
+		/**
+		 * {@inheritDoc}
+		 */
 		@Override
 		public OptionalEvaluatorStep withEstimation(final Function<String, ?> transformer) {
 			return withEstimation(transformer, IntStream.range(0, length).toArray());
 		}
 
+		/**
+		 * {@inheritDoc}
+		 */
 		@Override
 		public OptionalEvaluatorStep withEstimation(final Function<String, ?> transformer, final int... indexes) {
 			Ensure.notNull("transformer", transformer);
@@ -262,6 +283,9 @@ public final class DsvMender implements Mender<String[], DsvMendResult> {
 			return this;
 		}
 
+		/**
+		 * {@inheritDoc}
+		 */
 		@Override
 		public DsvMender build() {
 			return new DsvMender(delimiter, length, maxDepth, constraintEvaluators, estimationEvaluators);
@@ -537,6 +561,9 @@ public final class DsvMender implements Mender<String[], DsvMendResult> {
 		return children;
 	}
 
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public Optional<DsvMendResult> getLastResult() {
 		return Optional.ofNullable(lastResult);
