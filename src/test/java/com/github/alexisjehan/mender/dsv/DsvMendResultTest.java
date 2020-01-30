@@ -71,8 +71,8 @@ final class DsvMendResultTest {
 
 	@Test
 	void testEqualsHashCodeToString() {
-		assertThat(mendResult).isEqualTo(mendResult);
-		assertThat(mendResult).isNotEqualTo(1);
+		assertThat(mendResult.equals(mendResult)).isTrue();
+		assertThat(mendResult).isNotEqualTo(new Object());
 		assertThat(new DsvMendResult(VALUE, CANDIDATES, BEST_CANDIDATE)).satisfies(otherMendResult -> {
 			assertThat(mendResult).isNotSameAs(otherMendResult);
 			assertThat(mendResult).isEqualTo(otherMendResult);
