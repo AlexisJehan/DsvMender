@@ -159,7 +159,7 @@ final class DsvMenderBuilderTest {
 			assertThat(estimationEvaluator.evaluate(ObjectArrays.of("foo", "foo", "foo"))).isNaN();
 			estimationEvaluator.fit(ObjectArrays.of("foo", "foo", "foo"));
 			assertThat(estimationEvaluator.evaluate(ObjectArrays.of("foo", "foo", "foo"))).isEqualTo(1.0d);
-			assertThat(estimationEvaluator.evaluate(ObjectArrays.of("bar", "bar", "bar"))).isEqualTo(0.0d);
+			assertThat(estimationEvaluator.evaluate(ObjectArrays.of("bar", "bar", "bar"))).isZero();
 			estimationEvaluator.fit(ObjectArrays.of("bar", "bar", "bar"));
 			assertThat(estimationEvaluator.evaluate(ObjectArrays.of("foo", "foo", "foo"))).isEqualTo(0.5d);
 			assertThat(estimationEvaluator.evaluate(ObjectArrays.of("bar", "bar", "bar"))).isEqualTo(0.5d);
@@ -184,8 +184,8 @@ final class DsvMenderBuilderTest {
 			estimationEvaluator.fit(ObjectArrays.of("foo", "foo", "foo"));
 			assertThat(estimationEvaluator.evaluate(ObjectArrays.of("foo", "foo", "foo"))).isEqualTo(1.0d);
 			assertThat(estimationEvaluator.evaluate(ObjectArrays.of("foo", "foo", "foo"))).isEqualTo(1.0d);
-			assertThat(estimationEvaluator.evaluate(ObjectArrays.of("bar", "foo", "foo"))).isEqualTo(0.0d);
-			assertThat(estimationEvaluator.evaluate(ObjectArrays.of("bar", "foo", "foo"))).isEqualTo(0.0d);
+			assertThat(estimationEvaluator.evaluate(ObjectArrays.of("bar", "foo", "foo"))).isZero();
+			assertThat(estimationEvaluator.evaluate(ObjectArrays.of("bar", "foo", "foo"))).isZero();
 			estimationEvaluator.fit(ObjectArrays.of("bar", "foo", "foo"));
 			assertThat(estimationEvaluator.evaluate(ObjectArrays.of("foo", "foo", "foo"))).isEqualTo(0.5d);
 			assertThat(estimationEvaluator.evaluate(ObjectArrays.of("foo", "foo", "foo"))).isEqualTo(0.5d);
@@ -219,7 +219,7 @@ final class DsvMenderBuilderTest {
 				assertThat(estimationEvaluator.evaluate(ObjectArrays.of(Strings.EMPTY, Strings.EMPTY, Strings.EMPTY))).isNaN();
 				estimationEvaluator.fit(ObjectArrays.of("foo", "foo", "foo"));
 				assertThat(estimationEvaluator.evaluate(ObjectArrays.of("foo", "foo", "foo"))).isEqualTo(1.0d);
-				assertThat(estimationEvaluator.evaluate(ObjectArrays.of(Strings.EMPTY, Strings.EMPTY, Strings.EMPTY))).isEqualTo(0.0d);
+				assertThat(estimationEvaluator.evaluate(ObjectArrays.of(Strings.EMPTY, Strings.EMPTY, Strings.EMPTY))).isZero();
 			}
 		});
 		assertThat(DsvMender.basic(DELIMITER, LENGTH)).satisfies(dsvMender -> {
@@ -233,7 +233,7 @@ final class DsvMenderBuilderTest {
 				assertThat(estimationEvaluator.evaluate(ObjectArrays.of(Strings.EMPTY, Strings.EMPTY, Strings.EMPTY))).isNaN();
 				estimationEvaluator.fit(ObjectArrays.of("foo", "foo", "foo"));
 				assertThat(estimationEvaluator.evaluate(ObjectArrays.of("foo", "foo", "foo"))).isEqualTo(1.0d);
-				assertThat(estimationEvaluator.evaluate(ObjectArrays.of(Strings.EMPTY, Strings.EMPTY, Strings.EMPTY))).isEqualTo(0.0d);
+				assertThat(estimationEvaluator.evaluate(ObjectArrays.of(Strings.EMPTY, Strings.EMPTY, Strings.EMPTY))).isZero();
 			}
 		});
 	}

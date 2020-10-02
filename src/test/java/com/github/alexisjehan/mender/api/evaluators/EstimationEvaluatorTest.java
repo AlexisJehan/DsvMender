@@ -47,7 +47,7 @@ final class EstimationEvaluatorTest {
 			assertThat(estimationEvaluator.evaluate("bar")).isNaN();
 			estimationEvaluator.fit("foo");
 			assertThat(estimationEvaluator.evaluate("foo")).isEqualTo(1.0d);
-			assertThat(estimationEvaluator.evaluate("bar")).isEqualTo(0.0d);
+			assertThat(estimationEvaluator.evaluate("bar")).isZero();
 			estimationEvaluator.fit("bar");
 			assertThat(estimationEvaluator.evaluate("foo")).isEqualTo(0.5d);
 			assertThat(estimationEvaluator.evaluate("bar")).isEqualTo(0.5d);
@@ -57,7 +57,7 @@ final class EstimationEvaluatorTest {
 			assertThat(estimationEvaluator.evaluate("fooo")).isNaN();
 			estimationEvaluator.fit("foo");
 			assertThat(estimationEvaluator.evaluate("foo")).isEqualTo(1.0d);
-			assertThat(estimationEvaluator.evaluate("fooo")).isEqualTo(0.0d);
+			assertThat(estimationEvaluator.evaluate("fooo")).isZero();
 			estimationEvaluator.fit("fooo");
 			assertThat(estimationEvaluator.evaluate("foo")).isEqualTo(0.5d);
 			assertThat(estimationEvaluator.evaluate("fooo")).isEqualTo(0.5d);

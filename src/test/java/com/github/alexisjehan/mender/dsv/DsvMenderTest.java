@@ -160,7 +160,7 @@ final class DsvMenderTest {
 			assertThat(estimationEvaluator.evaluate(ObjectArrays.of("foo", "foo", "foo"))).isNaN();
 			estimationEvaluator.fit(ObjectArrays.of("foo", "foo", "foo"));
 			assertThat(estimationEvaluator.evaluate(ObjectArrays.of("foo", "foo", "foo"))).isEqualTo(1.0d);
-			assertThat(estimationEvaluator.evaluate(ObjectArrays.of("foo", "foo", "bar"))).isEqualTo(0.0d);
+			assertThat(estimationEvaluator.evaluate(ObjectArrays.of("foo", "foo", "bar"))).isZero();
 			estimationEvaluator.fit(ObjectArrays.of("foo", "foo", "bar"));
 			assertThat(estimationEvaluator.evaluate(ObjectArrays.of("foo", "foo", "foo"))).isEqualTo(0.5d);
 			assertThat(estimationEvaluator.evaluate(ObjectArrays.of("foo", "foo", "bar"))).isEqualTo(0.5d);
