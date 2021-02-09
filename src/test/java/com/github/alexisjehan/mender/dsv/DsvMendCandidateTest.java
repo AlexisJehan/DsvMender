@@ -69,14 +69,14 @@ final class DsvMendCandidateTest {
 		assertThat(new DsvMendCandidate(ObjectArrays.singleton("bar"), SCORE)).satisfies(otherMendCandidate -> {
 			assertThat(mendCandidate).isNotSameAs(otherMendCandidate);
 			assertThat(mendCandidate).isNotEqualTo(otherMendCandidate);
-			assertThat(mendCandidate.hashCode()).isNotEqualTo(otherMendCandidate.hashCode());
-			assertThat(mendCandidate.toString()).isNotEqualTo(otherMendCandidate.toString());
+			assertThat(mendCandidate).doesNotHaveSameHashCodeAs(otherMendCandidate);
+			assertThat(mendCandidate).doesNotHaveToString(otherMendCandidate.toString());
 		});
 		assertThat(new DsvMendCandidate(VALUE, 2.0d)).satisfies(otherMendCandidate -> {
 			assertThat(mendCandidate).isNotSameAs(otherMendCandidate);
 			assertThat(mendCandidate).isNotEqualTo(otherMendCandidate);
-			assertThat(mendCandidate.hashCode()).isNotEqualTo(otherMendCandidate.hashCode());
-			assertThat(mendCandidate.toString()).isNotEqualTo(otherMendCandidate.toString());
+			assertThat(mendCandidate).doesNotHaveSameHashCodeAs(otherMendCandidate);
+			assertThat(mendCandidate).doesNotHaveToString(otherMendCandidate.toString());
 		});
 	}
 

@@ -82,20 +82,20 @@ final class DsvMendResultTest {
 		assertThat(new DsvMendResult(ObjectArrays.singleton("bar"), CANDIDATES, BEST_CANDIDATE)).satisfies(otherMendResult -> {
 			assertThat(mendResult).isNotSameAs(otherMendResult);
 			assertThat(mendResult).isNotEqualTo(otherMendResult);
-			assertThat(mendResult.hashCode()).isNotEqualTo(otherMendResult.hashCode());
-			assertThat(mendResult.toString()).isNotEqualTo(otherMendResult.toString());
+			assertThat(mendResult).doesNotHaveSameHashCodeAs(otherMendResult);
+			assertThat(mendResult).doesNotHaveToString(otherMendResult.toString());
 		});
 		assertThat(new DsvMendResult(VALUE, Set.of(new DsvMendCandidate(ObjectArrays.singleton("foo"), 1.0d), new DsvMendCandidate(ObjectArrays.singleton("bar"), 2.0d)), BEST_CANDIDATE)).satisfies(otherMendResult -> {
 			assertThat(mendResult).isNotSameAs(otherMendResult);
 			assertThat(mendResult).isNotEqualTo(otherMendResult);
-			assertThat(mendResult.hashCode()).isNotEqualTo(otherMendResult.hashCode());
-			assertThat(mendResult.toString()).isNotEqualTo(otherMendResult.toString());
+			assertThat(mendResult).doesNotHaveSameHashCodeAs(otherMendResult);
+			assertThat(mendResult).doesNotHaveToString(otherMendResult.toString());
 		});
 		assertThat(new DsvMendResult(VALUE, CANDIDATES, new DsvMendCandidate(ObjectArrays.singleton("bar"), 2.0d))).satisfies(otherMendResult -> {
 			assertThat(mendResult).isNotSameAs(otherMendResult);
 			assertThat(mendResult).isNotEqualTo(otherMendResult);
-			assertThat(mendResult.hashCode()).isNotEqualTo(otherMendResult.hashCode());
-			assertThat(mendResult.toString()).isNotEqualTo(otherMendResult.toString());
+			assertThat(mendResult).doesNotHaveSameHashCodeAs(otherMendResult);
+			assertThat(mendResult).doesNotHaveToString(otherMendResult.toString());
 		});
 	}
 
