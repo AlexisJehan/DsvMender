@@ -38,7 +38,7 @@ public interface Mender<V, R extends MendResult<V, ? extends MendCandidate<V>>> 
 	 * <p>Mend the given value if needed.</p>
 	 * @param value the value to mend
 	 * @return the best fixed value
-	 * @throws MendException might occurs if mending the value is not possible
+	 * @throws MendException might occur if mending the value is not possible
 	 * @since 1.0.0
 	 */
 	V mend(final V value);

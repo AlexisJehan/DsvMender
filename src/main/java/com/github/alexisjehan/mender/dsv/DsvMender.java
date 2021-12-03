@@ -440,7 +440,7 @@ public final class DsvMender implements Mender<String[], DsvMendResult> {
 	 * <p>Mend the given DSV row if needed.</p>
 	 * @param row the row to mend
 	 * @return best fixed values
-	 * @throws MendException might occurs if mending the value is not possible
+	 * @throws MendException might occur if mending the value is not possible
 	 * @throws NullPointerException if the row is {@code null}
 	 * @since 1.0.0
 	 */
@@ -453,7 +453,7 @@ public final class DsvMender implements Mender<String[], DsvMendResult> {
 	 * <p>Mend given values if needed.</p>
 	 * @param values values to mend
 	 * @return best fixed values
-	 * @throws MendException might occurs if mending the value is not possible
+	 * @throws MendException might occur if mending the value is not possible
 	 * @throws NullPointerException if values or any of them is {@code null}
 	 * @since 1.0.0
 	 */
