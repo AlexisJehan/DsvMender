@@ -1,10 +1,10 @@
 ![DSV Mender](logo.png)
 # DSV Mender
-[![Maven Central](https://img.shields.io/maven-central/v/com.github.alexisjehan/dsv-mender.svg)](https://mvnrepository.com/artifact/com.github.alexisjehan/dsv-mender/latest)
-[![Javadoc](http://www.javadoc.io/badge/com.github.alexisjehan/dsv-mender.svg)](http://www.javadoc.io/doc/com.github.alexisjehan/dsv-mender)
-[![Travis](https://img.shields.io/travis/alexisjehan/dsv-mender.svg)](https://travis-ci.org/alexisjehan/dsv-mender)
-[![Codecov](https://img.shields.io/codecov/c/github/alexisjehan/dsv-mender.svg)](https://codecov.io/gh/alexisjehan/dsv-mender)
-[![License](https://img.shields.io/github/license/alexisjehan/dsv-mender.svg)](https://github.com/alexisjehan/dsv-mender/blob/master/LICENSE.txt)
+[![Maven Central](https://img.shields.io/maven-central/v/com.github.alexisjehan/dsv-mender.svg)](https://mvnrepository.com/artifact/com.github.alexisjehan/dsv-mender)
+[![Javadoc](https://javadoc.io/badge/com.github.alexisjehan/dsv-mender.svg)](https://javadoc.io/doc/com.github.alexisjehan/dsv-mender)
+[![Travis CI](https://img.shields.io/travis/com/AlexisJehan/DsvMender.svg)](https://travis-ci.com/github/AlexisJehan/DsvMender)
+[![Codecov](https://img.shields.io/codecov/c/github/AlexisJehan/DsvMender.svg)](https://codecov.io/gh/AlexisJehan/DsvMender)
+[![License](https://img.shields.io/github/license/AlexisJehan/DsvMender.svg)](LICENSE.txt)
 
 A Java 11+ library to fix malformed DSV (Delimiter-Separated Values) data automatically.
 
