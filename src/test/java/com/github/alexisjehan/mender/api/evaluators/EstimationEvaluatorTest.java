@@ -41,7 +41,7 @@ final class EstimationEvaluatorTest {
 	}
 
 	@Test
-	void testFitEvaluate() {
+	void testFitAndEvaluate() {
 		assertThat(new EstimationEvaluator<>(Function.identity())).satisfies(estimationEvaluator -> {
 			assertThat(estimationEvaluator.evaluate("foo")).isNaN();
 			assertThat(estimationEvaluator.evaluate("bar")).isNaN();
