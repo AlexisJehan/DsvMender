@@ -44,7 +44,7 @@ dependencies {
 }
 ```
 
-Also the Javadoc can be accessed [here](http://www.javadoc.io/doc/com.github.alexisjehan/dsv-mender).
+Also the Javadoc can be accessed [here](https://javadoc.io/doc/com.github.alexisjehan/dsv-mender).
 
 ## Examples
 Let's illustrate how it works step-by-step, consider the following CSV data:

@@ -9,7 +9,7 @@
 
 	<name>DSV Mender</name>
 	<description>A Java 11+ library to fix malformed DSV (Delimiter-Separated Values) data automatically.</description>
-	<url>https://github.com/alexisjehan/dsv-mender</url>
+	<url>https://github.com/AlexisJehan/DsvMender</url>
 	<inceptionYear>2017</inceptionYear>
 	<licenses>
 		<license>
@@ -20,23 +20,31 @@
 	</licenses>
 	<organization>
 		<name>Alexis Jehan</name>
-		<url>https://github.com/alexisjehan</url>
+		<url>https://github.com/AlexisJehan</url>
 	</organization>
 	<developers>
 		<developer>
 			<id>alexisjehan</id>
 			<name>Alexis Jehan</name>
-			<email>alexis.jehan2@gmail.com</email>
+			<email>alexis.jehan@outlook.com</email>
 			<organization>Alexis Jehan</organization>
-			<organizationUrl>https://github.com/alexisjehan</organizationUrl>
+			<organizationUrl>https://github.com/AlexisJehan</organizationUrl>
 		</developer>
 	</developers>
 
 	<scm>
-		<connection>scm:git:git@github.com:alexisjehan/dsv-mender.git</connection>
-		<developerConnection>scm:git:git@github.com:alexisjehan/dsv-mender.git</developerConnection>
-		<url>https://github.com/alexisjehan/dsv-mender</url>
+		<connection>scm:git:git@github.com:AlexisJehan/DsvMender.git</connection>
+		<developerConnection>scm:git:git@github.com:AlexisJehan/DsvMender.git</developerConnection>
+		<url>https://github.com/AlexisJehan/DsvMender</url>
 	</scm>
+	<issueManagement>
+		<system>GitHub Issues</system>
+		<url>https://github.com/AlexisJehan/DsvMender/issues</url>
+	</issueManagement>
+	<ciManagement>
+		<system>Travis CI</system>
+		<url>https://travis-ci.com/github/AlexisJehan/DsvMender</url>
+	</ciManagement>
 	<distributionManagement>
 		<snapshotRepository>
 			<id>ossrh</id>
@@ -47,14 +55,6 @@
 			<url>https://oss.sonatype.org/service/local/staging/deploy/maven2/</url>
 		</repository>
 	</distributionManagement>
-	<issueManagement>
-		<system>Github</system>
-		<url>https://github.com/alexisjehan/dsv-mender/issues</url>
-	</issueManagement>
-	<ciManagement>
-		<system>Travis CI</system>
-		<url>https://travis-ci.org/alexisjehan/dsv-mender</url>
-	</ciManagement>
 
 	<properties>
 		<maven.compiler.source>11</maven.compiler.source>
