@@ -42,8 +42,8 @@
 		<url>https://github.com/AlexisJehan/DsvMender/issues</url>
 	</issueManagement>
 	<ciManagement>
-		<system>Travis CI</system>
-		<url>https://travis-ci.com/github/AlexisJehan/DsvMender</url>
+		<system>GitHub Actions</system>
+		<url>https://github.com/AlexisJehan/Javanilla/actions</url>
 	</ciManagement>
 	<distributionManagement>
 		<snapshotRepository>
