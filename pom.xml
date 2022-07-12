@@ -150,7 +150,6 @@
 				<executions>
 					<execution>
 						<id>gpg-sign</id>
-						<phase>verify</phase>
 						<goals>
 							<goal>sign</goal>
 						</goals>
@@ -174,6 +173,7 @@
 				<executions>
 					<execution>
 						<id>jacoco-prepare-agent</id>
+						<phase>test-compile</phase>
 						<goals>
 							<goal>prepare-agent</goal>
 						</goals>
@@ -203,6 +203,7 @@
 				<executions>
 					<execution>
 						<id>license-check</id>
+						<phase>validate</phase>
 						<goals>
 							<goal>check</goal>
 						</goals>
