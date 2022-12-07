@@ -1,4 +1,5 @@
-![DSV Mender](logo.png)
+<image src="logo.png" align="right" width="250"/>
+
 # DSV Mender
 [![Maven Central](https://img.shields.io/maven-central/v/com.github.alexisjehan/dsv-mender.svg)](https://mvnrepository.com/artifact/com.github.alexisjehan/dsv-mender)
 [![Javadoc](https://javadoc.io/badge/com.github.alexisjehan/dsv-mender.svg)](https://javadoc.io/doc/com.github.alexisjehan/dsv-mender)
@@ -6,7 +7,7 @@
 [![Coverage](https://img.shields.io/codecov/c/github/AlexisJehan/DsvMender.svg)](https://codecov.io/gh/AlexisJehan/DsvMender)
 [![License](https://img.shields.io/github/license/AlexisJehan/DsvMender.svg)](LICENSE.txt)
 
-A Java 11+ library to fix malformed DSV (Delimiter-Separated Values) data automatically.
+A _Java 11+_ library to fix malformed DSV (Delimiter-Separated Values) data automatically.
 
 ## Introduction
 As many developers you may already have to treat some input data with formats such as _CSV_ or _JSON_. Sometimes that
