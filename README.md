@@ -1,4 +1,4 @@
-<image src="logo.png" align="right" width="250"/>
+<image src="logo.png" align="right" width="200"/>
 
 # DSV Mender
 [![Maven Central](https://img.shields.io/maven-central/v/com.github.alexisjehan/dsv-mender.svg)](https://mvnrepository.com/artifact/com.github.alexisjehan/dsv-mender)
