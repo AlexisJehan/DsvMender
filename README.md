@@ -1,11 +1,11 @@
 <image src="logo.png" align="right" width="200"/>
 
 # DSV Mender
-[![Maven Central](https://img.shields.io/maven-central/v/com.github.alexisjehan/dsv-mender.svg)](https://mvnrepository.com/artifact/com.github.alexisjehan/dsv-mender)
-[![Javadoc](https://javadoc.io/badge/com.github.alexisjehan/dsv-mender.svg)](https://javadoc.io/doc/com.github.alexisjehan/dsv-mender)
-[![Build](https://img.shields.io/github/workflow/status/AlexisJehan/DsvMender/CI.svg)](https://github.com/AlexisJehan/DsvMender/actions/workflows/ci.yml)
-[![Coverage](https://img.shields.io/codecov/c/github/AlexisJehan/DsvMender.svg)](https://codecov.io/gh/AlexisJehan/DsvMender)
-[![License](https://img.shields.io/github/license/AlexisJehan/DsvMender.svg)](LICENSE.txt)
+[![maven-central](https://img.shields.io/maven-central/v/com.github.alexisjehan/dsv-mender)](https://mvnrepository.com/artifact/com.github.alexisjehan/dsv-mender)
+[![javadoc](https://javadoc.io/badge/com.github.alexisjehan/dsv-mender.svg)](https://javadoc.io/doc/com.github.alexisjehan/dsv-mender)
+[![build](https://img.shields.io/github/workflow/status/AlexisJehan/DsvMender/CI)](https://github.com/AlexisJehan/DsvMender/actions/workflows/ci.yml)
+[![coverage](https://img.shields.io/codecov/c/github/AlexisJehan/DsvMender)](https://codecov.io/gh/AlexisJehan/DsvMender)
+[![license](https://img.shields.io/github/license/AlexisJehan/DsvMender)](LICENSE.txt)
 
 A _Java 11+_ library to fix malformed DSV (Delimiter-Separated Values) data automatically.
 
@@ -157,4 +157,4 @@ mvn license:format
 ```
 
 ## License
-This project is licensed under the MIT License - see the [LICENSE](LICENSE.txt) file for details
+This project is licensed under the [MIT License](LICENSE.txt).
