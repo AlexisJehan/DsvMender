@@ -29,9 +29,6 @@ import org.junit.jupiter.api.Test;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatNullPointerException;
 
-/**
- * <p>{@link MendException} unit tests.</p>
- */
 final class MendExceptionTest {
 
 	private static final String MESSAGE = "foo";

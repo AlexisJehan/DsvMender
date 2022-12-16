@@ -33,9 +33,6 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
 import static org.assertj.core.api.Assertions.assertThatNullPointerException;
 
-/**
- * <p>{@link DsvMendResult} unit tests.</p>
- */
 final class DsvMendResultTest {
 
 	private static final String[] VALUE = ObjectArrays.singleton("foo");

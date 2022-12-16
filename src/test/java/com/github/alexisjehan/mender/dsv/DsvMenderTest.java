@@ -38,9 +38,6 @@ import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
 import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
 import static org.assertj.core.api.Assertions.assertThatNullPointerException;
 
-/**
- * <p>{@link DsvMender} unit tests.</p>
- */
 final class DsvMenderTest {
 
 	private static final String DELIMITER = ",";

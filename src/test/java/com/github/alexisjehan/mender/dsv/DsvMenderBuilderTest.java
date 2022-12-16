@@ -35,9 +35,6 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
 import static org.assertj.core.api.Assertions.assertThatNullPointerException;
 
-/**
- * <p>{@link DsvMender.Builder} unit tests.</p>
- */
 final class DsvMenderBuilderTest {
 
 	private static final String DELIMITER = ",";
