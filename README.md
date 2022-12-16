@@ -3,7 +3,7 @@
 # DSV Mender
 [![maven-central](https://img.shields.io/maven-central/v/com.github.alexisjehan/dsv-mender)](https://mvnrepository.com/artifact/com.github.alexisjehan/dsv-mender)
 [![javadoc](https://javadoc.io/badge/com.github.alexisjehan/dsv-mender.svg)](https://javadoc.io/doc/com.github.alexisjehan/dsv-mender)
-[![build](https://img.shields.io/github/workflow/status/AlexisJehan/DsvMender/CI)](https://github.com/AlexisJehan/DsvMender/actions/workflows/ci.yml)
+[![build](https://img.shields.io/github/actions/workflow/status/AlexisJehan/DsvMender/ci.yml?branch=main)](https://github.com/AlexisJehan/DsvMender/actions/workflows/ci.yml)
 [![coverage](https://img.shields.io/codecov/c/github/AlexisJehan/DsvMender)](https://codecov.io/gh/AlexisJehan/DsvMender)
 [![license](https://img.shields.io/github/license/AlexisJehan/DsvMender)](LICENSE.txt)
 
