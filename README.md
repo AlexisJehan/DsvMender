@@ -94,7 +94,7 @@ First you need to create a _Mender_ object based on the input data. That require
 well as the expected number of columns.
 
 #### Basic configuration
-The lazy way, for a first attempt is to build a basic _Mender_, that can be able to mend most of input data:
+The lazy way, for a first attempt is to build a basic _Mender_, that can be able to mend most of the input data:
 ```java
 final var delimiter = ',';
 final var length = 3;
@@ -124,7 +124,7 @@ while (null != (row = reader.readLine())) {
 }
 ```
 
-Finally here is the result we got for our example:
+Finally, here is the result we got for our example:
 ```
 "Release", "Release date", "Highlights"
 "Java SE 9", "2017-09-21", "Initial release"
