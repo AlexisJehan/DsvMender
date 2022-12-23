@@ -24,8 +24,8 @@
 package com.github.alexisjehan.mender.api.evaluators;
 
 import com.github.alexisjehan.javanilla.misc.quality.Ensure;
-import com.github.alexisjehan.javanilla.util.collection.bags.Bag;
-import com.github.alexisjehan.javanilla.util.collection.bags.MapBag;
+import com.github.alexisjehan.javanilla.util.bag.Bag;
+import com.github.alexisjehan.javanilla.util.bag.MapBag;
 
 import java.util.function.Function;
 
