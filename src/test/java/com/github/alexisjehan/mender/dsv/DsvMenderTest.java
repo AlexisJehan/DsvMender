@@ -30,6 +30,7 @@ import com.github.alexisjehan.mender.api.evaluators.ConstraintEvaluator;
 import com.github.alexisjehan.mender.api.evaluators.EstimationEvaluator;
 import org.junit.jupiter.api.Test;
 
+import java.util.Collections;
 import java.util.Set;
 import java.util.function.Supplier;
 
@@ -53,9 +54,9 @@ final class DsvMenderTest {
 		assertThatIllegalArgumentException().isThrownBy(() -> new DsvMender(DELIMITER, 1, MAX_DEPTH, CONSTRAINT_EVALUATORS_GENERATOR.get(), ESTIMATION_EVALUATORS_GENERATOR.get()));
 		assertThatIllegalArgumentException().isThrownBy(() -> new DsvMender(DELIMITER, LENGTH, 0, CONSTRAINT_EVALUATORS_GENERATOR.get(), ESTIMATION_EVALUATORS_GENERATOR.get()));
 		assertThatNullPointerException().isThrownBy(() -> new DsvMender(DELIMITER, LENGTH, MAX_DEPTH, null, ESTIMATION_EVALUATORS_GENERATOR.get()));
-		assertThatNullPointerException().isThrownBy(() -> new DsvMender(DELIMITER, LENGTH, MAX_DEPTH, Set.of((ConstraintEvaluator<String[]>) null), ESTIMATION_EVALUATORS_GENERATOR.get()));
+		assertThatNullPointerException().isThrownBy(() -> new DsvMender(DELIMITER, LENGTH, MAX_DEPTH, Collections.singleton(null), ESTIMATION_EVALUATORS_GENERATOR.get()));
 		assertThatNullPointerException().isThrownBy(() -> new DsvMender(DELIMITER, LENGTH, MAX_DEPTH, CONSTRAINT_EVALUATORS_GENERATOR.get(), null));
-		assertThatNullPointerException().isThrownBy(() -> new DsvMender(DELIMITER, LENGTH, MAX_DEPTH, CONSTRAINT_EVALUATORS_GENERATOR.get(), Set.of((EstimationEvaluator<String[]>) null)));
+		assertThatNullPointerException().isThrownBy(() -> new DsvMender(DELIMITER, LENGTH, MAX_DEPTH, CONSTRAINT_EVALUATORS_GENERATOR.get(), Collections.singleton(null)));
 	}
 
 	@Test

@@ -38,5 +38,5 @@ public interface Evaluator<V> {
 	 * @return the value's score
 	 * @since 1.0.0
 	 */
-	double evaluate(final V value);
+	double evaluate(V value);
 }

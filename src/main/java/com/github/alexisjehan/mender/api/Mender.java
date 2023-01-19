@@ -41,7 +41,7 @@ public interface Mender<V, R extends MendResult<V, ? extends MendCandidate<V>>> 
 	 * @throws MendException might occur if mending the value is not possible
 	 * @since 1.0.0
 	 */
-	V mend(final V value);
+	V mend(V value);
 
 	/**
 	 * <p>Optionally get the {@link MendResult} of the last {@link #mend(Object)} call.</p>

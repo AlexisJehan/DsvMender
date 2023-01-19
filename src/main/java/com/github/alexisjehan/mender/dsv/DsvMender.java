@@ -72,7 +72,7 @@ public final class DsvMender implements Mender<String[], DsvMendResult> {
 		 * @return the current {@link Builder} at the next step
 		 * @since 1.0.0
 		 */
-		LengthStep withDelimiter(final String delimiter);
+		LengthStep withDelimiter(String delimiter);
 	}
 
 	/**
@@ -88,7 +88,7 @@ public final class DsvMender implements Mender<String[], DsvMendResult> {
 		 * @return the current {@link Builder} at the next step
 		 * @since 1.0.0
 		 */
-		OptionalMaxDepthStep withLength(final int length);
+		OptionalMaxDepthStep withLength(int length);
 	}
 
 	/**
@@ -103,7 +103,7 @@ public final class DsvMender implements Mender<String[], DsvMendResult> {
 		 * @return the current {@link Builder} at the next step
 		 * @since 1.0.0
 		 */
-		OptionalEvaluatorStep withMaxDepth(final int maxDepth);
+		OptionalEvaluatorStep withMaxDepth(int maxDepth);
 	}
 
 	/**
@@ -119,7 +119,7 @@ public final class DsvMender implements Mender<String[], DsvMendResult> {
 		 * @throws NullPointerException if the validator {@link Predicate} is {code null}
 		 * @since 1.0.0
 		 */
-		OptionalEvaluatorStep withConstraint(final Predicate<String> validator);
+		OptionalEvaluatorStep withConstraint(Predicate<String> validator);
 
 		/**
 		 * <p>Add a {@link ConstraintEvaluator} with the given validator {@link Predicate} on values at provided
@@ -131,7 +131,7 @@ public final class DsvMender implements Mender<String[], DsvMendResult> {
 		 * @throws IllegalArgumentException if the array of indexes is empty or if any of them is not valid
 		 * @since 1.0.0
 		 */
-		OptionalEvaluatorStep withConstraint(final Predicate<String> validator, final int... indexes);
+		OptionalEvaluatorStep withConstraint(Predicate<String> validator, int... indexes);
 
 		/**
 		 * <p>Add an {@link EstimationEvaluator} with the given transformer {@link Function} on every value.</p>
@@ -140,7 +140,7 @@ public final class DsvMender implements Mender<String[], DsvMendResult> {
 		 * @throws NullPointerException if the transformer {@link Function} is {code null}
 		 * @since 1.0.0
 		 */
-		OptionalEvaluatorStep withEstimation(final Function<String, ?> transformer);
+		OptionalEvaluatorStep withEstimation(Function<String, ?> transformer);
 
 		/**
 		 * <p>Add an {@link EstimationEvaluator} with the given transformer {@link Function} on values at provided
@@ -152,7 +152,7 @@ public final class DsvMender implements Mender<String[], DsvMendResult> {
 		 * @throws IllegalArgumentException if the array of indexes is empty or if any of them is not valid
 		 * @since 1.0.0
 		 */
-		OptionalEvaluatorStep withEstimation(final Function<String, ?> transformer, final int... indexes);
+		OptionalEvaluatorStep withEstimation(Function<String, ?> transformer, int... indexes);
 	}
 
 	/**
@@ -174,7 +174,7 @@ public final class DsvMender implements Mender<String[], DsvMendResult> {
 	 * <p>Step builder to build {@link DsvMender} instances.</p>
 	 * @since 1.0.0
 	 */
-	static class Builder implements DelimiterStep, LengthStep, OptionalMaxDepthStep {
+	static final class Builder implements DelimiterStep, LengthStep, OptionalMaxDepthStep {
 
 		/**
 		 * <p>Default maximum depth.</p>
@@ -624,11 +624,11 @@ public final class DsvMender implements Mender<String[], DsvMendResult> {
 	}
 
 	/**
-	 * <p>Create a new basic {@link DsvMender} instance without any {@link ConstraintEvaluator} and with some
+	 * <p>Create a new basic {@code DsvMender} instance without any {@link ConstraintEvaluator} and with some
 	 * {@link EstimationEvaluator}s.</p>
 	 * @param delimiter the {@code char} delimiter
 	 * @param length the length
-	 * @return the created basic {@link DsvMender}
+	 * @return the created basic {@code DsvMender}
 	 * @since 1.0.0
 	 */
 	public static DsvMender basic(final char delimiter, final int length) {
@@ -636,11 +636,11 @@ public final class DsvMender implements Mender<String[], DsvMendResult> {
 	}
 
 	/**
-	 * <p>Create a new basic {@link DsvMender} instance without any {@link ConstraintEvaluator} and with some
+	 * <p>Create a new basic {@code DsvMender} instance without any {@link ConstraintEvaluator} and with some
 	 * {@link EstimationEvaluator}s.</p>
 	 * @param delimiter the {@link String} delimiter
 	 * @param length the length
-	 * @return the created basic {@link DsvMender}
+	 * @return the created basic {@code DsvMender}
 	 * @since 1.0.0
 	 */
 	public static DsvMender basic(final String delimiter, final int length) {

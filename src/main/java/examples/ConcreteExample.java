@@ -63,7 +63,7 @@ public final class ConcreteExample {
 				.withConstraint(value -> value.startsWith("Java SE"), 0) // values[0] must start with "Java SE"
 				.withConstraint(value -> value.isEmpty() || 10 == value.length(), 1)// values[1] must be empty or have a length of 10
 				.build();
-		try (final var reader = new BufferedReader(new StringReader(DATA))) {
+		try (var reader = new BufferedReader(new StringReader(DATA))) {
 			printValues(Strings.split(mender.getDelimiter(), reader.readLine()).toArray(String[]::new)); // Header
 			String row;
 			while (null != (row = reader.readLine())) {
