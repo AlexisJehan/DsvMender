@@ -60,6 +60,7 @@ public final class DsvMendCandidate implements MendCandidate<String[]> {
 	 */
 	DsvMendCandidate(final String[] value, final double score) {
 		Ensure.notNullAndNotEmpty("value", value);
+		Ensure.notNullAndNotNullElements("value", value);
 		Ensure.greaterThanOrEqualTo("score", score, 0.0d);
 		this.value = value.clone();
 		this.score = score;

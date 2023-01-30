@@ -60,9 +60,10 @@ final class DsvMendResultTest {
 	void testConstructorInvalid() {
 		assertThatNullPointerException().isThrownBy(() -> new DsvMendResult(null, CANDIDATES, BEST_CANDIDATE));
 		assertThatIllegalArgumentException().isThrownBy(() -> new DsvMendResult(ObjectArrays.empty(String.class), CANDIDATES, BEST_CANDIDATE));
+		assertThatNullPointerException().isThrownBy(() -> new DsvMendResult(ObjectArrays.singleton(String.class, null), CANDIDATES, BEST_CANDIDATE));
 		assertThatNullPointerException().isThrownBy(() -> new DsvMendResult(VALUE, null, BEST_CANDIDATE));
-		assertThatNullPointerException().isThrownBy(() -> new DsvMendResult(VALUE, Collections.singleton(null), BEST_CANDIDATE));
 		assertThatIllegalArgumentException().isThrownBy(() -> new DsvMendResult(VALUE, Set.of(), BEST_CANDIDATE));
+		assertThatNullPointerException().isThrownBy(() -> new DsvMendResult(VALUE, Collections.singleton(null), BEST_CANDIDATE));
 		assertThatNullPointerException().isThrownBy(() -> new DsvMendResult(VALUE, CANDIDATES, null));
 	}
 

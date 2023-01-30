@@ -70,8 +70,9 @@ public final class DsvMendResult implements MendResult<String[], DsvMendCandidat
 	 */
 	DsvMendResult(final String[] value, final Set<DsvMendCandidate> candidates, final DsvMendCandidate bestCandidate) {
 		Ensure.notNullAndNotEmpty("value", value);
-		Ensure.notNullAndNotNullElements("candidates", candidates);
+		Ensure.notNullAndNotNullElements("value", value);
 		Ensure.notNullAndNotEmpty("candidates", candidates);
+		Ensure.notNullAndNotNullElements("candidates", candidates);
 		Ensure.notNull("bestCandidate", bestCandidate);
 		this.value = value.clone();
 		this.candidates = Set.copyOf(candidates);
