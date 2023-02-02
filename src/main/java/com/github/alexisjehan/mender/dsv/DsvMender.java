@@ -467,7 +467,7 @@ public final class DsvMender implements Mender<String[], DsvMendResult> {
 			}
 			return values;
 		}
-		final var depth = Math.abs(length - values.length - 2);
+		final var depth = StrictMath.abs(length - values.length - 2);
 		Ensure.lowerThanOrEqualTo("values depth", depth, maxDepth);
 		final var children = new ArrayList<String[]>();
 		if (length < values.length) {
