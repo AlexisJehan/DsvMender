@@ -35,12 +35,12 @@ import static org.assertj.core.api.Assertions.assertThatNullPointerException;
 
 final class DsvMendResultTest {
 
-	private static final String[] VALUE = ObjectArrays.singleton("foo");
+	private static final String[] VALUE = ObjectArrays.of("foo");
 	private static final Set<DsvMendCandidate> CANDIDATES;
 	private static final DsvMendCandidate BEST_CANDIDATE;
 
 	static {
-		final var candidate = new DsvMendCandidate(ObjectArrays.singleton("foo"), 1.0d);
+		final var candidate = new DsvMendCandidate(ObjectArrays.of("foo"), 1.0d);
 		CANDIDATES = Set.of(candidate);
 		BEST_CANDIDATE = candidate;
 	}
@@ -51,16 +51,15 @@ final class DsvMendResultTest {
 	void testConstructorImmutable() {
 		final var value = VALUE.clone();
 		final var mendResult = new DsvMendResult(value, CANDIDATES, BEST_CANDIDATE);
-		assertThat(mendResult.getValue()).containsExactly(VALUE);
-		value[0] = "bar";
-		assertThat(mendResult.getValue()).containsExactly(VALUE);
+		value[0] = null;
+		assertThat(mendResult.getValue()).isEqualTo(VALUE);
 	}
 
 	@Test
 	void testConstructorInvalid() {
 		assertThatNullPointerException().isThrownBy(() -> new DsvMendResult(null, CANDIDATES, BEST_CANDIDATE));
 		assertThatIllegalArgumentException().isThrownBy(() -> new DsvMendResult(ObjectArrays.empty(String.class), CANDIDATES, BEST_CANDIDATE));
-		assertThatNullPointerException().isThrownBy(() -> new DsvMendResult(ObjectArrays.singleton(String.class, null), CANDIDATES, BEST_CANDIDATE));
+		assertThatNullPointerException().isThrownBy(() -> new DsvMendResult(ObjectArrays.of((String) null), CANDIDATES, BEST_CANDIDATE));
 		assertThatNullPointerException().isThrownBy(() -> new DsvMendResult(VALUE, null, BEST_CANDIDATE));
 		assertThatIllegalArgumentException().isThrownBy(() -> new DsvMendResult(VALUE, Set.of(), BEST_CANDIDATE));
 		assertThatNullPointerException().isThrownBy(() -> new DsvMendResult(VALUE, Collections.singleton(null), BEST_CANDIDATE));
@@ -77,19 +76,19 @@ final class DsvMendResultTest {
 			assertThat(mendResult).hasSameHashCodeAs(otherMendResult);
 			assertThat(mendResult).hasToString(otherMendResult.toString());
 		});
-		assertThat(new DsvMendResult(ObjectArrays.singleton("bar"), CANDIDATES, BEST_CANDIDATE)).satisfies(otherMendResult -> {
+		assertThat(new DsvMendResult(ObjectArrays.of("bar"), CANDIDATES, BEST_CANDIDATE)).satisfies(otherMendResult -> {
 			assertThat(mendResult).isNotSameAs(otherMendResult);
 			assertThat(mendResult).isNotEqualTo(otherMendResult);
 			assertThat(mendResult).doesNotHaveSameHashCodeAs(otherMendResult);
 			assertThat(mendResult).doesNotHaveToString(otherMendResult.toString());
 		});
-		assertThat(new DsvMendResult(VALUE, Set.of(new DsvMendCandidate(ObjectArrays.singleton("foo"), 1.0d), new DsvMendCandidate(ObjectArrays.singleton("bar"), 2.0d)), BEST_CANDIDATE)).satisfies(otherMendResult -> {
+		assertThat(new DsvMendResult(VALUE, Set.of(new DsvMendCandidate(ObjectArrays.of("foo"), 1.0d), new DsvMendCandidate(ObjectArrays.of("bar"), 2.0d)), BEST_CANDIDATE)).satisfies(otherMendResult -> {
 			assertThat(mendResult).isNotSameAs(otherMendResult);
 			assertThat(mendResult).isNotEqualTo(otherMendResult);
 			assertThat(mendResult).doesNotHaveSameHashCodeAs(otherMendResult);
 			assertThat(mendResult).doesNotHaveToString(otherMendResult.toString());
 		});
-		assertThat(new DsvMendResult(VALUE, CANDIDATES, new DsvMendCandidate(ObjectArrays.singleton("bar"), 2.0d))).satisfies(otherMendResult -> {
+		assertThat(new DsvMendResult(VALUE, CANDIDATES, new DsvMendCandidate(ObjectArrays.of("bar"), 2.0d))).satisfies(otherMendResult -> {
 			assertThat(mendResult).isNotSameAs(otherMendResult);
 			assertThat(mendResult).isNotEqualTo(otherMendResult);
 			assertThat(mendResult).doesNotHaveSameHashCodeAs(otherMendResult);
@@ -99,15 +98,15 @@ final class DsvMendResultTest {
 
 	@Test
 	void testGetters() {
-		assertThat(mendResult.getValue()).containsExactly(VALUE);
+		assertThat(mendResult.getValue()).isEqualTo(VALUE);
 		assertThat(mendResult.getCandidates()).isEqualTo(CANDIDATES);
 		assertThat(mendResult.getBestCandidate()).isEqualTo(BEST_CANDIDATE);
 	}
 
 	@Test
 	void testGettersImmutable() {
-		assertThat(mendResult.getValue()).containsExactly(VALUE);
-		mendResult.getValue()[0] = "bar";
-		assertThat(mendResult.getValue()).containsExactly(VALUE);
+		assertThat(mendResult.getValue()).isEqualTo(VALUE);
+		mendResult.getValue()[0] = null;
+		assertThat(mendResult.getValue()).isEqualTo(VALUE);
 	}
 }

@@ -32,7 +32,7 @@ import static org.assertj.core.api.Assertions.assertThatNullPointerException;
 
 final class DsvMendCandidateTest {
 
-	private static final String[] VALUE = ObjectArrays.singleton("foo");
+	private static final String[] VALUE = ObjectArrays.of("foo");
 	private static final double SCORE = 1.0d;
 
 	private final DsvMendCandidate mendCandidate = new DsvMendCandidate(VALUE, SCORE);
@@ -41,16 +41,15 @@ final class DsvMendCandidateTest {
 	void testConstructorImmutable() {
 		final var value = VALUE.clone();
 		final var mendCandidate = new DsvMendCandidate(value, SCORE);
-		assertThat(mendCandidate.getValue()).containsExactly(VALUE);
-		value[0] = "bar";
-		assertThat(mendCandidate.getValue()).containsExactly(VALUE);
+		value[0] = null;
+		assertThat(mendCandidate.getValue()).isEqualTo(VALUE);
 	}
 
 	@Test
 	void testConstructorInvalid() {
 		assertThatNullPointerException().isThrownBy(() -> new DsvMendCandidate(null, SCORE));
 		assertThatIllegalArgumentException().isThrownBy(() -> new DsvMendCandidate(ObjectArrays.empty(String.class), SCORE));
-		assertThatNullPointerException().isThrownBy(() -> new DsvMendCandidate(ObjectArrays.singleton(String.class, null), SCORE));
+		assertThatNullPointerException().isThrownBy(() -> new DsvMendCandidate(ObjectArrays.of((String) null), SCORE));
 		assertThatIllegalArgumentException().isThrownBy(() -> new DsvMendCandidate(VALUE, -1.0d));
 	}
 
@@ -64,7 +63,7 @@ final class DsvMendCandidateTest {
 			assertThat(mendCandidate).hasSameHashCodeAs(otherMendCandidate);
 			assertThat(mendCandidate).hasToString(otherMendCandidate.toString());
 		});
-		assertThat(new DsvMendCandidate(ObjectArrays.singleton("bar"), SCORE)).satisfies(otherMendCandidate -> {
+		assertThat(new DsvMendCandidate(ObjectArrays.of("bar"), SCORE)).satisfies(otherMendCandidate -> {
 			assertThat(mendCandidate).isNotSameAs(otherMendCandidate);
 			assertThat(mendCandidate).isNotEqualTo(otherMendCandidate);
 			assertThat(mendCandidate).doesNotHaveSameHashCodeAs(otherMendCandidate);
@@ -80,14 +79,14 @@ final class DsvMendCandidateTest {
 
 	@Test
 	void testGetters() {
-		assertThat(mendCandidate.getValue()).containsExactly(VALUE);
+		assertThat(mendCandidate.getValue()).isEqualTo(VALUE);
 		assertThat(mendCandidate.getScore()).isEqualTo(SCORE);
 	}
 
 	@Test
 	void testGettersImmutable() {
-		assertThat(mendCandidate.getValue()).containsExactly(VALUE);
-		mendCandidate.getValue()[0] = "bar";
-		assertThat(mendCandidate.getValue()).containsExactly(VALUE);
+		assertThat(mendCandidate.getValue()).isEqualTo(VALUE);
+		mendCandidate.getValue()[0] = null;
+		assertThat(mendCandidate.getValue()).isEqualTo(VALUE);
 	}
 }
