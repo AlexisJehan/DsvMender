@@ -51,6 +51,8 @@ public final class DsvMender implements Mender<String[], DsvMendResult> {
 
 	/**
 	 * <p>{@link Builder}'s step to set the delimiter.</p>
+	 * <p><b>Note</b>: This interface is a {@link FunctionalInterface} whose abstract method is
+	 * {@link #withDelimiter(String)}.</p>
 	 * @since 1.0.0
 	 */
 	@FunctionalInterface
@@ -77,6 +79,8 @@ public final class DsvMender implements Mender<String[], DsvMendResult> {
 
 	/**
 	 * <p>{@link Builder}'s step to set the length.</p>
+	 * <p><b>Note</b>: This interface is a {@link FunctionalInterface} whose abstract method is
+	 * {@link #withLength(int)}.</p>
 	 * @since 1.0.0
 	 */
 	@FunctionalInterface
@@ -157,6 +161,7 @@ public final class DsvMender implements Mender<String[], DsvMendResult> {
 
 	/**
 	 * <p>{@link Builder}'s build step.</p>
+	 * <p><b>Note</b>: This interface is a {@link FunctionalInterface} whose abstract method is {@link #build()}.</p>
 	 * @since 1.0.0
 	 */
 	@FunctionalInterface

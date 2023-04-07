@@ -27,7 +27,7 @@ import com.github.alexisjehan.javanilla.misc.quality.Ensure;
 
 /**
  * <p>An unchecked {@link Exception} that can occur with {@link Mender#mend(Object)}.</p>
- * <p><b>Note</b>: This class is serializable.</p>
+ * <p><b>Note</b>: This class is {@link java.io.Serializable}.</p>
  * @since 1.0.0
  */
 public final class MendException extends RuntimeException {
