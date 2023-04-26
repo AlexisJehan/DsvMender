@@ -10,7 +10,7 @@
 - Update the `license-maven-plugin` plugin to `4.2`
 - Update the `maven-compiler-plugin` plugin to `3.11.0`
 - Update the `maven-surefire-plugin` plugin to `3.0.0`
-- Update the `jacoco-maven-plugin` plugin to `0.8.9`
+- Update the `jacoco-maven-plugin` plugin to `0.8.10`
 - Update the `maven-source-plugin` plugin to `3.2.1`
 - Update the `maven-javadoc-plugin` plugin to `3.5.0`
 - Update the `maven-gpg-plugin` plugin to `3.0.1`
