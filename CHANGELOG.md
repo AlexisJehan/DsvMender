@@ -1,6 +1,6 @@
 # Changelog
 
-## v1.1.0 (unreleased)
+## 1.1.0 (unreleased)
 
 ### Notes
 - Include the `maven-pmd-plugin` plugin with `pmd-core` and `pmd-java` dependencies
@@ -16,5 +16,5 @@
 - Update the `maven-gpg-plugin` plugin to `3.1.0`
 - Migrate the continuous integration from _Travis CI_ to _GitHub Actions_
 
-## [v1.0.0](https://github.com/AlexisJehan/DsvMender/releases/tag/v1.0.0) (2019-04-22)
+## [1.0.0](https://github.com/AlexisJehan/DsvMender/releases/tag/v1.0.0) (2019-04-22)
 Initial release
