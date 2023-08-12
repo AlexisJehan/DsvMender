@@ -5,7 +5,7 @@
 ### Notes
 - Include the `maven-pmd-plugin` plugin with `pmd-core` and `pmd-java` dependencies
 - Update the `javanilla` dependency to `1.8.0`
-- Update the `junit-jupiter` dependency to `5.9.3`
+- Update the `junit-jupiter` dependency to `5.10.0`
 - Update the `assertj-core` dependency to `3.24.2`
 - Update the `license-maven-plugin` plugin to `4.2`
 - Update the `maven-compiler-plugin` plugin to `3.11.0`
