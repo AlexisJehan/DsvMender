@@ -3,7 +3,7 @@
 ## 1.1.0 (unreleased)
 
 ### Notes
-- Include the `maven-pmd-plugin` plugin with `pmd-core` and `pmd-java` dependencies
+- Add the `maven-pmd-plugin` plugin with `pmd-core` and `pmd-java` dependencies
 - Update the `javanilla` dependency to `1.8.0`
 - Update the `junit-jupiter` dependency to `5.10.0`
 - Update the `assertj-core` dependency to `3.24.2`
