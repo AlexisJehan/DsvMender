@@ -34,9 +34,7 @@ public final class SimpleExample {
 	private static final String DELIMITER = "\t";
 	private static final int LENGTH = 3;
 
-	private SimpleExample() {
-		// Not available
-	}
+	private SimpleExample() {}
 
 	public static void main(final String... args) {
 		final var mender = DsvMender.builder()

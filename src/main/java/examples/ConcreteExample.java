@@ -52,9 +52,7 @@ public final class ConcreteExample {
 			String.join(DELIMITER, "Java SE 12", "Initial release") // Missing the release date value
 	);
 
-	private ConcreteExample() {
-		// Not available
-	}
+	private ConcreteExample() {}
 
 	public static void main(final String... args) throws IOException {
 		final var mender = DsvMender.builder()

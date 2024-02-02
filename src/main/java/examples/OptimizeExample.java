@@ -34,9 +34,7 @@ public final class OptimizeExample {
 	private static final char DELIMITER = ',';
 	private static final int LENGTH = 3;
 
-	private OptimizeExample() {
-		// Not available
-	}
+	private OptimizeExample() {}
 
 	public static void main(final String... args) {
 		final var mender = DsvMender.builder()
