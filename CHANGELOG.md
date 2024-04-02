@@ -13,7 +13,7 @@
 - Update the `jacoco-maven-plugin` plugin to `0.8.11`
 - Update the `maven-source-plugin` plugin to `3.3.0`
 - Update the `maven-javadoc-plugin` plugin to `3.6.3`
-- Update the `maven-gpg-plugin` plugin to `3.2.1`
+- Update the `maven-gpg-plugin` plugin to `3.2.2`
 - Migrate the continuous integration from _Travis CI_ to _GitHub Actions_
 
 ## [1.0.0](https://github.com/AlexisJehan/DsvMender/releases/tag/v1.0.0) (2019-04-22)
