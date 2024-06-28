@@ -348,7 +348,13 @@ public final class DsvMender implements Mender<String[], DsvMendResult> {
 	 *         {@link EstimationEvaluator}s is empty
 	 * @since 1.0.0
 	 */
-	public DsvMender(final String delimiter, final int length, final int maxDepth, final Set<ConstraintEvaluator<String[]>> constraintEvaluators, final Set<EstimationEvaluator<String[]>> estimationEvaluators) {
+	public DsvMender(
+			final String delimiter,
+			final int length,
+			final int maxDepth,
+			final Set<ConstraintEvaluator<String[]>> constraintEvaluators,
+			final Set<EstimationEvaluator<String[]>> estimationEvaluators
+	) {
 		Ensure.notNullAndNotEmpty("delimiter", delimiter);
 		Ensure.greaterThanOrEqualTo("length", length, 2);
 		Ensure.greaterThanOrEqualTo("maxDepth", maxDepth, 1);
@@ -503,20 +509,27 @@ public final class DsvMender implements Mender<String[], DsvMendResult> {
 		DsvMendCandidate bestCandidate = null;
 		for (final var child : children) {
 			final var optionalCandidateScore = DoubleStream.concat(
-					constraintEvaluators.stream().mapToDouble(constraintEvaluator -> constraintEvaluator.evaluate(child)),
-					estimationEvaluators.stream().mapToDouble(estimationEvaluator -> estimationEvaluator.evaluate(child))
+					constraintEvaluators.stream()
+							.mapToDouble(constraintEvaluator -> constraintEvaluator.evaluate(child)),
+					estimationEvaluators.stream()
+							.mapToDouble(estimationEvaluator -> estimationEvaluator.evaluate(child))
 			).average();
 			if (optionalCandidateScore.isPresent()) {
 				final var candidateScore = optionalCandidateScore.getAsDouble();
 				final var candidate = new DsvMendCandidate(child, candidateScore);
 				candidates.add(candidate);
-				if (!Double.isNaN(candidateScore) && (null == bestCandidate || bestCandidate.getScore() < candidateScore)) {
+				if (!Double.isNaN(candidateScore)
+						&& (null == bestCandidate || bestCandidate.getScore() < candidateScore)) {
 					bestCandidate = candidate;
 				}
 			}
 		}
 		if (null == bestCandidate) {
-			throw new MendException("No solution for values: " + ToString.toString(values) + " (consider using others constraints and estimations)");
+			throw new MendException(
+					"No solution for values: "
+							+ ToString.toString(values)
+							+ " (consider using others constraints and estimations)"
+			);
 		}
 		lastResult = new DsvMendResult(values, candidates, bestCandidate);
 		return bestCandidate.getValue();

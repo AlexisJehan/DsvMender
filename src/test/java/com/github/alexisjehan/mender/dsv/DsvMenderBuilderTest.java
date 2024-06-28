@@ -106,8 +106,10 @@ final class DsvMenderBuilderTest {
 		final var constraintEvaluators = dsvMender.getConstraintEvaluators();
 		assertThat(constraintEvaluators).hasSize(dsvMender.getLength());
 		for (final var constraintEvaluator : constraintEvaluators) {
-			assertThat(constraintEvaluator.evaluate(ObjectArrays.of("foo", "foo", "foo"))).isEqualTo(1.0d);
-			assertThat(constraintEvaluator.evaluate(ObjectArrays.of("bar", "bar", "bar"))).isNaN();
+			assertThat(constraintEvaluator.evaluate(ObjectArrays.of("foo", "foo", "foo")))
+					.isEqualTo(1.0d);
+			assertThat(constraintEvaluator.evaluate(ObjectArrays.of("bar", "bar", "bar")))
+					.isNaN();
 		}
 	}
 
@@ -122,10 +124,14 @@ final class DsvMenderBuilderTest {
 		final var constraintEvaluators = dsvMender.getConstraintEvaluators();
 		assertThat(constraintEvaluators).hasSize(1);
 		for (final var constraintEvaluator : constraintEvaluators) {
-			assertThat(constraintEvaluator.evaluate(ObjectArrays.of("foo", "foo", "foo"))).isEqualTo(1.0d);
-			assertThat(constraintEvaluator.evaluate(ObjectArrays.of("foo", "foo", "foo"))).isEqualTo(1.0d);
-			assertThat(constraintEvaluator.evaluate(ObjectArrays.of("bar", "foo", "foo"))).isNaN();
-			assertThat(constraintEvaluator.evaluate(ObjectArrays.of("bar", "foo", "foo"))).isNaN();
+			assertThat(constraintEvaluator.evaluate(ObjectArrays.of("foo", "foo", "foo")))
+					.isEqualTo(1.0d);
+			assertThat(constraintEvaluator.evaluate(ObjectArrays.of("foo", "foo", "foo")))
+					.isEqualTo(1.0d);
+			assertThat(constraintEvaluator.evaluate(ObjectArrays.of("bar", "foo", "foo")))
+					.isNaN();
+			assertThat(constraintEvaluator.evaluate(ObjectArrays.of("bar", "foo", "foo")))
+					.isNaN();
 		}
 	}
 
@@ -134,11 +140,16 @@ final class DsvMenderBuilderTest {
 		final var optionalEvaluatorStep = DsvMender.builder()
 				.withDelimiter(DELIMITER)
 				.withLength(LENGTH);
-		assertThatNullPointerException().isThrownBy(() -> optionalEvaluatorStep.withConstraint(null));
-		assertThatNullPointerException().isThrownBy(() -> optionalEvaluatorStep.withConstraint(CONSTRAINT_VALIDATOR, (int[]) null));
-		assertThatIllegalArgumentException().isThrownBy(() -> optionalEvaluatorStep.withConstraint(CONSTRAINT_VALIDATOR, IntArrays.EMPTY));
-		assertThatIllegalArgumentException().isThrownBy(() -> optionalEvaluatorStep.withConstraint(CONSTRAINT_VALIDATOR, -1));
-		assertThatIllegalArgumentException().isThrownBy(() -> optionalEvaluatorStep.withConstraint(CONSTRAINT_VALIDATOR, LENGTH));
+		assertThatNullPointerException()
+				.isThrownBy(() -> optionalEvaluatorStep.withConstraint(null));
+		assertThatNullPointerException()
+				.isThrownBy(() -> optionalEvaluatorStep.withConstraint(CONSTRAINT_VALIDATOR, (int[]) null));
+		assertThatIllegalArgumentException()
+				.isThrownBy(() -> optionalEvaluatorStep.withConstraint(CONSTRAINT_VALIDATOR, IntArrays.EMPTY));
+		assertThatIllegalArgumentException()
+				.isThrownBy(() -> optionalEvaluatorStep.withConstraint(CONSTRAINT_VALIDATOR, -1));
+		assertThatIllegalArgumentException()
+				.isThrownBy(() -> optionalEvaluatorStep.withConstraint(CONSTRAINT_VALIDATOR, LENGTH));
 	}
 
 	@Test
@@ -152,14 +163,20 @@ final class DsvMenderBuilderTest {
 		final var estimationEvaluators = dsvMender.getEstimationEvaluators();
 		assertThat(estimationEvaluators).hasSize(dsvMender.getLength());
 		for (final var estimationEvaluator : estimationEvaluators) {
-			assertThat(estimationEvaluator.evaluate(ObjectArrays.of("foo", "foo", "foo"))).isNaN();
-			assertThat(estimationEvaluator.evaluate(ObjectArrays.of("foo", "foo", "foo"))).isNaN();
+			assertThat(estimationEvaluator.evaluate(ObjectArrays.of("foo", "foo", "foo")))
+					.isNaN();
+			assertThat(estimationEvaluator.evaluate(ObjectArrays.of("foo", "foo", "foo")))
+					.isNaN();
 			estimationEvaluator.fit(ObjectArrays.of("foo", "foo", "foo"));
-			assertThat(estimationEvaluator.evaluate(ObjectArrays.of("foo", "foo", "foo"))).isEqualTo(1.0d);
-			assertThat(estimationEvaluator.evaluate(ObjectArrays.of("bar", "bar", "bar"))).isZero();
+			assertThat(estimationEvaluator.evaluate(ObjectArrays.of("foo", "foo", "foo")))
+					.isEqualTo(1.0d);
+			assertThat(estimationEvaluator.evaluate(ObjectArrays.of("bar", "bar", "bar")))
+					.isZero();
 			estimationEvaluator.fit(ObjectArrays.of("bar", "bar", "bar"));
-			assertThat(estimationEvaluator.evaluate(ObjectArrays.of("foo", "foo", "foo"))).isEqualTo(0.5d);
-			assertThat(estimationEvaluator.evaluate(ObjectArrays.of("bar", "bar", "bar"))).isEqualTo(0.5d);
+			assertThat(estimationEvaluator.evaluate(ObjectArrays.of("foo", "foo", "foo")))
+					.isEqualTo(0.5d);
+			assertThat(estimationEvaluator.evaluate(ObjectArrays.of("bar", "bar", "bar")))
+					.isEqualTo(0.5d);
 		}
 	}
 
@@ -174,20 +191,32 @@ final class DsvMenderBuilderTest {
 		final var estimationEvaluators = dsvMender.getEstimationEvaluators();
 		assertThat(estimationEvaluators).hasSize(1);
 		for (final var estimationEvaluator : estimationEvaluators) {
-			assertThat(estimationEvaluator.evaluate(ObjectArrays.of("foo", "foo", "foo"))).isNaN();
-			assertThat(estimationEvaluator.evaluate(ObjectArrays.of("foo", "foo", "foo"))).isNaN();
-			assertThat(estimationEvaluator.evaluate(ObjectArrays.of("bar", "foo", "foo"))).isNaN();
-			assertThat(estimationEvaluator.evaluate(ObjectArrays.of("bar", "foo", "foo"))).isNaN();
+			assertThat(estimationEvaluator.evaluate(ObjectArrays.of("foo", "foo", "foo")))
+					.isNaN();
+			assertThat(estimationEvaluator.evaluate(ObjectArrays.of("foo", "foo", "foo")))
+					.isNaN();
+			assertThat(estimationEvaluator.evaluate(ObjectArrays.of("bar", "foo", "foo")))
+					.isNaN();
+			assertThat(estimationEvaluator.evaluate(ObjectArrays.of("bar", "foo", "foo")))
+					.isNaN();
 			estimationEvaluator.fit(ObjectArrays.of("foo", "foo", "foo"));
-			assertThat(estimationEvaluator.evaluate(ObjectArrays.of("foo", "foo", "foo"))).isEqualTo(1.0d);
-			assertThat(estimationEvaluator.evaluate(ObjectArrays.of("foo", "foo", "foo"))).isEqualTo(1.0d);
-			assertThat(estimationEvaluator.evaluate(ObjectArrays.of("bar", "foo", "foo"))).isZero();
-			assertThat(estimationEvaluator.evaluate(ObjectArrays.of("bar", "foo", "foo"))).isZero();
+			assertThat(estimationEvaluator.evaluate(ObjectArrays.of("foo", "foo", "foo")))
+					.isEqualTo(1.0d);
+			assertThat(estimationEvaluator.evaluate(ObjectArrays.of("foo", "foo", "foo")))
+					.isEqualTo(1.0d);
+			assertThat(estimationEvaluator.evaluate(ObjectArrays.of("bar", "foo", "foo")))
+					.isZero();
+			assertThat(estimationEvaluator.evaluate(ObjectArrays.of("bar", "foo", "foo")))
+					.isZero();
 			estimationEvaluator.fit(ObjectArrays.of("bar", "foo", "foo"));
-			assertThat(estimationEvaluator.evaluate(ObjectArrays.of("foo", "foo", "foo"))).isEqualTo(0.5d);
-			assertThat(estimationEvaluator.evaluate(ObjectArrays.of("foo", "foo", "foo"))).isEqualTo(0.5d);
-			assertThat(estimationEvaluator.evaluate(ObjectArrays.of("bar", "foo", "foo"))).isEqualTo(0.5d);
-			assertThat(estimationEvaluator.evaluate(ObjectArrays.of("bar", "foo", "foo"))).isEqualTo(0.5d);
+			assertThat(estimationEvaluator.evaluate(ObjectArrays.of("foo", "foo", "foo")))
+					.isEqualTo(0.5d);
+			assertThat(estimationEvaluator.evaluate(ObjectArrays.of("foo", "foo", "foo")))
+					.isEqualTo(0.5d);
+			assertThat(estimationEvaluator.evaluate(ObjectArrays.of("bar", "foo", "foo")))
+					.isEqualTo(0.5d);
+			assertThat(estimationEvaluator.evaluate(ObjectArrays.of("bar", "foo", "foo")))
+					.isEqualTo(0.5d);
 		}
 	}
 
@@ -196,11 +225,16 @@ final class DsvMenderBuilderTest {
 		final var optionalEvaluatorStep = DsvMender.builder()
 				.withDelimiter(DELIMITER)
 				.withLength(LENGTH);
-		assertThatNullPointerException().isThrownBy(() -> optionalEvaluatorStep.withEstimation(null));
-		assertThatNullPointerException().isThrownBy(() -> optionalEvaluatorStep.withEstimation(ESTIMATION_TRANSFORMER, (int[]) null));
-		assertThatIllegalArgumentException().isThrownBy(() -> optionalEvaluatorStep.withEstimation(ESTIMATION_TRANSFORMER, IntArrays.EMPTY));
-		assertThatIllegalArgumentException().isThrownBy(() -> optionalEvaluatorStep.withEstimation(ESTIMATION_TRANSFORMER, -1));
-		assertThatIllegalArgumentException().isThrownBy(() -> optionalEvaluatorStep.withEstimation(ESTIMATION_TRANSFORMER, LENGTH));
+		assertThatNullPointerException()
+				.isThrownBy(() -> optionalEvaluatorStep.withEstimation(null));
+		assertThatNullPointerException()
+				.isThrownBy(() -> optionalEvaluatorStep.withEstimation(ESTIMATION_TRANSFORMER, (int[]) null));
+		assertThatIllegalArgumentException()
+				.isThrownBy(() -> optionalEvaluatorStep.withEstimation(ESTIMATION_TRANSFORMER, IntArrays.EMPTY));
+		assertThatIllegalArgumentException()
+				.isThrownBy(() -> optionalEvaluatorStep.withEstimation(ESTIMATION_TRANSFORMER, -1));
+		assertThatIllegalArgumentException()
+				.isThrownBy(() -> optionalEvaluatorStep.withEstimation(ESTIMATION_TRANSFORMER, LENGTH));
 	}
 
 	@Test
@@ -212,11 +246,15 @@ final class DsvMenderBuilderTest {
 			final var estimationEvaluators = dsvMender.getEstimationEvaluators();
 			assertThat(estimationEvaluators).hasSize(2 * dsvMender.getLength());
 			for (final var estimationEvaluator : estimationEvaluators) {
-				assertThat(estimationEvaluator.evaluate(ObjectArrays.of("foo", "foo", "foo"))).isNaN();
-				assertThat(estimationEvaluator.evaluate(ObjectArrays.of(Strings.EMPTY, Strings.EMPTY, Strings.EMPTY))).isNaN();
+				assertThat(estimationEvaluator.evaluate(ObjectArrays.of("foo", "foo", "foo")))
+						.isNaN();
+				assertThat(estimationEvaluator.evaluate(ObjectArrays.of(Strings.EMPTY, Strings.EMPTY, Strings.EMPTY)))
+						.isNaN();
 				estimationEvaluator.fit(ObjectArrays.of("foo", "foo", "foo"));
-				assertThat(estimationEvaluator.evaluate(ObjectArrays.of("foo", "foo", "foo"))).isEqualTo(1.0d);
-				assertThat(estimationEvaluator.evaluate(ObjectArrays.of(Strings.EMPTY, Strings.EMPTY, Strings.EMPTY))).isZero();
+				assertThat(estimationEvaluator.evaluate(ObjectArrays.of("foo", "foo", "foo")))
+						.isEqualTo(1.0d);
+				assertThat(estimationEvaluator.evaluate(ObjectArrays.of(Strings.EMPTY, Strings.EMPTY, Strings.EMPTY)))
+						.isZero();
 			}
 		});
 		assertThat(DsvMender.basic(DELIMITER, LENGTH)).satisfies(dsvMender -> {
@@ -226,11 +264,15 @@ final class DsvMenderBuilderTest {
 			final var estimationEvaluators = dsvMender.getEstimationEvaluators();
 			assertThat(estimationEvaluators).hasSize(2 * dsvMender.getLength());
 			for (final var estimationEvaluator : estimationEvaluators) {
-				assertThat(estimationEvaluator.evaluate(ObjectArrays.of("foo", "foo", "foo"))).isNaN();
-				assertThat(estimationEvaluator.evaluate(ObjectArrays.of(Strings.EMPTY, Strings.EMPTY, Strings.EMPTY))).isNaN();
+				assertThat(estimationEvaluator.evaluate(ObjectArrays.of("foo", "foo", "foo")))
+						.isNaN();
+				assertThat(estimationEvaluator.evaluate(ObjectArrays.of(Strings.EMPTY, Strings.EMPTY, Strings.EMPTY)))
+						.isNaN();
 				estimationEvaluator.fit(ObjectArrays.of("foo", "foo", "foo"));
-				assertThat(estimationEvaluator.evaluate(ObjectArrays.of("foo", "foo", "foo"))).isEqualTo(1.0d);
-				assertThat(estimationEvaluator.evaluate(ObjectArrays.of(Strings.EMPTY, Strings.EMPTY, Strings.EMPTY))).isZero();
+				assertThat(estimationEvaluator.evaluate(ObjectArrays.of("foo", "foo", "foo")))
+						.isEqualTo(1.0d);
+				assertThat(estimationEvaluator.evaluate(ObjectArrays.of(Strings.EMPTY, Strings.EMPTY, Strings.EMPTY)))
+						.isZero();
 			}
 		});
 	}

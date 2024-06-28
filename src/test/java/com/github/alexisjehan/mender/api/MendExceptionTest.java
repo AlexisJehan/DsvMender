@@ -49,6 +49,10 @@ final class MendExceptionTest {
 
 	@Test
 	void testSerializable() {
-		assertThat(Serializables.<MendException>deserialize(Serializables.serialize(mendException))).hasSameClassAs(mendException);
+		assertThat(
+				Serializables.<MendException>deserialize(
+						Serializables.serialize(mendException)
+				)
+		).hasSameClassAs(mendException);
 	}
 }

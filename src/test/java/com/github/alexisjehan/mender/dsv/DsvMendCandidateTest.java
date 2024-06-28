@@ -47,10 +47,14 @@ final class DsvMendCandidateTest {
 
 	@Test
 	void testConstructorInvalid() {
-		assertThatNullPointerException().isThrownBy(() -> new DsvMendCandidate(null, SCORE));
-		assertThatIllegalArgumentException().isThrownBy(() -> new DsvMendCandidate(ObjectArrays.empty(String.class), SCORE));
-		assertThatNullPointerException().isThrownBy(() -> new DsvMendCandidate(ObjectArrays.of((String) null), SCORE));
-		assertThatIllegalArgumentException().isThrownBy(() -> new DsvMendCandidate(VALUE, -1.0d));
+		assertThatNullPointerException()
+				.isThrownBy(() -> new DsvMendCandidate(null, SCORE));
+		assertThatIllegalArgumentException()
+				.isThrownBy(() -> new DsvMendCandidate(ObjectArrays.empty(String.class), SCORE));
+		assertThatNullPointerException()
+				.isThrownBy(() -> new DsvMendCandidate(ObjectArrays.of((String) null), SCORE));
+		assertThatIllegalArgumentException()
+				.isThrownBy(() -> new DsvMendCandidate(VALUE, -1.0d));
 	}
 
 	@Test

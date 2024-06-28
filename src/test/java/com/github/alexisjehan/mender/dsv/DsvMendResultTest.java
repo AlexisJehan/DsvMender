@@ -57,38 +57,72 @@ final class DsvMendResultTest {
 
 	@Test
 	void testConstructorInvalid() {
-		assertThatNullPointerException().isThrownBy(() -> new DsvMendResult(null, CANDIDATES, BEST_CANDIDATE));
-		assertThatIllegalArgumentException().isThrownBy(() -> new DsvMendResult(ObjectArrays.empty(String.class), CANDIDATES, BEST_CANDIDATE));
-		assertThatNullPointerException().isThrownBy(() -> new DsvMendResult(ObjectArrays.of((String) null), CANDIDATES, BEST_CANDIDATE));
-		assertThatNullPointerException().isThrownBy(() -> new DsvMendResult(VALUE, null, BEST_CANDIDATE));
-		assertThatIllegalArgumentException().isThrownBy(() -> new DsvMendResult(VALUE, Set.of(), BEST_CANDIDATE));
-		assertThatNullPointerException().isThrownBy(() -> new DsvMendResult(VALUE, Collections.singleton(null), BEST_CANDIDATE));
-		assertThatNullPointerException().isThrownBy(() -> new DsvMendResult(VALUE, CANDIDATES, null));
+		assertThatNullPointerException()
+				.isThrownBy(() -> new DsvMendResult(null, CANDIDATES, BEST_CANDIDATE));
+		assertThatIllegalArgumentException()
+				.isThrownBy(() -> new DsvMendResult(ObjectArrays.empty(String.class), CANDIDATES, BEST_CANDIDATE));
+		assertThatNullPointerException()
+				.isThrownBy(() -> new DsvMendResult(ObjectArrays.of((String) null), CANDIDATES, BEST_CANDIDATE));
+		assertThatNullPointerException()
+				.isThrownBy(() -> new DsvMendResult(VALUE, null, BEST_CANDIDATE));
+		assertThatIllegalArgumentException()
+				.isThrownBy(() -> new DsvMendResult(VALUE, Set.of(), BEST_CANDIDATE));
+		assertThatNullPointerException()
+				.isThrownBy(() -> new DsvMendResult(VALUE, Collections.singleton(null), BEST_CANDIDATE));
+		assertThatNullPointerException()
+				.isThrownBy(() -> new DsvMendResult(VALUE, CANDIDATES, null));
 	}
 
 	@Test
 	void testEqualsAndHashCodeAndToString() {
 		assertThat(mendResult.equals(mendResult)).isTrue();
 		assertThat(mendResult).isNotEqualTo(new Object());
-		assertThat(new DsvMendResult(VALUE, CANDIDATES, BEST_CANDIDATE)).satisfies(otherMendResult -> {
+		assertThat(
+				new DsvMendResult(
+						VALUE,
+						CANDIDATES,
+						BEST_CANDIDATE
+				)
+		).satisfies(otherMendResult -> {
 			assertThat(mendResult).isNotSameAs(otherMendResult);
 			assertThat(mendResult).isEqualTo(otherMendResult);
 			assertThat(mendResult).hasSameHashCodeAs(otherMendResult);
 			assertThat(mendResult).hasToString(otherMendResult.toString());
 		});
-		assertThat(new DsvMendResult(ObjectArrays.of("bar"), CANDIDATES, BEST_CANDIDATE)).satisfies(otherMendResult -> {
+		assertThat(
+				new DsvMendResult(
+						ObjectArrays.of("bar"),
+						CANDIDATES,
+						BEST_CANDIDATE
+				)
+		).satisfies(otherMendResult -> {
 			assertThat(mendResult).isNotSameAs(otherMendResult);
 			assertThat(mendResult).isNotEqualTo(otherMendResult);
 			assertThat(mendResult).doesNotHaveSameHashCodeAs(otherMendResult);
 			assertThat(mendResult).doesNotHaveToString(otherMendResult.toString());
 		});
-		assertThat(new DsvMendResult(VALUE, Set.of(new DsvMendCandidate(ObjectArrays.of("foo"), 1.0d), new DsvMendCandidate(ObjectArrays.of("bar"), 2.0d)), BEST_CANDIDATE)).satisfies(otherMendResult -> {
+		assertThat(
+				new DsvMendResult(
+						VALUE,
+						Set.of(
+								new DsvMendCandidate(ObjectArrays.of("foo"), 1.0d),
+								new DsvMendCandidate(ObjectArrays.of("bar"), 2.0d)
+						),
+						BEST_CANDIDATE
+				)
+		).satisfies(otherMendResult -> {
 			assertThat(mendResult).isNotSameAs(otherMendResult);
 			assertThat(mendResult).isNotEqualTo(otherMendResult);
 			assertThat(mendResult).doesNotHaveSameHashCodeAs(otherMendResult);
 			assertThat(mendResult).doesNotHaveToString(otherMendResult.toString());
 		});
-		assertThat(new DsvMendResult(VALUE, CANDIDATES, new DsvMendCandidate(ObjectArrays.of("bar"), 2.0d))).satisfies(otherMendResult -> {
+		assertThat(
+				new DsvMendResult(
+						VALUE,
+						CANDIDATES,
+						new DsvMendCandidate(ObjectArrays.of("bar"), 2.0d)
+				)
+		).satisfies(otherMendResult -> {
 			assertThat(mendResult).isNotSameAs(otherMendResult);
 			assertThat(mendResult).isNotEqualTo(otherMendResult);
 			assertThat(mendResult).doesNotHaveSameHashCodeAs(otherMendResult);
