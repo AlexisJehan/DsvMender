@@ -12,7 +12,7 @@
 - Update the `maven-surefire-plugin` plugin to `3.3.1`
 - Update the `jacoco-maven-plugin` plugin to `0.8.12`
 - Update the `maven-source-plugin` plugin to `3.3.1`
-- Update the `maven-javadoc-plugin` plugin to `3.7.0`
+- Update the `maven-javadoc-plugin` plugin to `3.8.0`
 - Update the `maven-gpg-plugin` plugin to `3.2.4`
 - Migrate the continuous integration from _Travis CI_ to _GitHub Actions_
 
