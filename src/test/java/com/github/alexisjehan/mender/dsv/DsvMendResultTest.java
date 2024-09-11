@@ -45,14 +45,15 @@ final class DsvMendResultTest {
 		BEST_CANDIDATE = candidate;
 	}
 
-	private final DsvMendResult mendResult = new DsvMendResult(VALUE, CANDIDATES, BEST_CANDIDATE);
+	private final DsvMendResult dsvMendResult = new DsvMendResult(VALUE, CANDIDATES, BEST_CANDIDATE);
 
 	@Test
 	void testConstructorImmutable() {
 		final var value = VALUE.clone();
-		final var mendResult = new DsvMendResult(value, CANDIDATES, BEST_CANDIDATE);
-		value[0] = null;
-		assertThat(mendResult.getValue()).isEqualTo(VALUE);
+		assertThat(new DsvMendResult(value, CANDIDATES, BEST_CANDIDATE)).satisfies(immutableDsvMendResult -> {
+			value[0] = null;
+			assertThat(immutableDsvMendResult.getValue()).isEqualTo(VALUE);
+		});
 	}
 
 	@Test
@@ -75,19 +76,19 @@ final class DsvMendResultTest {
 
 	@Test
 	void testEqualsAndHashCodeAndToString() {
-		assertThat(mendResult.equals(mendResult)).isTrue();
-		assertThat(mendResult).isNotEqualTo(new Object());
+		assertThat(dsvMendResult.equals(dsvMendResult)).isTrue();
+		assertThat(dsvMendResult).isNotEqualTo(new Object());
 		assertThat(
 				new DsvMendResult(
 						VALUE,
 						CANDIDATES,
 						BEST_CANDIDATE
 				)
-		).satisfies(otherMendResult -> {
-			assertThat(mendResult).isNotSameAs(otherMendResult);
-			assertThat(mendResult).isEqualTo(otherMendResult);
-			assertThat(mendResult).hasSameHashCodeAs(otherMendResult);
-			assertThat(mendResult).hasToString(otherMendResult.toString());
+		).satisfies(otherDsvMendResult -> {
+			assertThat(otherDsvMendResult).isNotSameAs(dsvMendResult);
+			assertThat(otherDsvMendResult).isEqualTo(dsvMendResult);
+			assertThat(otherDsvMendResult).hasSameHashCodeAs(dsvMendResult);
+			assertThat(otherDsvMendResult).hasToString(dsvMendResult.toString());
 		});
 		assertThat(
 				new DsvMendResult(
@@ -95,11 +96,11 @@ final class DsvMendResultTest {
 						CANDIDATES,
 						BEST_CANDIDATE
 				)
-		).satisfies(otherMendResult -> {
-			assertThat(mendResult).isNotSameAs(otherMendResult);
-			assertThat(mendResult).isNotEqualTo(otherMendResult);
-			assertThat(mendResult).doesNotHaveSameHashCodeAs(otherMendResult);
-			assertThat(mendResult).doesNotHaveToString(otherMendResult.toString());
+		).satisfies(otherDsvMendResult -> {
+			assertThat(otherDsvMendResult).isNotSameAs(dsvMendResult);
+			assertThat(otherDsvMendResult).isNotEqualTo(dsvMendResult);
+			assertThat(otherDsvMendResult).doesNotHaveSameHashCodeAs(dsvMendResult);
+			assertThat(otherDsvMendResult).doesNotHaveToString(dsvMendResult.toString());
 		});
 		assertThat(
 				new DsvMendResult(
@@ -110,11 +111,11 @@ final class DsvMendResultTest {
 						),
 						BEST_CANDIDATE
 				)
-		).satisfies(otherMendResult -> {
-			assertThat(mendResult).isNotSameAs(otherMendResult);
-			assertThat(mendResult).isNotEqualTo(otherMendResult);
-			assertThat(mendResult).doesNotHaveSameHashCodeAs(otherMendResult);
-			assertThat(mendResult).doesNotHaveToString(otherMendResult.toString());
+		).satisfies(otherDsvMendResult -> {
+			assertThat(otherDsvMendResult).isNotSameAs(dsvMendResult);
+			assertThat(otherDsvMendResult).isNotEqualTo(dsvMendResult);
+			assertThat(otherDsvMendResult).doesNotHaveSameHashCodeAs(dsvMendResult);
+			assertThat(otherDsvMendResult).doesNotHaveToString(dsvMendResult.toString());
 		});
 		assertThat(
 				new DsvMendResult(
@@ -122,25 +123,25 @@ final class DsvMendResultTest {
 						CANDIDATES,
 						new DsvMendCandidate(ObjectArrays.of("bar"), 2.0d)
 				)
-		).satisfies(otherMendResult -> {
-			assertThat(mendResult).isNotSameAs(otherMendResult);
-			assertThat(mendResult).isNotEqualTo(otherMendResult);
-			assertThat(mendResult).doesNotHaveSameHashCodeAs(otherMendResult);
-			assertThat(mendResult).doesNotHaveToString(otherMendResult.toString());
+		).satisfies(otherDsvMendResult -> {
+			assertThat(otherDsvMendResult).isNotSameAs(dsvMendResult);
+			assertThat(otherDsvMendResult).isNotEqualTo(dsvMendResult);
+			assertThat(otherDsvMendResult).doesNotHaveSameHashCodeAs(dsvMendResult);
+			assertThat(otherDsvMendResult).doesNotHaveToString(dsvMendResult.toString());
 		});
 	}
 
 	@Test
 	void testGetters() {
-		assertThat(mendResult.getValue()).isEqualTo(VALUE);
-		assertThat(mendResult.getCandidates()).isEqualTo(CANDIDATES);
-		assertThat(mendResult.getBestCandidate()).isEqualTo(BEST_CANDIDATE);
+		assertThat(dsvMendResult.getValue()).isEqualTo(VALUE);
+		assertThat(dsvMendResult.getCandidates()).isEqualTo(CANDIDATES);
+		assertThat(dsvMendResult.getBestCandidate()).isEqualTo(BEST_CANDIDATE);
 	}
 
 	@Test
 	void testGettersImmutable() {
-		assertThat(mendResult.getValue()).isEqualTo(VALUE);
-		mendResult.getValue()[0] = null;
-		assertThat(mendResult.getValue()).isEqualTo(VALUE);
+		assertThat(dsvMendResult.getValue()).isEqualTo(VALUE);
+		dsvMendResult.getValue()[0] = null;
+		assertThat(dsvMendResult.getValue()).isEqualTo(VALUE);
 	}
 }
