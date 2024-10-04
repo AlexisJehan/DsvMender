@@ -71,7 +71,7 @@
 		<dependency>
 			<groupId>org.junit.jupiter</groupId>
 			<artifactId>junit-jupiter</artifactId>
-			<version>5.11.1</version>
+			<version>5.11.2</version>
 			<scope>test</scope>
 		</dependency>
 		<dependency>
@@ -144,12 +144,12 @@
 					<dependency>
 						<groupId>net.sourceforge.pmd</groupId>
 						<artifactId>pmd-core</artifactId>
-						<version>7.5.0</version>
+						<version>7.6.0</version>
 					</dependency>
 					<dependency>
 						<groupId>net.sourceforge.pmd</groupId>
 						<artifactId>pmd-java</artifactId>
-						<version>7.5.0</version>
+						<version>7.6.0</version>
 					</dependency>
 				</dependencies>
 				<configuration>
@@ -226,7 +226,7 @@
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-javadoc-plugin</artifactId>
-				<version>3.10.0</version>
+				<version>3.10.1</version>
 				<executions>
 					<execution>
 						<id>javadoc-jar</id>
@@ -243,7 +243,7 @@
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-gpg-plugin</artifactId>
-				<version>3.2.6</version>
+				<version>3.2.7</version>
 				<executions>
 					<execution>
 						<id>gpg-sign</id>
