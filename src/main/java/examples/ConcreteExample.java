@@ -35,6 +35,7 @@ import java.util.stream.Collectors;
 public final class ConcreteExample {
 
 	private static final String DELIMITER = ",";
+
 	private static final int LENGTH = 3;
 
 	// Source: https://en.wikipedia.org/wiki/Java_version_history

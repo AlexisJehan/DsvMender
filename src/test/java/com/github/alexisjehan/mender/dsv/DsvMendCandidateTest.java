@@ -33,6 +33,7 @@ import static org.assertj.core.api.Assertions.assertThatNullPointerException;
 final class DsvMendCandidateTest {
 
 	private static final String[] VALUE = ObjectArrays.of("foo");
+
 	private static final double SCORE = 1.0d;
 
 	private final DsvMendCandidate dsvMendCandidate = new DsvMendCandidate(VALUE, SCORE);

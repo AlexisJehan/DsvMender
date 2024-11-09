@@ -32,6 +32,7 @@ import java.util.stream.Collectors;
 public final class SimpleExample {
 
 	private static final String DELIMITER = "\t";
+
 	private static final int LENGTH = 3;
 
 	private SimpleExample() {}

@@ -38,11 +38,17 @@ import static org.assertj.core.api.Assertions.assertThatNullPointerException;
 final class DsvMenderBuilderTest {
 
 	private static final String DELIMITER = ",";
+
 	private static final int LENGTH = 3;
+
 	private static final int MAX_DEPTH = 5;
+
 	private static final Predicate<String> CONSTRAINT_VALIDATOR = "foo"::equals;
+
 	private static final int[] CONSTRAINT_INDEXES = IntArrays.singleton(0);
+
 	private static final Function<String, ?> ESTIMATION_TRANSFORMER = Function.identity();
+
 	private static final int[] ESTIMATION_INDEXES = IntArrays.singleton(0);
 
 	@Test

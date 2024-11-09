@@ -32,6 +32,7 @@ import java.util.stream.Collectors;
 public final class OptimizeExample {
 
 	private static final char DELIMITER = ',';
+
 	private static final int LENGTH = 3;
 
 	private OptimizeExample() {}

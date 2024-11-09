@@ -42,10 +42,14 @@ import static org.assertj.core.api.Assertions.assertThatNullPointerException;
 final class DsvMenderTest {
 
 	private static final String DELIMITER = ",";
+
 	private static final int LENGTH = 3;
+
 	private static final int MAX_DEPTH = 5;
+
 	private static final Supplier<Set<ConstraintEvaluator<String[]>>> CONSTRAINT_EVALUATORS_GENERATOR
 			= () -> Set.of(new ConstraintEvaluator<>(values -> "foo".equals(values[0])));
+
 	private static final Supplier<Set<EstimationEvaluator<String[]>>> ESTIMATION_EVALUATORS_GENERATOR
 			= () -> Set.of(new EstimationEvaluator<>(values -> values[2]));
 
