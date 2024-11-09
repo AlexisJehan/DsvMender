@@ -22,8 +22,8 @@
  * SOFTWARE.
  */
 /**
- * <p>{@link com.github.alexisjehan.mender.dsv.DsvMender} implementation of
- * {@link com.github.alexisjehan.mender.api.Mender} and its components.</p>
+ * {@link com.github.alexisjehan.mender.dsv.DsvMender} implementation of
+ * {@link com.github.alexisjehan.mender.api.Mender} and its components.
  * @since 1.0.0
  */
 package com.github.alexisjehan.mender.dsv;

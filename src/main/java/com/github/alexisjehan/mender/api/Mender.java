@@ -26,8 +26,8 @@ package com.github.alexisjehan.mender.api;
 import java.util.Optional;
 
 /**
- * <p>Interface for objects that can mend a value. Fixed values are generated and then scored by some
- * {@link com.github.alexisjehan.mender.api.evaluators.Evaluator}s and the best one is returned.</p>
+ * Interface for objects that can mend a value. Fixed values are generated and then scored by some
+ * {@link com.github.alexisjehan.mender.api.evaluators.Evaluator}s and the best one is returned.
  * @param <V> the value's type
  * @param <R> the last result's type
  * @since 1.0.0
@@ -35,7 +35,7 @@ import java.util.Optional;
 public interface Mender<V, R extends MendResult<V, ? extends MendCandidate<V>>> {
 
 	/**
-	 * <p>Mend the given value if needed.</p>
+	 * Mend the given value if needed.
 	 * @param value the value to mend
 	 * @return the best fixed value
 	 * @throws MendException might occur if mending the value is not possible
@@ -44,7 +44,7 @@ public interface Mender<V, R extends MendResult<V, ? extends MendCandidate<V>>> 
 	V mend(V value);
 
 	/**
-	 * <p>Optionally get the {@link MendResult} of the last {@link #mend(Object)} call.</p>
+	 * Optionally get the {@link MendResult} of the last {@link #mend(Object)} call.
 	 * @return an {@link Optional} of the last {@link MendResult}
 	 * @since 1.0.0
 	 */

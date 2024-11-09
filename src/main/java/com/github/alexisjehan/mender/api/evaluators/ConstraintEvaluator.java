@@ -28,20 +28,20 @@ import com.github.alexisjehan.javanilla.misc.quality.Ensure;
 import java.util.function.Predicate;
 
 /**
- * <p>A binary {@link Evaluator} that is based on values validity.</p>
+ * A binary {@link Evaluator} that is based on values validity.
  * @param <V> the value's type
  * @since 1.0.0
  */
 public final class ConstraintEvaluator<V> implements Evaluator<V> {
 
 	/**
-	 * <p>Validator {@link Predicate}.</p>
+	 * Validator {@link Predicate}.
 	 * @since 1.0.0
 	 */
 	private final Predicate<V> validator;
 
 	/**
-	 * <p>Constructor with a validator {@link Predicate}.</p>
+	 * Constructor with a validator {@link Predicate}.
 	 * @param validator the validator {@link Predicate}
 	 * @throws NullPointerException if the validator {@link Predicate} is {@code null}
 	 * @since 1.0.0
@@ -52,7 +52,7 @@ public final class ConstraintEvaluator<V> implements Evaluator<V> {
 	}
 
 	/**
-	 * <p>Check that the given value is valid.</p>
+	 * Check that the given value is valid.
 	 * @param value the value to check
 	 * @return {@code true} if the value is valid
 	 * @since 1.0.0
@@ -62,7 +62,7 @@ public final class ConstraintEvaluator<V> implements Evaluator<V> {
 	}
 
 	/**
-	 * <p>Evaluate the given value based on its validity.</p>
+	 * Evaluate the given value based on its validity.
 	 * @param value the value to evaluate
 	 * @return {@code 1} if the value is valid, {@code NaN} otherwise
 	 * @since 1.0.0

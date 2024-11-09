@@ -43,14 +43,15 @@ import java.util.stream.DoubleStream;
 import java.util.stream.IntStream;
 
 /**
- * <p>{@link Mender} able to mend invalid DSV (Delimiter-Separated Values) rows based on valid ones.</p>
+ * {@link Mender} able to mend invalid DSV (Delimiter-Separated Values) rows based on valid ones.
  * @since 1.0.0
  */
 @SuppressWarnings("overrides")
 public final class DsvMender implements Mender<String[], DsvMendResult> {
 
 	/**
-	 * <p>{@link Builder}'s step to set the delimiter.</p>
+	 * {@link Builder}'s step to set the delimiter.
+	 *
 	 * <p><b>Note</b>: This interface is a {@link FunctionalInterface} whose abstract method is
 	 * {@link #withDelimiter(String)}.</p>
 	 * @since 1.0.0
@@ -59,7 +60,7 @@ public final class DsvMender implements Mender<String[], DsvMendResult> {
 	public interface DelimiterStep {
 
 		/**
-		 * <p>Set the delimiter with the given {@code char}.</p>
+		 * Set the delimiter with the given {@code char}.
 		 * @param delimiter the {@code char} delimiter
 		 * @return the current {@link Builder} at the next step
 		 * @since 1.0.0
@@ -69,7 +70,7 @@ public final class DsvMender implements Mender<String[], DsvMendResult> {
 		}
 
 		/**
-		 * <p>Set the delimiter with the given {@link String}.</p>
+		 * Set the delimiter with the given {@link String}.
 		 * @param delimiter the {@link String} delimiter
 		 * @return the current {@link Builder} at the next step
 		 * @since 1.0.0
@@ -78,7 +79,8 @@ public final class DsvMender implements Mender<String[], DsvMendResult> {
 	}
 
 	/**
-	 * <p>{@link Builder}'s step to set the length.</p>
+	 * {@link Builder}'s step to set the length.
+	 *
 	 * <p><b>Note</b>: This interface is a {@link FunctionalInterface} whose abstract method is
 	 * {@link #withLength(int)}.</p>
 	 * @since 1.0.0
@@ -87,7 +89,7 @@ public final class DsvMender implements Mender<String[], DsvMendResult> {
 	public interface LengthStep {
 
 		/**
-		 * <p>Set the length.</p>
+		 * Set the length.
 		 * @param length the length
 		 * @return the current {@link Builder} at the next step
 		 * @since 1.0.0
@@ -96,13 +98,13 @@ public final class DsvMender implements Mender<String[], DsvMendResult> {
 	}
 
 	/**
-	 * <p>{@link Builder}'s optional step to set the maximum depth.</p>
+	 * {@link Builder}'s optional step to set the maximum depth.
 	 * @since 1.0.0
 	 */
 	public interface OptionalMaxDepthStep extends OptionalEvaluatorStep {
 
 		/**
-		 * <p>Set the maximum depth.</p>
+		 * Set the maximum depth.
 		 * @param maxDepth the maximum depth
 		 * @return the current {@link Builder} at the next step
 		 * @since 1.0.0
@@ -111,13 +113,13 @@ public final class DsvMender implements Mender<String[], DsvMendResult> {
 	}
 
 	/**
-	 * <p>{@link Builder}'s optional step to add {@link ConstraintEvaluator}s and {@link EstimationEvaluator}s.</p>
+	 * {@link Builder}'s optional step to add {@link ConstraintEvaluator}s and {@link EstimationEvaluator}s.
 	 * @since 1.0.0
 	 */
 	public interface OptionalEvaluatorStep extends BuildStep {
 
 		/**
-		 * <p>Add a {@link ConstraintEvaluator} with the given validator {@link Predicate} on every value.</p>
+		 * Add a {@link ConstraintEvaluator} with the given validator {@link Predicate} on every value.
 		 * @param validator the validator {@link Predicate}
 		 * @return the current {@link Builder} at the next step
 		 * @throws NullPointerException if the validator {@link Predicate} is {code null}
@@ -126,8 +128,7 @@ public final class DsvMender implements Mender<String[], DsvMendResult> {
 		OptionalEvaluatorStep withConstraint(Predicate<String> validator);
 
 		/**
-		 * <p>Add a {@link ConstraintEvaluator} with the given validator {@link Predicate} on values at provided
-		 * indexes.</p>
+		 * Add a {@link ConstraintEvaluator} with the given validator {@link Predicate} on values at provided indexes.
 		 * @param validator the validator {@link Predicate}
 		 * @param indexes values' indexes
 		 * @return the current {@link Builder} at the next step
@@ -138,7 +139,7 @@ public final class DsvMender implements Mender<String[], DsvMendResult> {
 		OptionalEvaluatorStep withConstraint(Predicate<String> validator, int... indexes);
 
 		/**
-		 * <p>Add an {@link EstimationEvaluator} with the given transformer {@link Function} on every value.</p>
+		 * Add an {@link EstimationEvaluator} with the given transformer {@link Function} on every value.
 		 * @param transformer the transformer {@link Function}
 		 * @return the current {@link Builder} at the next step
 		 * @throws NullPointerException if the transformer {@link Function} is {code null}
@@ -147,8 +148,7 @@ public final class DsvMender implements Mender<String[], DsvMendResult> {
 		OptionalEvaluatorStep withEstimation(Function<String, ?> transformer);
 
 		/**
-		 * <p>Add an {@link EstimationEvaluator} with the given transformer {@link Function} on values at provided
-		 * indexes.</p>
+		 * Add an {@link EstimationEvaluator} with the given transformer {@link Function} on values at provided indexes.
 		 * @param transformer the transformer {@link Function}
 		 * @param indexes values' indexes
 		 * @return the current {@link Builder} at the next step
@@ -160,7 +160,8 @@ public final class DsvMender implements Mender<String[], DsvMendResult> {
 	}
 
 	/**
-	 * <p>{@link Builder}'s build step.</p>
+	 * {@link Builder}'s build step.
+	 *
 	 * <p><b>Note</b>: This interface is a {@link FunctionalInterface} whose abstract method is {@link #build()}.</p>
 	 * @since 1.0.0
 	 */
@@ -168,7 +169,7 @@ public final class DsvMender implements Mender<String[], DsvMendResult> {
 	public interface BuildStep {
 
 		/**
-		 * <p>Build the {@link DsvMender}.</p>
+		 * Build the {@link DsvMender}.
 		 * @return the built {@link DsvMender}
 		 * @since 1.0.0
 		 */
@@ -176,43 +177,43 @@ public final class DsvMender implements Mender<String[], DsvMendResult> {
 	}
 
 	/**
-	 * <p>Step builder to build {@link DsvMender} instances.</p>
+	 * Step builder to build {@link DsvMender} instances.
 	 * @since 1.0.0
 	 */
 	static final class Builder implements DelimiterStep, LengthStep, OptionalMaxDepthStep {
 
 		/**
-		 * <p>Default maximum depth.</p>
+		 * Default maximum depth.
 		 * @since 1.0.0
 		 */
 		static final int DEFAULT_MAX_DEPTH = 20;
 
 		/**
-		 * <p>{@link DsvMender}'s delimiter.</p>
+		 * {@link DsvMender}'s delimiter.
 		 * @since 1.0.0
 		 */
 		private String delimiter;
 
 		/**
-		 * <p>{@link DsvMender}'s length.</p>
+		 * {@link DsvMender}'s length.
 		 * @since 1.0.0
 		 */
 		private int length;
 
 		/**
-		 * <p>{@link DsvMender}'s maximum depth.</p>
+		 * {@link DsvMender}'s maximum depth.
 		 * @since 1.0.0
 		 */
 		private int maxDepth = DEFAULT_MAX_DEPTH;
 
 		/**
-		 * <p>{@link DsvMender}'s {@link Set} of {@link ConstraintEvaluator}s.</p>
+		 * {@link DsvMender}'s {@link Set} of {@link ConstraintEvaluator}s.
 		 * @since 1.0.0
 		 */
 		private final Set<ConstraintEvaluator<String[]>> constraintEvaluators = new HashSet<>();
 
 		/**
-		 * <p>{@link DsvMender}'s {@link Set} of {@link EstimationEvaluator}s.</p>
+		 * {@link DsvMender}'s {@link Set} of {@link EstimationEvaluator}s.
 		 * @since 1.0.0
 		 */
 		private final Set<EstimationEvaluator<String[]>> estimationEvaluators = new HashSet<>();
@@ -298,44 +299,44 @@ public final class DsvMender implements Mender<String[], DsvMendResult> {
 	}
 
 	/**
-	 * <p>Delimiter.</p>
+	 * Delimiter.
 	 * @since 1.0.0
 	 */
 	private final String delimiter;
 
 	/**
-	 * <p>Length.</p>
+	 * Length.
 	 * @since 1.0.0
 	 */
 	private final int length;
 
 	/**
-	 * <p>Maximum depth.</p>
+	 * Maximum depth.
 	 * @since 1.0.0
 	 */
 	private final int maxDepth;
 
 	/**
-	 * <p>{@link Set} of {@link ConstraintEvaluator}s.</p>
+	 * {@link Set} of {@link ConstraintEvaluator}s.
 	 * @since 1.0.0
 	 */
 	private final Set<ConstraintEvaluator<String[]>> constraintEvaluators;
 
 	/**
-	 * <p>{@link Set} of {@link EstimationEvaluator}s.</p>
+	 * {@link Set} of {@link EstimationEvaluator}s.
 	 * @since 1.0.0
 	 */
 	private final Set<EstimationEvaluator<String[]>> estimationEvaluators;
 
 	/**
-	 * <p>Last {@link #mend(String...)} result or {@code null}.</p>
+	 * Last {@link #mend(String...)} result or {@code null}.
 	 * @since 1.0.0
 	 */
 	private DsvMendResult lastResult;
 
 	/**
-	 * <p>Constructor with a delimiter, a length, a maximum depth, a {@link Set} of {@link ConstraintEvaluator}s and a
-	 * {@link Set} of {@link EstimationEvaluator}s.</p>
+	 * Constructor with a delimiter, a length, a maximum depth, a {@link Set} of {@link ConstraintEvaluator}s and a
+	 * {@link Set} of {@link EstimationEvaluator}s.
 	 * @param delimiter the delimiter
 	 * @param length the length
 	 * @param maxDepth the maximum depth
@@ -368,7 +369,7 @@ public final class DsvMender implements Mender<String[], DsvMendResult> {
 	}
 
 	/**
-	 * <p>Test if values are valid based on the length and {@link ConstraintEvaluator}s.</p>
+	 * Test if values are valid based on the length and {@link ConstraintEvaluator}s.
 	 * @param values values to test
 	 * @return {@code true} if values are valid
 	 * @since 1.0.0
@@ -386,8 +387,8 @@ public final class DsvMender implements Mender<String[], DsvMendResult> {
 	}
 
 	/**
-	 * <p>Could optimize the given DSV row by merging consecutive empty values to improve the {@link #mend(String...)}
-	 * operation.</p>
+	 * Could optimize the given DSV row by merging consecutive empty values to improve the {@link #mend(String...)}
+	 * operation.
 	 * @param threshold the threshold of consecutive empty values to keep
 	 * @param row the row to optimize
 	 * @return optimized values
@@ -401,8 +402,8 @@ public final class DsvMender implements Mender<String[], DsvMendResult> {
 	}
 
 	/**
-	 * <p>Could optimize given values by merging consecutive empty values to improve the {@link #mend(String...)}
-	 * operation.</p>
+	 * Could optimize given values by merging consecutive empty values to improve the {@link #mend(String...)}
+	 * operation.
 	 * @param threshold the threshold of consecutive empty values to keep
 	 * @param values values to optimize
 	 * @return optimized values
@@ -448,7 +449,7 @@ public final class DsvMender implements Mender<String[], DsvMendResult> {
 	}
 
 	/**
-	 * <p>Mend the given DSV row if needed.</p>
+	 * Mend the given DSV row if needed.
 	 * @param row the row to mend
 	 * @return best fixed values
 	 * @throws MendException might occur if mending the value is not possible
@@ -461,7 +462,7 @@ public final class DsvMender implements Mender<String[], DsvMendResult> {
 	}
 
 	/**
-	 * <p>Mend given values if needed.</p>
+	 * Mend given values if needed.
 	 * @param values values to mend
 	 * @return best fixed values
 	 * @throws MendException might occur if mending the value is not possible
@@ -536,7 +537,7 @@ public final class DsvMender implements Mender<String[], DsvMendResult> {
 	}
 
 	/**
-	 * <p>Generate a {@link List} of every possibility of joining consecutive values with the delimiter.</p>
+	 * Generate a {@link List} of every possibility of joining consecutive values with the delimiter.
 	 * @param parent parent values
 	 * @return a {@link List} of joining possibilities
 	 * @since 1.0.0
@@ -558,7 +559,7 @@ public final class DsvMender implements Mender<String[], DsvMendResult> {
 	}
 
 	/**
-	 * <p>Generate a {@link List} of every possibility of shifting consecutive values with an empty one.</p>
+	 * Generate a {@link List} of every possibility of shifting consecutive values with an empty one.
 	 * @param parent parent values
 	 * @return a {@link List} of shifting possibilities
 	 * @since 1.0.0
@@ -588,7 +589,7 @@ public final class DsvMender implements Mender<String[], DsvMendResult> {
 	}
 
 	/**
-	 * <p>Get the delimiter.</p>
+	 * Get the delimiter.
 	 * @return the delimiter
 	 * @since 1.0.0
 	 */
@@ -597,7 +598,7 @@ public final class DsvMender implements Mender<String[], DsvMendResult> {
 	}
 
 	/**
-	 * <p>Get the length.</p>
+	 * Get the length.
 	 * @return the length
 	 * @since 1.0.0
 	 */
@@ -606,7 +607,7 @@ public final class DsvMender implements Mender<String[], DsvMendResult> {
 	}
 
 	/**
-	 * <p>Get the maximum depth.</p>
+	 * Get the maximum depth.
 	 * @return the maximum depth
 	 * @since 1.0.0
 	 */
@@ -615,7 +616,7 @@ public final class DsvMender implements Mender<String[], DsvMendResult> {
 	}
 
 	/**
-	 * <p>Get the {@link Set} of {@link ConstraintEvaluator}s.</p>
+	 * Get the {@link Set} of {@link ConstraintEvaluator}s.
 	 * @return the {@link Set} of {@link ConstraintEvaluator}s
 	 * @since 1.0.0
 	 */
@@ -624,7 +625,7 @@ public final class DsvMender implements Mender<String[], DsvMendResult> {
 	}
 
 	/**
-	 * <p>Get the {@link Set} of {@link EstimationEvaluator}s.</p>
+	 * Get the {@link Set} of {@link EstimationEvaluator}s.
 	 * @return the {@link Set} of {@link EstimationEvaluator}s
 	 * @since 1.0.0
 	 */
@@ -633,7 +634,7 @@ public final class DsvMender implements Mender<String[], DsvMendResult> {
 	}
 
 	/**
-	 * <p>Create a new {@link Builder} instance.</p>
+	 * Create a new {@link Builder} instance.
 	 * @return the created {@link Builder}
 	 * @since 1.0.0
 	 */
@@ -642,8 +643,8 @@ public final class DsvMender implements Mender<String[], DsvMendResult> {
 	}
 
 	/**
-	 * <p>Create a new basic {@code DsvMender} instance without any {@link ConstraintEvaluator} and with some
-	 * {@link EstimationEvaluator}s.</p>
+	 * Create a new basic {@code DsvMender} instance without any {@link ConstraintEvaluator} and with some
+	 * {@link EstimationEvaluator}s.
 	 * @param delimiter the {@code char} delimiter
 	 * @param length the length
 	 * @return the created basic {@code DsvMender}
@@ -654,8 +655,8 @@ public final class DsvMender implements Mender<String[], DsvMendResult> {
 	}
 
 	/**
-	 * <p>Create a new basic {@code DsvMender} instance without any {@link ConstraintEvaluator} and with some
-	 * {@link EstimationEvaluator}s.</p>
+	 * Create a new basic {@code DsvMender} instance without any {@link ConstraintEvaluator} and with some
+	 * {@link EstimationEvaluator}s.
 	 * @param delimiter the {@link String} delimiter
 	 * @param length the length
 	 * @return the created basic {@code DsvMender}

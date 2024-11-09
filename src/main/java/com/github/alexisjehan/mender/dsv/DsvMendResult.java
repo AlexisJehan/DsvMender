@@ -33,7 +33,8 @@ import com.github.alexisjehan.mender.api.MendResult;
 import java.util.Set;
 
 /**
- * <p>An immutable {@link MendResult} implementation to work with {@link DsvMender}.</p>
+ * An immutable {@link MendResult} implementation to work with {@link DsvMender}.
+ *
  * <p><b>Note</b>: This class implements its own {@link #equals(Object)}, {@link #hashCode()} and {@link #toString()}
  * methods.</p>
  * @since 1.0.0
@@ -41,25 +42,25 @@ import java.util.Set;
 public final class DsvMendResult implements MendResult<String[], DsvMendCandidate> {
 
 	/**
-	 * <p>Initial value.</p>
+	 * Initial value.
 	 * @since 1.0.0
 	 */
 	private final String[] value;
 
 	/**
-	 * <p>{@link Set} of all candidates.</p>
+	 * {@link Set} of all candidates.
 	 * @since 1.0.0
 	 */
 	private final Set<DsvMendCandidate> candidates;
 
 	/**
-	 * <p>Best candidate.</p>
+	 * Best candidate.
 	 * @since 1.0.0
 	 */
 	private final DsvMendCandidate bestCandidate;
 
 	/**
-	 * <p>Constructor with an initial value, its candidates and the best one.</p>
+	 * Constructor with an initial value, its candidates and the best one.
 	 * @param value the initial value
 	 * @param candidates the {@link Set} of all candidates
 	 * @param bestCandidate the best candidate

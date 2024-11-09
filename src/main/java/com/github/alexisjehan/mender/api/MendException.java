@@ -26,20 +26,21 @@ package com.github.alexisjehan.mender.api;
 import com.github.alexisjehan.javanilla.misc.quality.Ensure;
 
 /**
- * <p>An unchecked {@link Exception} that can occur with {@link Mender#mend(Object)}.</p>
+ * An unchecked {@link Exception} that can occur with {@link Mender#mend(Object)}.
+ *
  * <p><b>Note</b>: This class is {@link java.io.Serializable}.</p>
  * @since 1.0.0
  */
 public final class MendException extends RuntimeException {
 
 	/**
-	 * <p>Serial version unique ID.</p>
+	 * Serial version unique ID.
 	 * @since 1.0.0
 	 */
 	private static final long serialVersionUID = -2548765841738762668L;
 
 	/**
-	 * <p>Constructor with a message.</p>
+	 * Constructor with a message.
 	 * @param message the message
 	 * @throws NullPointerException if the message is {@code null}
 	 * @since 1.0.0

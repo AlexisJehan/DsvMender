@@ -31,7 +31,8 @@ import com.github.alexisjehan.javanilla.misc.tuple.Pair;
 import com.github.alexisjehan.mender.api.MendCandidate;
 
 /**
- * <p>An immutable {@link MendCandidate} implementation to work with {@link DsvMender}.</p>
+ * An immutable {@link MendCandidate} implementation to work with {@link DsvMender}.
+ *
  * <p><b>Note</b>: This class implements its own {@link #equals(Object)}, {@link #hashCode()} and {@link #toString()}
  * methods.</p>
  * @since 1.0.0
@@ -39,19 +40,19 @@ import com.github.alexisjehan.mender.api.MendCandidate;
 public final class DsvMendCandidate implements MendCandidate<String[]> {
 
 	/**
-	 * <p>Fixed value.</p>
+	 * Fixed value.
 	 * @since 1.0.0
 	 */
 	private final String[] value;
 
 	/**
-	 * <p>Value's score.</p>
+	 * Value's score.
 	 * @since 1.0.0
 	 */
 	private final double score;
 
 	/**
-	 * <p>Constructor with a fixed value and its score.</p>
+	 * Constructor with a fixed value and its score.
 	 * @param value the fixed value
 	 * @param score the score
 	 * @throws NullPointerException if the fixed value is {@code null}

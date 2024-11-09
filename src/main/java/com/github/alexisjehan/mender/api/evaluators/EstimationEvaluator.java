@@ -30,26 +30,26 @@ import com.github.alexisjehan.javanilla.util.bag.MapBag;
 import java.util.function.Function;
 
 /**
- * <p>An empiric {@link Evaluator} that can be fitted to evaluate transformed values based on their frequency.</p>
+ * An empiric {@link Evaluator} that can be fitted to evaluate transformed values based on their frequency.
  * @param <V> the value's type
  * @since 1.0.0
  */
 public final class EstimationEvaluator<V> implements Evaluator<V> {
 
 	/**
-	 * <p>Transformer {@link Function}.</p>
+	 * Transformer {@link Function}.
 	 * @since 1.0.0
 	 */
 	private final Function<V, ?> transformer;
 
 	/**
-	 * <p>{@link Bag} to count transformed values.</p>
+	 * {@link Bag} to count transformed values.
 	 * @since 1.0.0
 	 */
 	private final Bag<Object> bag = new MapBag<>();
 
 	/**
-	 * <p>Constructor with a transformer {@link Function}.</p>
+	 * Constructor with a transformer {@link Function}.
 	 * @param transformer the transformer {@link Function}
 	 * @throws NullPointerException if the transformer {@link Function} is {@code null}
 	 * @since 1.0.0
@@ -60,7 +60,7 @@ public final class EstimationEvaluator<V> implements Evaluator<V> {
 	}
 
 	/**
-	 * <p>Adjust the frequency of the given value after being transformed.</p>
+	 * Adjust the frequency of the given value after being transformed.
 	 * @param value the value to fit
 	 * @since 1.0.0
 	 */
@@ -69,7 +69,7 @@ public final class EstimationEvaluator<V> implements Evaluator<V> {
 	}
 
 	/**
-	 * <p>Evaluate the given value after being transformed, based on the frequency among all of them.</p>
+	 * Evaluate the given value after being transformed, based on the frequency among all of them.
 	 * @param value the value to evaluate
 	 * @return a score between {@code 0} and {@code 1}
 	 * @since 1.0.0

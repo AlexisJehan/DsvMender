@@ -26,7 +26,7 @@ package com.github.alexisjehan.mender.api;
 import java.util.Set;
 
 /**
- * <p>A result of a mending operation containing all candidates and the best one.</p>
+ * A result of a mending operation containing all candidates and the best one.
  * @param <V> the value's type
  * @param <C> candidates' type
  * @since 1.0.0
@@ -34,21 +34,21 @@ import java.util.Set;
 public interface MendResult<V, C extends MendCandidate<V>> {
 
 	/**
-	 * <p>Get the initial value.</p>
+	 * Get the initial value.
 	 * @return the initial value
 	 * @since 1.0.0
 	 */
 	V getValue();
 
 	/**
-	 * <p>Get the {@link Set} of all candidates.</p>
+	 * Get the {@link Set} of all candidates.
 	 * @return the {@link Set} of all candidates
 	 * @since 1.0.0
 	 */
 	Set<C> getCandidates();
 
 	/**
-	 * <p>Get the best candidate.</p>
+	 * Get the best candidate.
 	 * @return the best candidate
 	 * @since 1.0.0
 	 */

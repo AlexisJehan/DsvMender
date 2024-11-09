@@ -24,21 +24,21 @@
 package com.github.alexisjehan.mender.api;
 
 /**
- * <p>A candidate of a mending operation composed of a value and its score.</p>
+ * A candidate of a mending operation composed of a value and its score.
  * @param <V> the value's type
  * @since 1.0.0
  */
 public interface MendCandidate<V> {
 
 	/**
-	 * <p>Get the fixed value.</p>
+	 * Get the fixed value.
 	 * @return the fixed value
 	 * @since 1.0.0
 	 */
 	V getValue();
 
 	/**
-	 * <p>Get the score.</p>
+	 * Get the score.
 	 * @return the score
 	 * @since 1.0.0
 	 */

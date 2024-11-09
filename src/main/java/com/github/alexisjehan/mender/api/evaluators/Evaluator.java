@@ -24,7 +24,8 @@
 package com.github.alexisjehan.mender.api.evaluators;
 
 /**
- * <p>Interface for a component able to evaluate values.</p>
+ * Interface for a component able to evaluate values.
+ *
  * <p><b>Note</b>: This interface is a {@link FunctionalInterface} whose abstract method is
  * {@link #evaluate(Object)}.</p>
  * @param <V> the value's type
@@ -34,7 +35,7 @@ package com.github.alexisjehan.mender.api.evaluators;
 public interface Evaluator<V> {
 
 	/**
-	 * <p>Evaluate the given value by returning its score.</p>
+	 * Evaluate the given value by returning its score.
 	 * @param value the value to evaluate
 	 * @return the value's score
 	 * @since 1.0.0

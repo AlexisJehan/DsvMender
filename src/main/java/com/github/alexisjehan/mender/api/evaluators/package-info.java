@@ -22,7 +22,7 @@
  * SOFTWARE.
  */
 /**
- * <p>{@link com.github.alexisjehan.mender.api.evaluators.Evaluator} implementations.</p>
+ * {@link com.github.alexisjehan.mender.api.evaluators.Evaluator} implementations.
  * @since 1.0.0
  */
 package com.github.alexisjehan.mender.api.evaluators;
