@@ -63,24 +63,27 @@ final class DsvMendCandidateTest {
 	void testEqualsAndHashCodeAndToString() {
 		assertThat(dsvMendCandidate.equals(dsvMendCandidate)).isTrue();
 		assertThat(dsvMendCandidate).isNotEqualTo(new Object());
-		assertThat(new DsvMendCandidate(VALUE, SCORE)).satisfies(otherDsvMendCandidate -> {
-			assertThat(otherDsvMendCandidate).isNotSameAs(dsvMendCandidate);
-			assertThat(otherDsvMendCandidate).isEqualTo(dsvMendCandidate);
-			assertThat(otherDsvMendCandidate).hasSameHashCodeAs(dsvMendCandidate);
-			assertThat(otherDsvMendCandidate).hasToString(dsvMendCandidate.toString());
-		});
-		assertThat(new DsvMendCandidate(ObjectArrays.of("bar"), SCORE)).satisfies(otherDsvMendCandidate -> {
-			assertThat(otherDsvMendCandidate).isNotSameAs(dsvMendCandidate);
-			assertThat(otherDsvMendCandidate).isNotEqualTo(dsvMendCandidate);
-			assertThat(otherDsvMendCandidate).doesNotHaveSameHashCodeAs(dsvMendCandidate);
-			assertThat(otherDsvMendCandidate).doesNotHaveToString(dsvMendCandidate.toString());
-		});
-		assertThat(new DsvMendCandidate(VALUE, 2.0d)).satisfies(otherDsvMendCandidate -> {
-			assertThat(otherDsvMendCandidate).isNotSameAs(dsvMendCandidate);
-			assertThat(otherDsvMendCandidate).isNotEqualTo(dsvMendCandidate);
-			assertThat(otherDsvMendCandidate).doesNotHaveSameHashCodeAs(dsvMendCandidate);
-			assertThat(otherDsvMendCandidate).doesNotHaveToString(dsvMendCandidate.toString());
-		});
+		assertThat(new DsvMendCandidate(VALUE, SCORE))
+				.satisfies(otherDsvMendCandidate -> {
+					assertThat(otherDsvMendCandidate).isNotSameAs(dsvMendCandidate);
+					assertThat(otherDsvMendCandidate).isEqualTo(dsvMendCandidate);
+					assertThat(otherDsvMendCandidate).hasSameHashCodeAs(dsvMendCandidate);
+					assertThat(otherDsvMendCandidate).hasToString(dsvMendCandidate.toString());
+				});
+		assertThat(new DsvMendCandidate(ObjectArrays.of("bar"), SCORE))
+				.satisfies(otherDsvMendCandidate -> {
+					assertThat(otherDsvMendCandidate).isNotSameAs(dsvMendCandidate);
+					assertThat(otherDsvMendCandidate).isNotEqualTo(dsvMendCandidate);
+					assertThat(otherDsvMendCandidate).doesNotHaveSameHashCodeAs(dsvMendCandidate);
+					assertThat(otherDsvMendCandidate).doesNotHaveToString(dsvMendCandidate.toString());
+				});
+		assertThat(new DsvMendCandidate(VALUE, 2.0d))
+				.satisfies(otherDsvMendCandidate -> {
+					assertThat(otherDsvMendCandidate).isNotSameAs(dsvMendCandidate);
+					assertThat(otherDsvMendCandidate).isNotEqualTo(dsvMendCandidate);
+					assertThat(otherDsvMendCandidate).doesNotHaveSameHashCodeAs(dsvMendCandidate);
+					assertThat(otherDsvMendCandidate).doesNotHaveToString(dsvMendCandidate.toString());
+				});
 	}
 
 	@Test

@@ -39,25 +39,27 @@ final class EstimationEvaluatorTest {
 
 	@Test
 	void testFitAndEvaluate() {
-		assertThat(new EstimationEvaluator<>(Function.identity())).satisfies(estimationEvaluator -> {
-			assertThat(estimationEvaluator.evaluate("foo")).isNaN();
-			assertThat(estimationEvaluator.evaluate("bar")).isNaN();
-			estimationEvaluator.fit("foo");
-			assertThat(estimationEvaluator.evaluate("foo")).isEqualTo(1.0d);
-			assertThat(estimationEvaluator.evaluate("bar")).isZero();
-			estimationEvaluator.fit("bar");
-			assertThat(estimationEvaluator.evaluate("foo")).isEqualTo(0.5d);
-			assertThat(estimationEvaluator.evaluate("bar")).isEqualTo(0.5d);
-		});
-		assertThat(new EstimationEvaluator<>(String::length)).satisfies(estimationEvaluator -> {
-			assertThat(estimationEvaluator.evaluate("foo")).isNaN();
-			assertThat(estimationEvaluator.evaluate("fooo")).isNaN();
-			estimationEvaluator.fit("foo");
-			assertThat(estimationEvaluator.evaluate("foo")).isEqualTo(1.0d);
-			assertThat(estimationEvaluator.evaluate("fooo")).isZero();
-			estimationEvaluator.fit("fooo");
-			assertThat(estimationEvaluator.evaluate("foo")).isEqualTo(0.5d);
-			assertThat(estimationEvaluator.evaluate("fooo")).isEqualTo(0.5d);
-		});
+		assertThat(new EstimationEvaluator<>(Function.identity()))
+				.satisfies(estimationEvaluator -> {
+					assertThat(estimationEvaluator.evaluate("foo")).isNaN();
+					assertThat(estimationEvaluator.evaluate("bar")).isNaN();
+					estimationEvaluator.fit("foo");
+					assertThat(estimationEvaluator.evaluate("foo")).isEqualTo(1.0d);
+					assertThat(estimationEvaluator.evaluate("bar")).isZero();
+					estimationEvaluator.fit("bar");
+					assertThat(estimationEvaluator.evaluate("foo")).isEqualTo(0.5d);
+					assertThat(estimationEvaluator.evaluate("bar")).isEqualTo(0.5d);
+				});
+		assertThat(new EstimationEvaluator<>(String::length))
+				.satisfies(estimationEvaluator -> {
+					assertThat(estimationEvaluator.evaluate("foo")).isNaN();
+					assertThat(estimationEvaluator.evaluate("fooo")).isNaN();
+					estimationEvaluator.fit("foo");
+					assertThat(estimationEvaluator.evaluate("foo")).isEqualTo(1.0d);
+					assertThat(estimationEvaluator.evaluate("fooo")).isZero();
+					estimationEvaluator.fit("fooo");
+					assertThat(estimationEvaluator.evaluate("foo")).isEqualTo(0.5d);
+					assertThat(estimationEvaluator.evaluate("fooo")).isEqualTo(0.5d);
+				});
 	}
 }

@@ -52,10 +52,11 @@ final class DsvMendResultTest {
 	@Test
 	void testConstructorImmutable() {
 		final var value = VALUE.clone();
-		assertThat(new DsvMendResult(value, CANDIDATES, BEST_CANDIDATE)).satisfies(immutableDsvMendResult -> {
-			value[0] = null;
-			assertThat(immutableDsvMendResult.getValue()).isEqualTo(VALUE);
-		});
+		assertThat(new DsvMendResult(value, CANDIDATES, BEST_CANDIDATE))
+				.satisfies(immutableDsvMendResult -> {
+					value[0] = null;
+					assertThat(immutableDsvMendResult.getValue()).isEqualTo(VALUE);
+				});
 	}
 
 	@Test
