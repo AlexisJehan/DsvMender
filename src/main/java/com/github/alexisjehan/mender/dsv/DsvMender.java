@@ -510,15 +510,18 @@ public final class DsvMender implements Mender<String[], DsvMendResult> {
 		DsvMendCandidate bestCandidate = null;
 		for (final var child : children) {
 			final var optionalCandidateScore = DoubleStream.concat(
-					constraintEvaluators.stream()
-							.mapToDouble(
-									constraintEvaluator -> constraintEvaluator.evaluate(child)
-							),
-					estimationEvaluators.stream()
-							.mapToDouble(
-									estimationEvaluator -> estimationEvaluator.evaluate(child)
-							)
-			).average();
+							constraintEvaluators.stream()
+									.mapToDouble(
+											constraintEvaluator ->
+													constraintEvaluator.evaluate(child)
+									),
+							estimationEvaluators.stream()
+									.mapToDouble(
+											estimationEvaluator ->
+													estimationEvaluator.evaluate(child)
+									)
+					)
+					.average();
 			if (optionalCandidateScore.isPresent()) {
 				final var candidateScore = optionalCandidateScore.getAsDouble();
 				final var candidate = new DsvMendCandidate(child, candidateScore);
