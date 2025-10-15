@@ -21,13 +21,13 @@ each valid column of the data independently to find the best solution while hand
 DSV Mender is working with a concept of constraints and estimations that are associated to specific columns of the data:
 
 * **Constraints** eliminate some candidate possibilities of a malformed row if they do not respect a rule, without
-taking into account previous valid values at all. For example if the third column has to be exactly 5 characters long,
-then all candidates with a value that does not will be discarded.
+  taking into account previous valid values at all. For example if the third column has to be exactly 5 characters long,
+  then all candidates with a value that does not will be discarded.
 
 * **Estimations** could be used to collect some features from valid values. When an invalid value needs to be fixed then
-the closest generated possibility is chosen. For example if you collect the length of valid values and get 5 characters
-95% of the time then a possible fixed-value that got a length of 5 got more chances to be selected than a candidate of 3
-characters.
+  the closest generated possibility is chosen. For example if you collect the length of valid values and get 5
+  characters 95% of the time then a possible fixed-value that got a length of 5 got more chances to be selected than a
+  candidate of 3 characters.
 
 ## Getting started
 To include and use DSV Mender, you need to add the following dependency from the _Maven Central_:
